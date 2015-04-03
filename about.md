@@ -4,12 +4,9 @@ title: About
 permalink: /about/
 ---
 
-Some information about you!
+My name is Chester Burbidge and I am a Bristol based Software developer.
 
-### More Information
+This is my blog, [these](https://github.com/CBurbidge) are my codings and my website will be up soon.
 
-A place to include any other types of information that you'd like to include about yourself.
+Enjoy. 
 
-### Contact me
-
-[email@domain.com](mailto:email@domain.com)
