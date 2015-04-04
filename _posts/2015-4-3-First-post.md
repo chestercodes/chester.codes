@@ -1,6 +1,7 @@
 ---
 layout: post
 title: First post!
+excerpt: Creating my blog.
 ---
 
 Hello all, today a blog is born!
