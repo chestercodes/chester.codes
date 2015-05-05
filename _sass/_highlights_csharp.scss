@@ -1,0 +1,17 @@
+$light-blue: lightblue;
+$blue: blue;
+$dark-blue: darkblue;
+$purple: purple;
+$green: green;
+$black: black;
+$red: red;
+
+.highlight .k { color: $blue } /* Keyword */
+.highlight .n { color: $black } /* Name */
+.highlight .p { color: $black } /* Punctuation */
+.highlight .c1 { color: $green } /* Comment.Single */
+.highlight .kt { color: $blue } /* Keyword.Type */
+.highlight .s { color: $red } /* Literal.String */
+.highlight .nc { color: $dark-blue } /* Name.Class */
+.highlight .nf { color: $black } /* Name.Function */
+.highlight .nn { color: $dark-blue } /* Name.Namespace */
