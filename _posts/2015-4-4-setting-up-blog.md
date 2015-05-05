@@ -2,6 +2,10 @@
 layout: post
 title: Blog, blog and away!
 excerpt: Setting up my blog.
+tags: 
+- blog
+- jekyll
+- jekyll-now
 ---
 
 I'm a coder, that's what I am. That's what I do and I do it fairly well.

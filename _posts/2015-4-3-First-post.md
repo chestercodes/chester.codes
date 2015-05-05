@@ -2,6 +2,10 @@
 layout: post
 title: First post!
 excerpt: Creating my blog.
+tags:
+- blog
+- jekyll
+- jekyll-now
 ---
 
 Hello all, today a blog is born!
