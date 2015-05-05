@@ -13,6 +13,19 @@ layout: default
       </div>
 
       <a href="{{ site.baseurl }}{{ post.url }}" class="read-more">Read More</a>
+      
+      <table class="tags">
+      <tr>
+        <td>tags: </td>
+        {% for tag in post.tags %}
+          <td class="tag {{tag}}">{{tag}}</td>
+        {% endfor %}
+	  
+	  </tr>
+	  </table>
+	  
     </article>
   {% endfor %}
 </div>
+
+<div class="tag-pane"></div>
