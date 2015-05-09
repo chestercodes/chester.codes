@@ -1,8 +1,10 @@
 $tagColour: lightblue;
 
+$button-radius: 3px;
+
 @mixin tag-button($colour)
 {
-    border-radius: 15px;
+    border-radius: $button-radius;
     background: $colour;
     height: 30px; 
     vertical-align: middle;
@@ -11,7 +13,7 @@ $tagColour: lightblue;
 
 @mixin selected-button()
 {
-    border-radius: 15px;
+    border-radius: $button-radius;
     background: darkblue;
     color: white;
     height: 35px; 
@@ -29,7 +31,14 @@ $tagColour: lightblue;
     width: 20%;
     vertical-align: top;
     display: inline-block;
-    margin-top: 30px;
+    //margin-top: 20px;
+    //background-color: red;
+    //padding: 10px;
+    
+    p
+    {
+        margin: 5px 0px;
+    }
     
     div.tag-selectors
     {
@@ -43,18 +52,18 @@ $tagColour: lightblue;
         {
             @include selected-button();
         }
-    }
-    
+    }    
 }
 
 div.tags
 {
-    margin-top: 10px;
+    //margin-top: 10px;
     height: 30px;
 }
 
 p.filter-caption
 {
+    margin-top: auto;
     @include tag-button(yellow);
 }
 
@@ -65,8 +74,6 @@ div.tag
     @include tag-button($tagColour);
     width: 50px;
 }
-
-$clearWritingColour: black;
 
 p.clear-tags
 {
