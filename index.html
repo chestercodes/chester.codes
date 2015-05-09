@@ -14,20 +14,21 @@ layout: default
 
       <a href="{{ site.baseurl }}{{ post.url }}" class="read-more">Read More</a>
       
-      <table class="tags">
-      <tr>
+      <div class="tags">
         {% for tag in post.tags %}
-          <td class="tag {{tag}}">{{tag}}</td>
+          <div class="tag {{tag}}">{{tag}}</div>
         {% endfor %}
-	  
-	  </tr>
-	  </table>
-	  
+    </div>
+        
     </article>
   {% endfor %}
 </div>
 
-<div id="tag-pane"></div>
+<div id="tag-pane">
+<p class="filter-caption">
+    Filter by tag:
+    </p>
+</div>
 
 	<script>
 		var getTagNamesFromPost = function(post){
