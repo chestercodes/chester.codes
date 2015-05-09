@@ -1,6 +1,3 @@
-$light-purple: #CAA3CA ;
-
-$light-green: lightgreen;
 
 $max-width: 1000px;
 
@@ -22,7 +19,7 @@ h1
 
 article.page
 {
-    background-color: $light-green;
+    background-color: $post-green;
     border-radius: 5px;
     padding: 5px;
 }
@@ -31,7 +28,7 @@ article.post
 {
     padding: 20px;
     padding-bottom: 20px;
-    background-color: $light-green;
+    background-color: $post-green;
     border-radius: 10px;
 }
 
@@ -47,4 +44,14 @@ pre
     {
         font-size: 15px;   
     }
+}
+
+div.site-info
+{
+    margin-right:40px;
+}
+
+nav
+{
+    float: none;
 }

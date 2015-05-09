@@ -1,4 +1,3 @@
-$tagColour: lightblue;
 
 $button-radius: 3px;
 
@@ -22,7 +21,7 @@ $button-radius: 3px;
 
 .posts
 {
-    width: 78%;
+    width: 79%;
     display: inline-block;
 }
 
@@ -31,9 +30,6 @@ $button-radius: 3px;
     width: 20%;
     vertical-align: top;
     display: inline-block;
-    //margin-top: 20px;
-    //background-color: red;
-    //padding: 10px;
     
     p
     {
@@ -57,7 +53,6 @@ $button-radius: 3px;
 
 div.tags
 {
-    //margin-top: 10px;
     height: 30px;
 }
 
@@ -77,5 +72,5 @@ div.tag
 
 p.clear-tags
 {
-    @include tag-button(lightgreen);
+    @include tag-button($post-green);
 }
