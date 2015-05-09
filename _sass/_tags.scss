@@ -5,7 +5,6 @@ $button-radius: 3px;
 {
     border-radius: $button-radius;
     background: $colour;
-    height: 30px; 
     vertical-align: middle;
     text-align: center;   
 }
@@ -15,7 +14,7 @@ $button-radius: 3px;
     border-radius: $button-radius;
     background: darkblue;
     color: white;
-    height: 35px; 
+    height: 50px; 
     vertical-align: middle;
 }
 
@@ -54,6 +53,7 @@ $button-radius: 3px;
 div.tags
 {
     height: 30px;
+    margin-top: 10px;
 }
 
 p.filter-caption
@@ -74,3 +74,14 @@ p.clear-tags
 {
     @include tag-button($post-green);
 }
+
+
+$base-font-size: 14px;
+$multiplier: 3;
+
+p.count-1 { font-size: $base-font-size + 1 * $multiplier; }
+p.count-2 { font-size: $base-font-size + 2 * $multiplier; }
+p.count-3 { font-size: $base-font-size + 3 * $multiplier; }
+p.count-4 { font-size: $base-font-size + 4 * $multiplier; }
+p.count-5 { font-size: $base-font-size + 5 * $multiplier; }
+p.count-6 { font-size: $base-font-size + 6 * $multiplier; }
