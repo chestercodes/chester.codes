@@ -164,7 +164,7 @@ public class ProjectConfiguration
 ```
 
 We can see the typed-ness of the `int` type in visual studio:
-![Alt int is typed](images/Int_typed.png)
+![Alt int is typed](/images/Int_typed.png)
 
 ### Nest get it on ###
 
