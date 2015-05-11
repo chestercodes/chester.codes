@@ -63,8 +63,6 @@ if (ProjectConfiguration.SomeSetting.Exists)
 }
 ```
 
-Happy days!
-
 ### A different typeof ( Solution ) ###
 
 All was well, until I saw the setting `someInt` being accessed and parsed into an `int` value in the code. Wouldn't it be nice if the `Value` of that setting was `int` typed already? This would remove the extra parsing required upon every accessing of the setting. 
