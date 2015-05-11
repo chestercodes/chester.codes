@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Letting me c sharp
-excerpt: Defining colours for github syntax C# highlighting.
+title: Letting me C sharp
+excerpt: Defining colours for C# syntax highlighting with Jekyll Now.
 tags: 
 - blog
 - jekyll
