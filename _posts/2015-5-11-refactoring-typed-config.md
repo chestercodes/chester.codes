@@ -11,21 +11,21 @@ tags:
 I was reading some code recently and was getting pretty sick of this pattern:
 
 ``` csharp
-if(ConfigurationManager.AppSetting["SomeSetting"] != null){
-	var someSetting = ConfigurationManager.AppSetting["SomeSetting"];	
+if(ConfigurationManager.AppSetting["someSetting"] != null){
+	var someSetting = ConfigurationManager.AppSetting["someSetting"];	
 	// Do something...
 }
 ```
 
-This checks whether the setting `"SomeSetting"` exists in the configuration and uses the value to do something. 
+This checks whether the setting `"someSetting"` exists in the configuration and uses the value to do something. 
 
 It's crime, you ask? 
 
-I don't like the repetition of the use of the string literal `"SomeSetting"`, which is prone to speelling missteaks and leads to problems/hassle if the name ever changes. It is also likely that the setting is used somewhere else in the code, which means duplication of the null checks that check the existence of the setting.
+I don't like the repetition of the use of the string literal `"someSetting"`, which is prone to speelling missteaks and leads to problems/hassle if the name ever changes. It is also likely that the setting is used somewhere else in the code, which means duplication of the null checks that check the existence of the setting.
 
 ### A solution ###
 
-I wanted to wrap each configuration setting in a class that exposes an `Exists` property to do the work of the null check and a `Value` property to give the setting value. The instantiation of this class stores the string `"SomeSetting"` and it can be called as one, of many, static properties of a configuration class. There is also the advantage of being able to find all of the usages of the setting without string searching.
+I wanted to wrap each configuration setting in a class that exposes an `Exists` property to do the work of the null check and a `Value` property to give the setting value. The instantiation of this class stores the string `"someSetting"` and it can be called as one, of many, static properties of a configuration class. There is also the advantage of being able to find all of the usages of the setting without string searching.
 
 My first attempt lead to the code:
 
@@ -52,7 +52,7 @@ public class ProjectSetting
 
 public class ProjectConfiguration
 {
-	public static ProjectSetting SomeStringSetting = new ProjectSetting("someSetting");
+	public static ProjectSetting SomeSetting = new ProjectSetting("someSetting");
 }
 ```
 
@@ -156,7 +156,7 @@ public class ProjectSetting<T>
 
 public class ProjectConfiguration
 {
-	public static ProjectSetting SomeStringSetting = new ProjectSetting("someSetting");
+	public static ProjectSetting SomeSetting = new ProjectSetting("someSetting");
 	public static ProjectSetting<int> SomeIntSetting = new ProjectSetting<int>("someInt");
 	public static ProjectSetting<bool> SomeBoolSetting = new ProjectSetting<bool>("someBool");
 }
@@ -173,7 +173,7 @@ The other advantage of wrapping the configuration is that you can nest and sort 
 ``` csharp
 public class ProjectConfiguration
 {
-	public static ProjectSetting SomeStringSetting = new ProjectSetting("someSetting");
+	public static ProjectSetting SomeSetting = new ProjectSetting("someSetting");
 	public static ProjectSetting<int> SomeIntSetting = new ProjectSetting<int>("someInt");
 	public static ProjectSetting<bool> SomeBoolSetting = new ProjectSetting<bool>("someBool");
 
