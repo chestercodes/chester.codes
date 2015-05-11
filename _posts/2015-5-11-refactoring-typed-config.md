@@ -21,7 +21,7 @@ This checks whether the setting `"someSetting"` exists in the configuration and 
 
 It's crime, you ask? 
 
-I don't like the repetition of the use of the string literal `"someSetting"`, which is prone to speelling missteaks and leads to problems/hassle if the name ever changes. It is also likely that the setting is used somewhere else in the code, which means duplication of the null checks that check the existence of the setting.
+I don't like the repetition of the string literal `"someSetting"`, which is prone to speelling missteaks and could lead to problems if the setting name changes. It is also likely that the setting is used somewhere else in the code, which means duplication of the null checks that check the existence of the setting.
 
 ### A solution ###
 
@@ -44,10 +44,7 @@ public class ProjectSetting
 		get { return ConfigurationManager.AppSettings[_settingName]; }
 	}
 
-	public bool Exists
-	{
-		get { return Value != null; }
-	}
+	public bool Exists { get { return Value != null; } }
 }
 
 public class ProjectConfiguration
@@ -70,9 +67,9 @@ Happy days!
 
 ### A different typeof ( Solution ) ###
 
-All was well, until I saw that the config setting `someInt` being accessed and parsed into an `int` value in the code. I thought to myself, wouldn't it be nice if the `Value` of that setting was `int` typed already? This would remove the extra parsing required upon every accessing of the setting. 
+All was well, until I saw the setting `someInt` being accessed and parsed into an `int` value in the code. Wouldn't it be nice if the `Value` of that setting was `int` typed already? This would remove the extra parsing required upon every accessing of the setting. 
 
-From the App.config file:
+Given the App.config file:
 	
 ``` xml
 
@@ -89,9 +86,9 @@ From the App.config file:
 </configuration> 
 ```
 
-I wanted typed properties such that the `Value` property of the `ProjectSettings` classes would be typed `int` for `someInt` and `bool` for `someBool`. Value types can't be null and so need a way of expressing that the setting is not in the file. If the setting isn't in the file, it can't be parsed and so would need to throw an exception. 
+I want typed properties such that the `Value` property of the `ProjectSettings` classes would be typed `int` for `someInt` and `bool` for `someBool`. Value types can't be null and so there is no way of expressing that the setting is not in the file. If this is the case then it can't be parsed and we need to throw an exception. 
 
-I used my old friend generics to produce typed `Value` properties from the code:
+Generics can be used to produce typed `Value` properties:
 
 ```csharp
 
@@ -168,7 +165,7 @@ We can see the typed-ness of the `int` type in visual studio:
 
 ### Nest get it on ###
 
-The other advantage of wrapping the configuration is that you can nest and sort configuration settings that are related.
+The other advantage of wrapping the configuration is that you can nest and sort configuration settings that are related into their own classes. For example:
 
 ``` csharp
 public class ProjectConfiguration
