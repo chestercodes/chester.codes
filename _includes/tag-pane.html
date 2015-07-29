@@ -87,15 +87,22 @@
 		document.addEventListener("DOMContentLoaded", function(event) { 
 			var posts = document.querySelectorAll('.post');
 			var tagsAndPosts = getElementInfoAndPosts(posts, getTagNamesFromPost);
-			
-			var divElement = document.createElement("div");
-			addClass(divElement, "tag-selectors");
+			var datesAndPosts = getElementInfoAndPosts(posts, function(post){
+				return [ 
+					post.className.split(" ")[1]
+				];
+			});
+			var filterContainerElement = document.createElement("div");
+			addClass(filterContainerElement, "filtering");
 			
 			var clearText = "clear";
 			var clearTagsElement = document.createElement("p");
 			addClass(clearTagsElement, "clear-tags");
 			clearTagsElement.innerText = clearText;
-			divElement.appendChild(clearTagsElement);
+			filterContainerElement.appendChild(clearTagsElement);
+			
+			var tagSelectorsElement = document.createElement("div");
+			addClass(tagSelectorsElement, "tag-selectors");
 			
 			var selectedClass = "selected";
 			
@@ -117,7 +124,7 @@
 					
 					tagsAndTagSelectorElements[tagName] = tagPElement;
 					
-					divElement.appendChild(tagPElement);
+					tagSelectorsElement.appendChild(tagPElement);
 				}
 			}
 			
@@ -153,7 +160,8 @@
 			}
 			
 			var tagPaneElement = document.getElementById("tag-pane");
-			tagPaneElement.appendChild(divElement);
+			tagPaneElement.appendChild(filterContainerElement);
+			filterContainerElement.appendChild(tagSelectorsElement);
 		});
 	</script>
 
