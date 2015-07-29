@@ -19,7 +19,7 @@
 			return tagNames;
 		}
 		
-		var getTagsAndPosts = function(posts){
+		var getElementInfoAndPosts = function(posts, getElementInfo){
 			var allTagNames = [];
 			var tagsAndPosts = {};
 			
@@ -27,7 +27,7 @@
 			{
 				var post = posts[i];
 				
-				var tagNames = getTagNamesFromPost(post);
+				var tagNames = getElementInfo(post);
 				for(var j = 0; j < tagNames.length; j++)
 				{
 					var tagName = tagNames[j];
@@ -86,7 +86,7 @@
 		
 		document.addEventListener("DOMContentLoaded", function(event) { 
 			var posts = document.querySelectorAll('.post');
-			var tagsAndPosts = getTagsAndPosts(posts);
+			var tagsAndPosts = getElementInfoAndPosts(posts, getTagNamesFromPost);
 			
 			var divElement = document.createElement("div");
 			addClass(divElement, "tag-selectors");
