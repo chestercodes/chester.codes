@@ -4,7 +4,7 @@ layout: default
 
 <div class="posts">
   {% for post in site.posts %}
-    <article class="post" data-date="{{ post.date | date: "%Y-%m-%d" }}">
+    <article class="post {{ post.date | date: "%Y-%m" }}">
 
       <h1><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h1>
 
@@ -17,9 +17,7 @@ layout: default
           <div class="tag {{tag}}">{{tag}}</div>
         {% endfor %}
     </div>
-    <span class="post-date">
-        {{ post.date | date: "%B %e, %Y" }}
-    </span>
+    <span class="post-date">{{ post.date | date: "%B %e, %Y" }}</span>
     </article>
   {% endfor %}
 </div>
