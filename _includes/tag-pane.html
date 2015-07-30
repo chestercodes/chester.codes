@@ -102,14 +102,34 @@
 
 			var posts = document.querySelectorAll('.post');
 			
+			/// Tags
 			var tagsAndPosts = getElementInfoAndPosts(posts, getTagNamesFromPost);
 			var tagsAndTagSelectorElements = {}
 			tagsAndTagSelectorElements[clearText] = clearTagsElement;
 			
-			var clickEventToCurry = function(eventObj, selectorElements, selectors) {
+			/// Dates
+			var datesAndPosts = getElementInfoAndPosts(posts, function(post){
+				return [ 
+					post.className.split(" ")[1]
+				];
+			});
+
+			var datesAndDateSelectorElements = {}
+			datesAndDateSelectorElements[clearText] = clearTagsElement;
+			
+			var clickEventToCurry = function(eventObj, isTags) {
 				var elementName = eventObj.currentTarget.innerText;
 				
-				removeSelectedClassFromAllTags(selectorElements, selectedClass);
+				var selectorElements = isTags ? 
+					tagsAndTagSelectorElements 
+					: datesAndDateSelectorElements;
+				
+				var selectors = isTags ? 
+					tagsAndPosts
+					: datesAndPosts;
+
+				removeSelectedClassFromAllTags(tagsAndTagSelectorElements, selectedClass);
+				removeSelectedClassFromAllTags(datesAndDateSelectorElements, selectedClass);
 				
 				if(elementName === clearText)
 				{
@@ -128,7 +148,7 @@
 			}
 
 			var tagsClickEvent = function(eventObj){
-				return clickEventToCurry(eventObj, tagsAndTagSelectorElements, tagsAndPosts)
+				return clickEventToCurry(eventObj, true)
 			}
 
 			tagsAndTagSelectorElements[clearText].addEventListener("click", tagsClickEvent);
@@ -155,18 +175,9 @@
 				}
 			}
 			
-			// Dates...
-			var datesAndPosts = getElementInfoAndPosts(posts, function(post){
-				return [ 
-					post.className.split(" ")[1]
-				];
-			});
-
-			var datesAndDateSelectorElements = {}
-			datesAndDateSelectorElements[clearText] = clearTagsElement;
-			
+			// Dates..
 			var datesClickEvent = function(eventObj){
-				return clickEventToCurry(eventObj, datesAndDateSelectorElements, datesAndPosts);
+				return clickEventToCurry(eventObj, false);
 			};
 
 			datesAndDateSelectorElements[clearText].addEventListener("click", datesClickEvent);
