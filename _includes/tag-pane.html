@@ -112,13 +112,36 @@
 			var tagsAndTagSelectorElements = {}
 			tagsAndTagSelectorElements[clearText] = clearTagsElement;
 			
+			var clickEventThing = function(eventObj) {
+				var tagName = eventObj.currentTarget.innerText;
+				
+				removeSelectedClassFromAllTags(tagsAndTagSelectorElements, selectedClass);
+				
+				if(tagName === clearText)
+				{
+					removeClass(clearTagsElement, clearShowing);
+					var allPosts = [];
+					for(var n = 0; n < posts.length; n++)
+						allPosts.push(n);
+					
+					displayPosts(posts, allPosts);
+					return;
+				}
+				addClass(clearTagsElement, clearShowing);
+				addClass(tagsAndTagSelectorElements[tagName], selectedClass);
+				var postsToShow = tagsAndPosts[tagName];
+				displayPosts(posts, postsToShow);
+			}
+
+			tagsAndTagSelectorElements[clearText].addEventListener("click", clickEventThing);
+
 			for(var tagName in tagsAndPosts)
 			{
 				if(tagsAndPosts.hasOwnProperty(tagName))
 				{
 					var postsContainingTag = tagsAndPosts[tagName];
 					var numberOfPosts = postsContainingTag.length;
-					var classToAdd = "count-" + numberOfPosts;
+					var classToAdd = "tag-count-" + numberOfPosts;
 					
 					var tagPElement = document.createElement("p");
 					addClass(tagPElement, "tag-selector");
@@ -128,6 +151,9 @@
 					tagsAndTagSelectorElements[tagName] = tagPElement;
 					
 					tagSelectorsElement.appendChild(tagPElement);
+
+					tagsAndTagSelectorElements[tagName]
+						.addEventListener("click", clickEventThing);
 				}
 			}
 			
@@ -136,28 +162,7 @@
 			{
 				if(tagsAndTagSelectorElements.hasOwnProperty(tagName))
 				{
-					tagsAndTagSelectorElements[tagName]
-						.addEventListener("click", 
-						function(eventObj) {
-							var tagName = eventObj.currentTarget.innerText;
-							
-							removeSelectedClassFromAllTags(tagsAndTagSelectorElements, selectedClass);
-							
-							if(tagName === clearText)
-							{
-								removeClass(clearTagsElement, clearShowing);
-								var allPosts = [];
-								for(var n = 0; n < posts.length; n++)
-									allPosts.push(n);
-								
-								displayPosts(posts, allPosts);
-								return;
-							}
-							addClass(clearTagsElement, clearShowing);
-							addClass(tagsAndTagSelectorElements[tagName], selectedClass);
-							var postsToShow = tagsAndPosts[tagName];
-							displayPosts(posts, postsToShow);
-						});
+					
 				}
 			}
 			
