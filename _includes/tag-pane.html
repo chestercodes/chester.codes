@@ -85,13 +85,6 @@
 		};
 		
 		document.addEventListener("DOMContentLoaded", function(event) { 
-			var posts = document.querySelectorAll('.post');
-			var tagsAndPosts = getElementInfoAndPosts(posts, getTagNamesFromPost);
-			var datesAndPosts = getElementInfoAndPosts(posts, function(post){
-				return [ 
-					post.className.split(" ")[1]
-				];
-			});
 			var filterContainerElement = document.createElement("div");
 			addClass(filterContainerElement, "filtering");
 			
@@ -104,8 +97,18 @@
 			var tagSelectorsElement = document.createElement("div");
 			addClass(tagSelectorsElement, "tag-selectors");
 			
+			var clearShowing = "showing";
 			var selectedClass = "selected";
+
+			var posts = document.querySelectorAll('.post');
 			
+			var datesAndPosts = getElementInfoAndPosts(posts, function(post){
+				return [ 
+					post.className.split(" ")[1]
+				];
+			});
+			
+			var tagsAndPosts = getElementInfoAndPosts(posts, getTagNamesFromPost);
 			var tagsAndTagSelectorElements = {}
 			tagsAndTagSelectorElements[clearText] = clearTagsElement;
 			
@@ -128,7 +131,6 @@
 				}
 			}
 			
-			var clearShowing = "showing";
 			
 			for(var tagName in tagsAndTagSelectorElements)
 			{
