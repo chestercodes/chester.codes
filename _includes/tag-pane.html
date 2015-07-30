@@ -112,12 +112,12 @@
 			var tagsAndTagSelectorElements = {}
 			tagsAndTagSelectorElements[clearText] = clearTagsElement;
 			
-			var clickEventThing = function(eventObj) {
-				var tagName = eventObj.currentTarget.innerText;
+			var clickEventToCurry = function(eventObj, selectorElements, selectors) {
+				var elementName = eventObj.currentTarget.innerText;
 				
-				removeSelectedClassFromAllTags(tagsAndTagSelectorElements, selectedClass);
+				removeSelectedClassFromAllTags(selectorElements, selectedClass);
 				
-				if(tagName === clearText)
+				if(elementName === clearText)
 				{
 					removeClass(clearTagsElement, clearShowing);
 					var allPosts = [];
@@ -128,12 +128,16 @@
 					return;
 				}
 				addClass(clearTagsElement, clearShowing);
-				addClass(tagsAndTagSelectorElements[tagName], selectedClass);
-				var postsToShow = tagsAndPosts[tagName];
+				addClass(selectorElements[elementName], selectedClass);
+				var postsToShow = selectors[elementName];
 				displayPosts(posts, postsToShow);
 			}
 
-			tagsAndTagSelectorElements[clearText].addEventListener("click", clickEventThing);
+			var tagsClickEvent = function(eventObj){
+				return clickEventToCurry(eventObj, tagsAndTagSelectorElements, tagsAndPosts)
+			}
+
+			tagsAndTagSelectorElements[clearText].addEventListener("click", tagsClickEvent);
 
 			for(var tagName in tagsAndPosts)
 			{
@@ -153,7 +157,7 @@
 					tagSelectorsElement.appendChild(tagPElement);
 
 					tagsAndTagSelectorElements[tagName]
-						.addEventListener("click", clickEventThing);
+						.addEventListener("click", tagsClickEvent);
 				}
 			}
 			
