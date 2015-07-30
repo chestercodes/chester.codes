@@ -102,12 +102,6 @@
 
 			var posts = document.querySelectorAll('.post');
 			
-			var datesAndPosts = getElementInfoAndPosts(posts, function(post){
-				return [ 
-					post.className.split(" ")[1]
-				];
-			});
-			
 			var tagsAndPosts = getElementInfoAndPosts(posts, getTagNamesFromPost);
 			var tagsAndTagSelectorElements = {}
 			tagsAndTagSelectorElements[clearText] = clearTagsElement;
@@ -161,14 +155,44 @@
 				}
 			}
 			
+			// Dates...
+			var datesAndPosts = getElementInfoAndPosts(posts, function(post){
+				return [ 
+					post.className.split(" ")[1]
+				];
+			});
+
+			var datesAndDateSelectorElements = {}
+			datesAndDateSelectorElements[clearText] = clearTagsElement;
 			
-			for(var tagName in tagsAndTagSelectorElements)
+			var datesClickEvent = function(eventObj){
+				return clickEventToCurry(eventObj, datesAndDateSelectorElements, datesAndPosts);
+			};
+
+			datesAndDateSelectorElements[clearText].addEventListener("click", datesClickEvent);
+
+			for(var date in datesAndPosts)
 			{
-				if(tagsAndTagSelectorElements.hasOwnProperty(tagName))
+				if(datesAndPosts.hasOwnProperty(date))
 				{
+					var postsContainingTag = datesAndPosts[date];
+					var numberOfPosts = postsContainingTag.length;
+					var classToAdd = "date-count-" + numberOfPosts;
 					
+					var datePElement = document.createElement("p");
+					addClass(datePElement, "date-selector");
+					addClass(datePElement, classToAdd);
+					datePElement.textContent = date;
+					
+					datesAndDateSelectorElements[date] = datePElement;
+					
+					tagSelectorsElement.appendChild(datePElement);
+
+					datesAndDateSelectorElements[date]
+						.addEventListener("click", datesClickEvent);
 				}
 			}
+			
 			
 			var tagPaneElement = document.getElementById("tag-pane");
 			tagPaneElement.appendChild(filterContainerElement);
