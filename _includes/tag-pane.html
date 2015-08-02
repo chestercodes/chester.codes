@@ -1,9 +1,5 @@
-
-	<!-- Tag Pane -->
-	<div id="tag-pane">
-<p class="filter-caption">
-    Filter by tag:
-    </p>
+<!-- Tag Pane -->
+<div id="tag-pane">
 </div>
 
 	<script>
@@ -96,7 +92,19 @@
 			
 			var tagSelectorsElement = document.createElement("div");
 			addClass(tagSelectorsElement, "tag-selectors");
+			var tagsInfoElement = document.createElement("p");
+			addClass(tagsInfoElement, "filter-caption");
+			tagsInfoElement.innerText = "Filter by tag:";
+            tagSelectorsElement.appendChild(tagsInfoElement);
 			
+            var dateSelectorsElement = document.createElement("div");
+			addClass(dateSelectorsElement, "date-selectors");
+			var datesInfoElement = document.createElement("p");
+			addClass(datesInfoElement, "dates-caption");
+			datesInfoElement.innerText = "Filter by date:";
+            dateSelectorsElement.appendChild(datesInfoElement);
+			
+            
 			var clearShowing = "showing";
 			var selectedClass = "selected";
 
@@ -197,17 +205,17 @@
 					
 					datesAndDateSelectorElements[date] = datePElement;
 					
-					tagSelectorsElement.appendChild(datePElement);
+					dateSelectorsElement.appendChild(datePElement);
 
 					datesAndDateSelectorElements[date]
 						.addEventListener("click", datesClickEvent);
 				}
 			}
 			
-			
 			var tagPaneElement = document.getElementById("tag-pane");
 			tagPaneElement.appendChild(filterContainerElement);
 			filterContainerElement.appendChild(tagSelectorsElement);
+			filterContainerElement.appendChild(dateSelectorsElement);
 		});
 	</script>
 

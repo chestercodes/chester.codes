@@ -1,4 +1,3 @@
-
 $button-radius: 3px;
 
 @mixin tag-button($colour)
@@ -6,7 +5,8 @@ $button-radius: 3px;
     border-radius: $button-radius;
     background: $colour;
     vertical-align: middle;
-    text-align: center;   
+    padding-left: 10px;   
+    padding-right: 10px;
 }
 
 @mixin selected-button()
@@ -26,10 +26,9 @@ $button-radius: 3px;
 
 #tag-pane
 {
-    width: 20%;
     vertical-align: top;
     display: inline-block;
-    
+    width: 20%;
     p
     {
         margin: 5px 0px;
@@ -37,9 +36,31 @@ $button-radius: 3px;
     
     div.tag-selectors
     {
+        display: block;
+        @include tag-button(yellow);
+        
         p.tag-selector
         {
-            text-align: center;   
+            display: inline-block;
+            margin: 2px;
+            @include tag-button($tagColour);
+        }
+
+        p.selected
+        {
+            @include selected-button();
+        }
+    }    
+    
+    div.date-selectors
+    {
+        display: block;
+        @include tag-button(yellow);
+        
+        p.date-selector
+        {
+            display: inline-block;
+            margin: 2px;
             @include tag-button($tagColour);
         }
 
@@ -75,13 +96,21 @@ p.clear-tags
     @include tag-button($post-green);
 }
 
+$tag-base-font-size: 14px;
+$tag-multiplier: 3;
 
-$base-font-size: 14px;
-$multiplier: 3;
+p.tag-count-1 { font-size: $tag-base-font-size + 1 * $tag-multiplier; }
+p.tag-count-2 { font-size: $tag-base-font-size + 2 * $tag-multiplier; }
+p.tag-count-3 { font-size: $tag-base-font-size + 3 * $tag-multiplier; }
+p.tag-count-4 { font-size: $tag-base-font-size + 4 * $tag-multiplier; }
+p.tag-count-5 { font-size: $tag-base-font-size + 5 * $tag-multiplier; }
+p.tag-count-6 { font-size: $tag-base-font-size + 6 * $tag-multiplier; }
 
-p.count-1 { font-size: $base-font-size + 1 * $multiplier; }
-p.count-2 { font-size: $base-font-size + 2 * $multiplier; }
-p.count-3 { font-size: $base-font-size + 3 * $multiplier; }
-p.count-4 { font-size: $base-font-size + 4 * $multiplier; }
-p.count-5 { font-size: $base-font-size + 5 * $multiplier; }
-p.count-6 { font-size: $base-font-size + 6 * $multiplier; }
+$date-base-font-size: $tag-base-font-size;
+$date-multiplier: $tag-multiplier;
+p.date-count-1 { font-size: $date-base-font-size + 1 * $date-multiplier; }
+p.date-count-2 { font-size: $date-base-font-size + 2 * $date-multiplier; }
+p.date-count-3 { font-size: $date-base-font-size + 3 * $date-multiplier; }
+p.date-count-4 { font-size: $date-base-font-size + 4 * $date-multiplier; }
+p.date-count-5 { font-size: $date-base-font-size + 5 * $date-multiplier; }
+p.date-count-6 { font-size: $date-base-font-size + 6 * $date-multiplier; }
