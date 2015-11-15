@@ -9,8 +9,6 @@ tags:
 - mobile
 ---
 
-# First app -  problems, solutions.#
-
 I have recently finished my first windows phone app.
 
 My first experience using an VVM framework and the XAML stack. I learned a few whilst developing this, some obvious and some no so obvious. 
