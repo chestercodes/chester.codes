@@ -12,10 +12,10 @@ tags:
 
 Counting to 10 in different programming languages.
 
-Scratch - https://scratch.mit.edu/projects/90544713/#editor
+[Scratch](https://scratch.mit.edu/projects/90544713/#editor)
 
-C# - https://dotnetfiddle.net/Yytqx3
+[C#](https://dotnetfiddle.net/Yytqx3)
 
-F# - https://dotnetfiddle.net/vri351
+[F#](https://dotnetfiddle.net/vri351)
 
-python - https://trinket.io/library/trinkets/8a818948b5
+[python](https://trinket.io/library/trinkets/8a818948b5)
