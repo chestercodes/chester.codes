@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Git flow commiting function
-excerpt: A powershell function to make git flow committing a bit easier
+title: Git flow committing powershell function
+excerpt: A powershell function to make committing a little bit easier
 tags: 
 - git flow
 - git
@@ -19,7 +19,8 @@ To make this easier, I've made a powershell function that:
 - Takes a message argument
 - Finds the branch name that is being worked on
 - extracts the JIRA item number by convention defined regex.
-- commits the message as so, <JIRAITEM>:<Message>
+- commits the message as so, JiraItem:Message
+- (e.g. PROJ-123:Added code to do stuff)
 - if it isn't a git flow function then it asks for user input and proceeds if it is 'y'
 
 The function is:
@@ -50,4 +51,8 @@ function com
 }
 ```
 
+Add this to your powershell profile and then call `com "Some commit message"` to use.
+
 I'll soon be blogging about my powershell profile setup but I thought that this deserved a post of it's own.
+
+[p.s. Follow this to make a powershell profile.](http://www.howtogeek.com/50236/customizing-your-powershell-profile/)
