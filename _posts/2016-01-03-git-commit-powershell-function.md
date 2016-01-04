@@ -30,7 +30,7 @@ function com
 {
     param([string]$message)
 
-    $jiraItemRegex = "^[A-Za-z]+(\-|_)\d+"
+    $jiraItemRegex = "^feature\/[A-Za-z]+(\-|_)\d+"
     $currentBranch = git rev-parse --abbrev-ref HEAD
     
     if($currentBranch -match $jiraItemRegex)
