@@ -35,9 +35,9 @@ function com
     
     if($currentBranch -match $jiraItemRegex)
     {
-        $jiraItem = $Matches[0]
+        $jiraItem = $Matches[0].Replace("feature/", "")
 
-        git commit -m "$jiraItem`:$message"
+        git commit -m "$jiraItem`: $message"
     }
     else
     {
