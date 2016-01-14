@@ -19,7 +19,7 @@ I've spent a bit of time customising a powershell profile. My requirements are t
 - have as little as possible in $profile files, instead link to other files from these. This is in an effort to make sure nothing is forgotten on a machine accidentally.
 
 
-The end product can be found on my GitHub profile in [this repository](www.github.com/cburbidge/powershellprofile). In this post i'll explain a few of the ideas in it. This post will go out of date as my profile changes.
+The end product can be found on my GitHub profile in [this repository](https://github.com/CBurbidge/PowershellProfile). In this post i'll explain a few of the ideas in it. This post will go out of date as my profile changes.
 
 ## Installation ##
 
@@ -27,7 +27,7 @@ Powershell is used to 'install' the profile. The installation is the process of 
 
 The command `powershell -file .\AddFilesToProfile.ps1` should be enough to install it, if it doesn't work then try running it again. The AddFilesToProfile.ps1 script does the following things
 
--Finds out where it is running and figures out which of the two environment files to use by looking at the computer name from the environment.
+- Finds out where it is running and figures out which of the two environment files to use by looking at the computer name from the environment.
 - Creates a new profile file if it doesn't already exist and timestamp archives it, if it already exists.
 - Adds references to the ProfileShared.ps1 and the environment machine file using the `. file.ps1` command to import the files.
 - Adds a command to edit the files in powershell_ise 
@@ -54,7 +54,7 @@ Similarly the `go` command changes directory to the place or the directory that 
 ### $profileUrls ###
 I want my profile to have quick access to commonly used web pages, for this I have created the $profileUrls variable which can be added to on all of the profile files. I have also created a function which opens chrome if presented with an argument that has a value in the $profileUrls hashmap. Using this function going to my GitHub profile is as easy as calling `c gh`.
 
-The only other things of note in my profile are the 'com' function which I have written about [here](www.cburbidge.github.io/post-about-com) TODO!!! and an alias for `git status` which is shortened to `gs`.
+The only other things of note in my profile are the 'com' function which I have written about [here](http://cburbidge.github.io/git-commit-powershell-function/) and an alias for `git status` which is shortened to `gs`.
 
 ## Profile(Work|Home).ps1 ##
 The environment specific files are used to add to the $profileUrls, $profilePlaces and $profileList variables to customise for that environment. They can also contain functions etc which don't make sense being on the other environment files.
