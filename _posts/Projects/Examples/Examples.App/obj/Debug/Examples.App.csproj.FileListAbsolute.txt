@@ -1,0 +1,8 @@
+F:\Repos\CBurbidge.github.io\_posts\Projects\Examples\Examples.App\bin\Debug\Examples.App.exe.config
+F:\Repos\CBurbidge.github.io\_posts\Projects\Examples\Examples.App\bin\Debug\Examples.App.exe
+F:\Repos\CBurbidge.github.io\_posts\Projects\Examples\Examples.App\bin\Debug\Examples.App.pdb
+F:\Repos\CBurbidge.github.io\_posts\Projects\Examples\Examples.App\bin\Debug\Examples.dll
+F:\Repos\CBurbidge.github.io\_posts\Projects\Examples\Examples.App\bin\Debug\Examples.pdb
+F:\Repos\CBurbidge.github.io\_posts\Projects\Examples\Examples.App\obj\Debug\Examples.App.csprojResolveAssemblyReference.cache
+F:\Repos\CBurbidge.github.io\_posts\Projects\Examples\Examples.App\obj\Debug\Examples.App.exe
+F:\Repos\CBurbidge.github.io\_posts\Projects\Examples\Examples.App\obj\Debug\Examples.App.pdb
