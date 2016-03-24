@@ -30,6 +30,15 @@ To get the values whilst debugging you can select the rows, right click and Copy
 
 ![Selected rows](/images/selected_local_window.png)
 
-This will give the string contents and you can delete the first and last quote and then replace the `|` with `"` to get the C# code.
+This will give the string contents:
+
+```
+"new SimpleClass(){ SomeString = |String 1|, SomeBool = true, SomeInt = 5, }"
+"new SimpleClass(){ SomeString = |String 2|, SomeBool = false, SomeInt = 7, }"
+"new SimpleClass(){ SomeString = |String 3|, SomeBool = true, SomeInt = 9, }"
+"new SimpleClass(){ SomeString = |String 4|, SomeBool = true, SomeInt = 11, }"
+```
+
+You can delete the first and last quote and then replace the `|` with `"` to get the C# code that instantiates the objects to assert against.
 
 This trick saved me a lot of time and may be of use to you. It would also be possible to write the `ToDisplay` property to a file and this would mean that the string's wouldn't need to be un-escaped.
