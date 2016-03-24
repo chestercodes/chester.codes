@@ -20,26 +20,9 @@ Debugger display allows you to change how your object is seen whilst debugging. 
 
 To take advantage of this I added a `string ToDisplay {get; set;}` property to the class of the objects being produced. This property holds a string representation of the constructor needed to make this object.
 
-An example can be seen here. 
+An example can be seen:
 
-``` csharp
-[DebuggerDisplay("{ToDisplay}")]
-public class SimpleClass
-{
-	public string SomeString { get; set; }
-	public bool SomeBool { get; set; }
-	public int SomeInt { get; set; }
-	public string ToDisplay => PrintToDisplay();
-	private string PrintToDisplay()
-	{
-		return $"new SimpleClass(){{ " +
-		       $"{nameof(SomeString)} = |{SomeString}|, " +
-		       $"{nameof(SomeBool)} = {SomeBool.ToString().ToLower()}, " +
-		       $"{nameof(SomeInt)} = {SomeInt}, " +
-		       $"}}";
-	}
-}
-```
+{% gist CBurbidge/5982c42200edc8962ccb %}
 
 Instead of the `"` I used a `|` in an attempt to escape the string. This will obviously break if the string contains this character.
 
