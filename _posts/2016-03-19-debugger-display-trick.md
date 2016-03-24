@@ -8,8 +8,6 @@ tags:
 - code-generation
 ---
 
-## Debugger display test data generating trick ##
-
 In my day to day it's not always possible to be able to properly write code in a TDD manner. The lack of existing code coverage, tight coupling of components and time constraints mean that a test after strategy is sometimes required.
 
 Recently I was maintaining some code that serialised XML into C# objects to be loaded into a database. The C# objects were fairly simple, a couple of string properties detailing the values and table names. Each XML file produced 10-100s of objects and I wanted a way to quickly get test data to add to tests that I was writing.
