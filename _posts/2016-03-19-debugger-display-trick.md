@@ -28,6 +28,8 @@ Instead of the `"` I used a `|` in an attempt to escape the string. This will ob
 
 To get the values whilst debugging you can select the rows, right click and Copy Value. 
 
+![Selected rows](/images/selected_local_window.png)
+
 This will give the string contents and you can delete the first and last quote and then replace the `|` with `"` to get the C# code.
 
 This trick saved me a lot of time and may be of use to you. It would also be possible to write the `ToDisplay` property to a file and this would mean that the string's wouldn't need to be un-escaped.
