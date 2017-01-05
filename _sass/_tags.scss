@@ -37,7 +37,7 @@ $button-radius: 3px;
     div.tag-selectors
     {
         display: block;
-        @include tag-button(yellow);
+        @include tag-button($tag-panel);
         
         p.tag-selector
         {
@@ -55,7 +55,7 @@ $button-radius: 3px;
     div.date-selectors
     {
         display: block;
-        @include tag-button(yellow);
+        @include tag-button($tag-panel);
         
         p.date-selector
         {
@@ -80,7 +80,7 @@ div.tags
 p.filter-caption
 {
     margin-top: auto;
-    @include tag-button(yellow);
+    @include tag-button($tag-panel);
 }
 
 div.tag
