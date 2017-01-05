@@ -93,7 +93,7 @@ div.tag
 
 p.clear-tags
 {
-    @include tag-button($post-green);
+    @include tag-button($tag-panel);
 }
 
 $tag-base-font-size: 14px;
