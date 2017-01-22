@@ -16,7 +16,6 @@ With a long PATH variable this can be hard to check for a value, so having a way
 The function i've made is below and allows the easy display of the variable by running `path` and filtering and display by passing a value into the function like `path go`.
 
 ``` powershell
-
 function path($filterBy){
     $res = $env:Path.Split(';')
     if([string]::IsNullOrWhiteSpace($filterBy) -eq $false){
@@ -25,6 +24,6 @@ function path($filterBy){
         $res
     }
 }
-
-
 ```
+
+To use this function it's easiest to add it to a [powershell profile](http://cburbidge.github.io/powershell-profile/).
