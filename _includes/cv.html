@@ -1,0 +1,473 @@
+<!doctype html>
+<html>
+	<head>
+	
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimal-ui">
+	
+	<title>Chester Burbidge</title>
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/octicons/2.0.2/octicons.min.css">
+	
+	<style type="text/css">
+	@import url(
+	https://fonts.googleapis.com/css?family=Lato:400,700
+);
+body {
+	background: #fff;
+	font-family: Lato, sans-serif;
+	margin: 0 0 80px;
+}
+a {
+	color: #2ecc71;
+}
+a:focus,
+a:hover {
+	color: #f1c40f;
+	text-decoration: none;
+}
+p {
+	line-height: 1.5;
+	margin: 0;
+}
+p + p {
+	margin-top: 10px;
+}
+h1,
+h2,
+h3,
+h4 {
+	margin-top: 0
+}
+section {
+	margin-top: 30px;
+}
+li {
+	line-height: 1.8;
+	list-style: none;
+}
+li:before {
+	content: "\f052";
+	float: left;
+	font: 13px Octicons;
+	margin-top: 6px;
+	margin-left: -20px;
+	opacity: .1;
+	position: absolute;
+}
+blockquote {
+	border-left: 5px solid #e7e9ec;
+	font-size: 14px;
+}
+em {
+	color: #95a5a6;
+	font-weight: normal;
+	font-style: normal;
+}
+h4 span:first-child {
+	color: #000;
+	font-weight: bold;
+}
+.container {
+	max-width: 750px;
+	padding: 0 30px;
+}
+.col-sm-6 {
+	margin-bottom: 10px;
+}
+.col-sm-12 h4 {
+	margin-top: 12px; 
+}
+.col-sm-12 + .col-sm-12 {
+	margin-top: 30px;
+}
+#header {
+	background: #f4f6f6;
+	padding: 50px 0;
+	margin-bottom: 30px;
+}
+#header h2 {
+	color: #95a5a6;
+	font-size: 24px;
+}
+#content h3 {
+	color: #f1c40f;
+	font-size: 26px;
+	margin-top: -4px;
+}
+#content aside {
+	text-align: right;
+	padding-right: 30px;
+}
+#profiles .network {
+	text-transform: capitalize;
+}
+#work .position,
+#volunteer .position {
+	font-weight: bold;
+	margin-bottom: 8px;
+}
+#education .area {
+	font-weight: bold;
+}
+#education .area:before {
+	content: "\f0d7";
+	font: 16px Octicons;
+	margin-right: 6px;
+}
+#education .studyType {
+	margin-left: 25px;
+}
+#awards .summary,
+#publications .summary {
+	margin-top: 8px;
+}
+#publications .website a:before {
+	content: attr(href);
+}
+
+@media (min-width: 480px) {
+	.strike-through {
+		border-top: 1px solid #f4f6f6;
+		height: 20px;
+		margin-top: 12px;
+		margin-bottom: -2px;
+		position: relative;
+	}
+	.strike-through span,
+	.strike-through a {
+		background: #fff;
+		position: absolute;
+	}
+	.strike-through span:first-child {
+		padding-right: 20px;
+		margin-top: -12px;
+	}
+	.strike-through span + span {
+		font-size: 14px;
+		margin-top: -10px;
+		padding-left: 20px;
+		right: 0;
+	}
+}
+@media (max-width: 768px) {
+	.col-sm-6:last-child {
+		margin-bottom: 0px;
+	}
+	#content aside {
+		margin-bottom: 20px;
+		padding-right: 0;
+		text-align: left;
+	}
+	#publications .website a:before {
+		content: "View publication";
+	}
+}
+@media (max-width: 480px) {
+	h1 {
+		font-size: 26px;
+	}
+	.date {
+		font-size: 14px;
+		margin-bottom: 5px;
+	}
+	.strike-through span:first-child {
+		margin-bottom: 7px;
+	}
+	.strike-through span {
+		display: block;
+	}	
+	#header {
+		margin-bottom: 10px;
+		padding: 40px 0;
+	}
+	#actions {
+		display: none;
+	}
+}
+
+	</style>
+	
+	</head>
+	<body>
+	
+	<header id="header">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-9 col-sm-push-3">
+					<h1>
+						Chester Burbidge
+					</h1>
+					<h2>
+						Software Engineer
+					</h2>
+				</div>
+			</div>
+		</div>
+	</header>
+	<div id="content" class="container">
+
+	<section id="contact" class="row">
+		<aside class="col-sm-3">
+			<h3>Contact</h3>
+		</aside>
+		<div class="col-sm-9">
+			<div class="row">
+			</div>
+		</div>
+	</section>
+	<section id="about" class="row">
+		<aside class="col-sm-3">
+			<h3>About</h3>
+		</aside>
+		<div class="col-sm-9">
+			<p>An ambitious Software Engineer with a passion for self-development who is constantly trying to learn, practice and improve in all aspects of software development. New technologies and paradigms discovered through reading books and articles, listening to podcasts, attending talks and personal projects.</p>
+		</div>
+	</section>
+	<section id="profiles" class="row">
+		<aside class="col-sm-3">
+			<h3>Profiles</h3>
+		</aside>
+		<div class="col-sm-9">
+			<div class="row">
+				<div class="col-sm-6">
+					<strong class="network">
+						Twitter
+					</strong>
+					<div class="username">
+						<div class="url">
+							<a href="https://twitter.com/burbdude">burbdude</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<strong class="network">
+						Github
+					</strong>
+					<div class="username">
+						<div class="url">
+							<a href="https://github.com/CBurbidge">CBurbidge</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section id="work" class="row">
+		<aside class="col-sm-3">
+			<h3>Work</h3>
+		</aside>
+		<div class="col-sm-9">
+			<div class="row">
+			<div class="col-sm-12">
+				<h4 class="strike-through">
+					<span>Abide Financial</span>
+					<span class="date">
+						2015-03-01 — 
+					</span>
+				</h4>
+				<div class="website pull-right">
+					<a href="http://www.abide-financial.com/">http://www.abide-financial.com/</a>
+				</div>
+				<div class="position">
+					Software Engineer
+				</div>
+				<div class="summary">
+					<p></p>
+				</div>
+				<h4>Highlights</h4>
+				<ul class="highlights">
+					<li class="bullet">Produced or maintained code to efficiently enrich and validate transaction data using primarily C# and SQL, but also python</li>
+					<li class="bullet">Devised and setup Continuous Integration and Deployment infrastructure and conventions for AWS resources including EC2 and Lambda. This consisted primarily of Teamcity and Octopus deploy.</li>
+					<li class="bullet">Created nuget packages to help promote and implement best practices in build and deployment automation</li>
+					<li class="bullet">Implemented configuration of logging aggregation solution to remote production systems. This involved extensive automation with powershell.</li>
+					<li class="bullet">Wrote scripts and programs for file archival and other windows server administration tasks</li>
+					<li class="bullet">Spread best practices in methods and technologies through organising department wide, weekly workshops.</li>
+					<li class="bullet">Extensive use of automation technologies like powershell, AWS Cloudformation and Chef.</li>
+				</ul>
+			</div>
+			<div class="col-sm-12">
+				<h4 class="strike-through">
+					<span>Fundslibrary</span>
+					<span class="date">
+						2013-12-01 — 2014-12-01
+					</span>
+				</h4>
+				<div class="website pull-right">
+					<a href="https://www.fundslibrary.co.uk">https://www.fundslibrary.co.uk</a>
+				</div>
+				<div class="position">
+					Junior Software Developer
+				</div>
+				<div class="summary">
+					<p>Maintaining and extending the Funds Library website and it&#x27;s clients&#x27; customisations in a work environment based on Agile methodologies. Modern software development practices used including Test Driven Development, Automated Testing, Refactoring, Continuous Integration, SOLID craftmanship practices and development patterns.
+Role used C#, ASP.NET MVC and SQL Server to develop web sites, web services and internal tools. Client side development consisted of using typescript, LESS and javascript libraries such as KnockoutJs, jQuery, d3.js using grunt and jasmine for testing.</p>
+				</div>
+			</div>
+			<div class="col-sm-12">
+				<h4 class="strike-through">
+					<span>Toplevel Computing Ltd</span>
+					<span class="date">
+						2013-03-01 — 2014-03-01
+					</span>
+				</h4>
+				<div class="website pull-right">
+					<a href="https://www.toplev.com/">https://www.toplev.com/</a>
+				</div>
+				<div class="position">
+					Graduate Software Developer
+				</div>
+				<div class="summary">
+					<p>Extending or performing maintenance on customer or internal systems, using in-house developed software analogous to Web Forms, combined with the .Net Framework and other technologies. Role involved understanding client&#x27;s requests, writing code specications, designs and performing the implementation of code changes, in a workplace that practices agile methodologies.</p>
+				</div>
+			</div>
+			<div class="col-sm-12">
+				<h4 class="strike-through">
+					<span>University of Exeter</span>
+					<span class="date">
+						2010-10-01 — 2012-02-01
+					</span>
+				</h4>
+				<div class="website pull-right">
+					<a href="http://www.exeter.ac.uk/">http://www.exeter.ac.uk/</a>
+				</div>
+				<div class="position">
+					Graduate teaching assistant
+				</div>
+				<div class="summary">
+					<p>Teaching undergraduate students mathematics and demonstrating first year laboratory experiments.</p>
+				</div>
+			</div>
+			<div class="col-sm-12">
+				<h4 class="strike-through">
+					<span>Scats Country Store</span>
+					<span class="date">
+						2006-11-01 — 2007-09-01
+					</span>
+				</h4>
+				<div class="position">
+					Retail assistant
+				</div>
+				<div class="summary">
+					<p>Customer service, stock rotation, cleaning and till operation.</p>
+				</div>
+			</div>
+			<div class="col-sm-12">
+				<h4 class="strike-through">
+					<span>Burbidge&#x27;s Bakery</span>
+					<span class="date">
+						2002-06-01 — 2007-09-01
+					</span>
+				</h4>
+				<div class="website pull-right">
+					<a href="http://www.burbidges.co.uk/">http://www.burbidges.co.uk/</a>
+				</div>
+				<div class="position">
+					Bakery Helper
+				</div>
+				<div class="summary">
+					<p>Various roles including helping customers, preparing food and cleaning.</p>
+				</div>
+			</div>
+			</div>
+		</div>
+	</section>
+
+	<section id="volunteer" class="row">
+		<aside class="col-sm-3">
+			<h3>Volunteer</h3>
+		</aside>
+		<div class="col-sm-9">
+			<div class="row">
+			<div class="col-sm-12">
+				<h4 class="strike-through">
+					<span>Codeclub</span>
+					<span class="date">
+						2015-10-01 — 2016-04-01
+					</span>
+				</h4>
+				<div class="website pull-right">
+					<a href="https://www.codeclub.org.uk/">https://www.codeclub.org.uk/</a>
+				</div>
+				<div class="position">
+					Club leader
+				</div>
+				<div class="summary">
+					<p>After school club for primary school children. Taught scratch, HTML CSS and python.</p>
+				</div>
+			</div>
+			<div class="col-sm-12">
+				<h4 class="strike-through">
+					<span>Codeclub</span>
+					<span class="date">
+						2013-09-01 — 2014-04-01
+					</span>
+				</h4>
+				<div class="website pull-right">
+					<a href="https://www.codeclub.org.uk/">https://www.codeclub.org.uk/</a>
+				</div>
+				<div class="position">
+					Club leader
+				</div>
+				<div class="summary">
+					<p>After school club for primary school children. Taught scratch, HTML CSS and python.</p>
+				</div>
+			</div>
+			</div>
+		</div>
+	</section>
+	
+	<section id="education" class="row">
+		<aside class="col-sm-3">
+			<h3>Education</h3>
+		</aside>
+		<div class="col-sm-9">
+			<div class="row">
+			<div class="col-sm-12">
+				<h4 class="strike-through">
+					<span>The University of Exeter</span>
+					<span class="date">
+						2010-10-01 — 2012-10-01
+					</span>
+				</h4>
+			</div>
+			<div class="col-sm-12">
+				<h4 class="strike-through">
+					<span>The University of Exeter</span>
+					<span class="date">
+						2007-09-01 — 2010-09-01
+					</span>
+				</h4>
+			</div>
+			<div class="col-sm-12">
+				<h4 class="strike-through">
+					<span>Queen Mary&#x27;s College</span>
+					<span class="date">
+						2005-09-01 — 2007-09-01
+					</span>
+				</h4>
+			</div>
+			<div class="col-sm-12">
+				<h4 class="strike-through">
+					<span>Harroway Community School</span>
+					<span class="date">
+						2000-09-01 — 2005-09-01
+					</span>
+				</h4>
+			</div>
+			</div>
+		</div>
+	</section>
+	
+	
+	
+
+
+	
+
+	</div>
+	
+	</body>
+</html>
