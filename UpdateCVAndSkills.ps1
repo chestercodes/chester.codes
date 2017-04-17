@@ -21,5 +21,5 @@ $skillsHtmlTemplate = $skillsHtmlTemplate.Replace("{SkillsCode}", $skillsJs)
 [IO.File]::WriteAllText("$executingDir\_includes\skills.html", $skillsHtmlTemplate)
 
 cd $cvRepo
-resume export cv.html
+powershell -file "$cvRepo\GenerateHtmlAndRemoveSections.ps1"
 Copy-Item "$cvRepo\cv.html" "$executingDir\_includes\cv.html"
