@@ -4,11 +4,9 @@ title: About
 permalink: /about/
 ---
 
-Hello, welcome to this awfully coloured web page.
+Hello, my name is Chester Burbidge and I am a Bristol based Software developer.
 
-My name is Chester Burbidge and I am a Bristol based Software developer.
-
-This is my blog, [these](https://github.com/CBurbidge) are my codings and my website will be up soon.
+This is my blog and [these](https://github.com/CBurbidge) are my codings.
 
 Enjoy. 
 
