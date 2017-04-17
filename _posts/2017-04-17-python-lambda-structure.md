@@ -3,7 +3,7 @@ layout: post
 title: Project structure for python AWS Lambda functions
 excerpt: Example of a project structure for python AWS Lambda functions
 tags: 
-- aws-Lambda
+- aws-lambda
 - python
 ---
 
