@@ -2,6 +2,7 @@
 layout: post
 title: First app - things learnt.
 excerpt: Things learnt whilst writing first phone app
+issue: 5
 tags: 
 - c-sharp
 - mvvmcross

@@ -2,6 +2,7 @@
 layout: post
 title: PSFOM January - path display function
 excerpt: A function to either display or find value in PATH environment variable
+issue: 14
 tags: 
 - psfom
 - powershell

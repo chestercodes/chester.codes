@@ -2,6 +2,7 @@
 layout: post
 title: Powershell Error Handling
 excerpt: Methods of detection and handling of errors in powershell
+issue: 11
 tags: 
 - powershell
 - error-handling

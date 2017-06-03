@@ -2,6 +2,7 @@
 layout: post
 title: Powershell function of the month
 excerpt: 
+issue: 15
 tags: 
 - powershell
 - psfom

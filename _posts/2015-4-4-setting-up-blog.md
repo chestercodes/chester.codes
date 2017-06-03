@@ -2,6 +2,7 @@
 layout: post
 title: Blog, blog and away!
 excerpt: Setting up my blog.
+issue: 2
 tags: 
 - blog
 - jekyll

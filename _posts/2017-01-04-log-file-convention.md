@@ -2,6 +2,7 @@
 layout: post
 title: Log file name convention
 excerpt: A simple log file name convention
+issue: 12
 tags: 
 - logging
 - devops

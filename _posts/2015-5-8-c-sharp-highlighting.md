@@ -2,6 +2,7 @@
 layout: post
 title: Letting me C sharp
 excerpt: Defining colours for C# syntax highlighting with Jekyll Now.
+issue: 3
 tags: 
 - blog
 - jekyll

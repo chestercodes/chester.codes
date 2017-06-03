@@ -2,6 +2,7 @@
 layout: post
 title: First post!
 excerpt: Creating my blog.
+issue: 1
 tags:
 - blog
 - jekyll

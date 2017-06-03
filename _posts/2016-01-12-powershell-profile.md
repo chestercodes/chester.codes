@@ -2,6 +2,7 @@
 layout: post
 title: Powershell profile
 excerpt: Details of my new super duper powershell profile
+issue: 8
 tags: 
 - powershell
 - profile

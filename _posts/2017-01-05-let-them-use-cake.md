@@ -2,6 +2,7 @@
 layout: post
 title: Let them use CAKE
 excerpt: Useful ideas for making the switch to the CAKE build system easier
+issue: 13
 tags: 
 - c-sharp
 - cake

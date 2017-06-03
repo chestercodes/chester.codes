@@ -2,6 +2,7 @@
 layout: post
 title: Git flow committing powershell function
 excerpt: A powershell function to make committing a little bit easier
+issue: 7
 tags: 
 - git flow
 - git

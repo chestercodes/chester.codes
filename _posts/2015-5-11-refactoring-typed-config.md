@@ -2,6 +2,7 @@
 layout: post
 title: Refactoring to typed configuration
 excerpt: Refactoring .NET ConfigurationManager calls to typed properties.
+issue: 4
 tags: 
 - c-sharp
 - refactoring

@@ -2,6 +2,7 @@
 layout: post
 title: Debugger display trick
 excerpt: Generating test after data
+issue: 9
 tags: 
 - c-sharp
 - testing
@@ -20,7 +21,6 @@ To take advantage of this I added a `string ToDisplay {get; set;}` property to t
 
 An example can be seen:
 
-{% gist CBurbidge/5982c42200edc8962ccb %}
 
 Instead of the `"` I used a `|` in an attempt to escape the string. This will obviously break if the string contains this character.
 
