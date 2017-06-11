@@ -10,15 +10,15 @@ tags:
 - streams
 ---
 
-I've been adding unit test coverage to a project which makes heavy use of the file system and uses a streaming approach to write potentially big files. 
+I've been adding unit test coverage to a project which uses a streaming approach to write potentially big files. 
+With such projects it's tempting to rely on integration tests for the convenience of not having to mock out the file system. 
+I prefer the speed and control of unit tests which use a mocking framework like [Moq](https://github.com/moq/moq) combined with the [System.IO.Abstractions](https://github.com/tathamoddie/System.IO.Abstractions) library to mock out the file system calls.
 
-With such projects, it's tempting to rely on integration tests for the convenience of not having to mock out the file system. I prefer the speed and control of using a unit test with a mocking framework like Moq combined with the Nuget library System.IO.Abstractions to mock out the file system calls.
-
-I found a problem when trying to test what had been written to file streams which i've not seen documented anywhere else and I thought i'd explain.
+I ran into a problem when trying to test what had been written to a file stream and developed a trick that I've not seen documented anywhere else.
 
 ### Testing file streams ###
 
-To open a file for reading or writing one can use the `File.Open` method and the `StreamWriter` to write to this stream.
+To open a file for reading or writing one can use the `File.Open` method to create a stream and the `StreamWriter` class to write to this stream.
 
 ``` csharp
 // fs is an IFileSystem from System.IO.Abstractions
@@ -30,7 +30,7 @@ using(var writer = new StreamWriter(fileStream))
 }
 ```
 
-To test this we can setup a mock to pass in a stream to be written to. We can use the .Net `MemoryStream` class to store the information being written to the file. Once we have finished we can read the result with the `StreamReader` class.
+To test this we can setup a mock to pass in a stream to capture the information written to the file. We can use the .Net `MemoryStream` class to store the information and the `StreamReader` to read the result.
 
 ``` csharp
 var mockFileSystem = new Mock<IFileSystem>();
@@ -54,10 +54,10 @@ Assert.That(result, Is.EqualTo("something"));
 
 ### The problem ###
 
-When we run this code we get the error `System.ArgumentException: 'Stream was not readable.'`.
-The problem is that the `memoryStream` is being disposed of before we can read from it at the end of the `using` statement.
+Running this code, we get the error `System.ArgumentException: 'Stream was not readable.'`.
+The problem is that the `memoryStream` is being disposed of at the end of the `using` statement which is before we can read from it.
 
-To solve this problem I created a class called `CopyingMemoryStream` which derives from the `MemoryStream` class. This class then overrides the `Write` method and copies the `byte`s being written into a StringBuilder using a `byte[]` to `char[]` conversion function.
+To solve this problem I created a class called `CopyingMemoryStream` which derives from the `MemoryStream` class. This class then overrides the `Write` method and copies the bytes being written into a `StringBuilder` using a `byte[]` to `char[]` conversion function.
 
 ``` csharp
 public class CopyingMemoryStream : MemoryStream
@@ -79,7 +79,7 @@ public class CopyingMemoryStream : MemoryStream
 }
 ```
 
-Using this new class instead of the MemoryStream, we can now assert against the `Written` property and the test becomes:
+With this class we can now assert against the `Written` property and the test passes:
 
 ``` csharp
 var mockFileSystem = new Mock<IFileSystem>();
@@ -101,4 +101,6 @@ var result = stream.Written;
 Assert.That(result, Is.EqualTo("something"));
 ```
 
-There may be other ways to solve this problem, this method does the job.
+
+
+I think this is a nice solution to the problem described and it has helped me in my testing.
