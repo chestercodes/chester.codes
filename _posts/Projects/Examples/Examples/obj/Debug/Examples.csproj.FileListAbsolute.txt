@@ -1,5 +1,0 @@
-F:\Repos\CBurbidge.github.io\_posts\Projects\Examples\Examples\bin\Debug\Examples.dll
-F:\Repos\CBurbidge.github.io\_posts\Projects\Examples\Examples\bin\Debug\Examples.pdb
-F:\Repos\CBurbidge.github.io\_posts\Projects\Examples\Examples\obj\Debug\Examples.csprojResolveAssemblyReference.cache
-F:\Repos\CBurbidge.github.io\_posts\Projects\Examples\Examples\obj\Debug\Examples.dll
-F:\Repos\CBurbidge.github.io\_posts\Projects\Examples\Examples\obj\Debug\Examples.pdb
