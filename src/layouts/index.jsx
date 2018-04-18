@@ -9,6 +9,7 @@ import "./global.scss";
 export default class MainLayout extends React.Component {
   getLocalTitle() {
     function capitalize(string) {
+      if(!string){return ""}
       return string.charAt(0).toUpperCase() + string.slice(1);
     }
     const pathPrefix = config.pathPrefix ? config.pathPrefix : "/";
