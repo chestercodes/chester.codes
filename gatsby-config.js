@@ -10,7 +10,6 @@ module.exports = {
     siteUrl: config.siteUrl + pathPrefix,
     rssMetadata: {
       site_url: config.siteUrl + pathPrefix,
-      feed_url: config.siteUrl + pathPrefix + config.siteRss,
       title: config.siteTitle,
       description: config.siteDescription,
       image_url: `${config.siteUrl + pathPrefix}/logos/logo-512.png`,
@@ -130,7 +129,6 @@ module.exports = {
             siteMetadata {
               rssMetadata {
                 site_url
-                feed_url
                 title
                 description
                 image_url
@@ -180,7 +178,6 @@ module.exports = {
               }
             }
           `,
-            output: config.siteRss
           }
         ]
       }

@@ -2,8 +2,6 @@ import React from "react";
 import Helmet from "react-helmet";
 import Card from "react-md/lib/Cards";
 import CardText from "react-md/lib/Cards/CardText";
-import UserInfo from "../components/UserInfo/UserInfo";
-import Disqus from "../components/Disqus/Disqus";
 import PostTags from "../components/PostTags/PostTags";
 import PostCover from "../components/PostCover/PostCover";
 import PostInfo from "../components/PostInfo/PostInfo";
@@ -78,12 +76,7 @@ export default class PostTemplate extends React.Component {
               />
             </div>
           </Card>
-          <UserInfo
-            className="md-grid md-cell md-cell--12"
-            config={config}
-            expanded={expanded}
-          />
-          <Disqus postNode={postNode} expanded={expanded} />
+          
         </div>
 
         <PostSuggestions postNode={postNode} />
