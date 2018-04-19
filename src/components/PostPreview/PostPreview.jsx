@@ -42,23 +42,18 @@ class PostPreview extends Component {
     const cover = postInfo.cover.startsWith("/")
       ? __PATH_PREFIX__ + postInfo.cover
       : postInfo.cover;
-    const coverHeight = mobile ? 162 : 225;
     return (
       <Card key={postInfo.path} raise className="md-grid md-cell md-cell--12">
         <Link style={{ textDecoration: "none" }} to={postInfo.path}>
           <CardTitle
-            expander={expand}
             title={postInfo.title}
             subtitle={`${postInfo.timeToRead} min read - Published on ${postInfo.date}`}
           />
-
-          <CardText expandable={expand}>
+          <CardText>
             {postInfo.excerpt}
           </CardText>
-
         </Link>
         <PostTags tags={postInfo.tags} />
-
       </Card>
     );
   }

@@ -2,8 +2,8 @@ var copy = "Chester Burbidge © " + new Date().getFullYear()
 
 module.exports = {
   blogPostDir: "posts", // The name of directory that contains your posts.
-  siteTitle: "Chester Codes", // Site title.
-  siteTitleAlt: "Chester Codes", // Alternative site title for SEO.
+  siteTitle: "chester.codes", // Site title.
+  siteTitleAlt: "chester.codes", // Alternative site title for SEO.
   siteLogo: "/logos/logo-1024.png", // Logo used for SEO and manifest.
   siteUrl: "https://chester.codes", // Domain of your website without pathPrefix.
   pathPrefix: "/", // Prefixes all links. For cases when deployed to example.github.io/gatsby-material-starter/.

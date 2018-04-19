@@ -20,10 +20,10 @@ class Footer extends Component {
             <h4>{copyright}</h4>
           </div>
 
-          <div className="based-on">
+          <div  style={{textDecoration: "none"}} className="based-on">
             <h4>
               <a href="https://github.com/chestercodes/chestercodes.github.io">
-                View source
+                View page source
               </a>
             </h4>
           </div>
