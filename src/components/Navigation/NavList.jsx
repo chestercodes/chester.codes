@@ -5,7 +5,7 @@ import Link from "gatsby-link";
 function GetNavList(config) {
   const NavList = [
     {
-      primaryText: "Home",
+      primaryText: "Blog",
       leftIcon: <FontIcon>home</FontIcon>,
       component: Link,
       to: "/"
@@ -14,6 +14,22 @@ function GetNavList(config) {
       divider: true
     }
   ];
+
+  NavList.push({
+    primaryText: "CV",
+    leftIcon: <FontIcon>person</FontIcon>,
+    component: Link,
+    to: "/cv/"
+  });
+
+  NavList.push({
+    primaryText: "Talks",
+    leftIcon: <FontIcon>share</FontIcon>,
+    component: Link,
+    to: "/talks/"
+  });
+
+  NavList.push({ divider: true });
 
   if (config.userLinks) {
     config.userLinks.forEach(link => {
@@ -26,14 +42,6 @@ function GetNavList(config) {
     });
   }
 
-  NavList.push({ divider: true });
-
-  NavList.push({
-    primaryText: "About",
-    leftIcon: <FontIcon>person</FontIcon>,
-    component: Link,
-    to: "/about/"
-  });
   return NavList;
 }
 export default GetNavList;

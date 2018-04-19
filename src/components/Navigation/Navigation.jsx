@@ -3,6 +3,7 @@ import NavigationDrawer from "react-md/lib/NavigationDrawers";
 import ToolbarActions from "../ToolbarActions/ToolbarActions";
 import Footer from "../Footer/Footer";
 import GetNavList from "./NavList";
+import NavTitle from "./NavTitle";
 import "./Navigation.scss";
 
 class Navigation extends Component {
@@ -12,13 +13,14 @@ class Navigation extends Component {
     return (
       <NavigationDrawer
         drawerTitle={config.siteTitle}
-        toolbarTitle={LocalTitle}
+        toolbarTitle={LocalTitle }
         contentClassName="main-content"
         navItems={GetNavList(config)}
         mobileDrawerType={NavigationDrawer.DrawerTypes.TEMPORARY}
         tabletDrawerType={NavigationDrawer.DrawerTypes.TEMPORARY}
         desktopDrawerType={NavigationDrawer.DrawerTypes.TEMPORARY}
-        toolbarActions={<ToolbarActions config={config} />}
+        //toolbarActions={<ToolbarActions config={config} />}
+        toolbarActions={<NavTitle />}
       >
         <div className="main-container">{children}</div>
         <Footer userLinks={footerLinks} />

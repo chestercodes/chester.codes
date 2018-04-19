@@ -3,9 +3,9 @@ import Card from "react-md/lib/Cards/Card";
 import CardText from "react-md/lib/Cards/CardText";
 import UserLinks from "../UserLinks/UserLinks";
 import config from "../../../data/SiteConfig";
-import "./About.scss";
+import "./CV.scss";
 
-class About extends Component {
+class CV extends Component {
   render() {
     return (
       <div className="about-container md-grid mobile-fix">
@@ -21,4 +21,4 @@ class About extends Component {
   }
 }
 
-export default About;
+export default CV;

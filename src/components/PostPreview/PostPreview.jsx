@@ -46,33 +46,19 @@ class PostPreview extends Component {
     return (
       <Card key={postInfo.path} raise className="md-grid md-cell md-cell--12">
         <Link style={{ textDecoration: "none" }} to={postInfo.path}>
-          <Media
-            style={{
-              backgroundImage: `url(${cover})`,
-              height: `${coverHeight}px`
-            }}
-            className="post-preview-cover"
-          >
-            <MediaOverlay>
-              <CardTitle title={postInfo.title}>
-                <Button raised secondary className="md-cell--right">
-                  Read
-                </Button>
-              </CardTitle>
-            </MediaOverlay>
-          </Media>
-        </Link>
-        <CardTitle
-          expander={expand}
-          avatar={<Avatar icon={<FontIcon iconClassName="fa fa-calendar" />} />}
-          title={`Published on ${postInfo.date}`}
-          subtitle={`${postInfo.timeToRead} min read`}
-        />
+          <CardTitle
+            expander={expand}
+            title={postInfo.title}
+            subtitle={`${postInfo.timeToRead} min read - Published on ${postInfo.date}`}
+          />
 
-        <CardText expandable={expand}>
-          {postInfo.excerpt}
-          <PostTags tags={postInfo.tags} />
-        </CardText>
+          <CardText expandable={expand}>
+            {postInfo.excerpt}
+          </CardText>
+
+        </Link>
+        <PostTags tags={postInfo.tags} />
+
       </Card>
     );
   }
