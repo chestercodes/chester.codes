@@ -9,7 +9,7 @@ import "./global.scss";
 export default class MainLayout extends React.Component {
   getLocalTitle() {
     function capitalize(string) {
-      if(!string){return ""}
+      if (!string) { return "" }
       return string.charAt(0).toUpperCase() + string.slice(1);
     }
     const pathPrefix = config.pathPrefix ? config.pathPrefix : "/";
@@ -44,9 +44,21 @@ export default class MainLayout extends React.Component {
   }
   render() {
     const { children } = this.props;
+    var minHeight = 350;
     return (
       <Navigation config={config} LocalTitle={this.getLocalTitle()}>
-        <div>
+        <div style={{
+          height: "100%",
+          width: "100%",
+          position: "absolute",
+          backgroundImage: "url('/logos/logo-1024.png')",
+          opacity: 0.5,
+          height: minHeight
+        }} ></div>
+        <div style={{
+          minHeight: minHeight,
+          zIndex: 0
+        }} >
           <Helmet>
             <meta name="description" content={config.siteDescription} />
           </Helmet>

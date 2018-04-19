@@ -57,7 +57,9 @@ export default class PostTemplate extends React.Component {
           <link rel="canonical" href={`${config.siteUrl}${post.id}`} />
         </Helmet>
         <SEO postPath={slug} postNode={postNode} postSEO />
-        <PostCover postNode={postNode} mobile={mobile} />
+        
+        {/* <PostCover postNode={postNode} mobile={mobile} />
+         */}
         <div
           className={`md-grid md-cell--9 post-page-contents mobile-fix ${postOverlapClass}`}
         >

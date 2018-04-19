@@ -1,6 +1,17 @@
 import React from "react";
 import PostPreview from "../PostPreview/PostPreview";
 
+import Card from "react-md/lib/Cards/Card";
+import CardTitle from "react-md/lib/Cards/CardTitle";
+import Button from "react-md/lib/Buttons";
+import Avatar from "react-md/lib/Avatars";
+import CardText from "react-md/lib/Cards/CardText";
+import FontIcon from "react-md/lib/FontIcons";
+import Link from "gatsby-link";
+import Media, { MediaOverlay } from "react-md/lib/Media";
+
+
+
 class PostListing extends React.Component {
   getPostList() {
     const postList = [];
@@ -19,6 +30,9 @@ class PostListing extends React.Component {
   }
   render() {
     const postList = this.getPostList();
+    var search = (<Card className="md-grid md-cell md-cell--middle md-cell--12">        
+    </Card>
+    )
     return (
       <div className="md-grid md-grid--no-spacing md-cell--middle">
         <div className="md-grid md-cell--10 mobile-fix">
