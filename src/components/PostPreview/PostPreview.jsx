@@ -38,10 +38,6 @@ class PostPreview extends Component {
     const { postInfo } = this.props;
     const { mobile } = this.state;
     const expand = mobile;
-    /* eslint no-undef: "off"*/
-    const cover = postInfo.cover.startsWith("/")
-      ? __PATH_PREFIX__ + postInfo.cover
-      : postInfo.cover;
     return (
       <Card key={postInfo.path} raise className="md-grid md-cell md-cell--12">
         <Link style={{ textDecoration: "none" }} to={postInfo.path}>
