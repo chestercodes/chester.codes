@@ -58,10 +58,8 @@ export default class PostTemplate extends React.Component {
         </Helmet>
         <SEO postPath={slug} postNode={postNode} postSEO />
         
-        {/* <PostCover postNode={postNode} mobile={mobile} />
-         */}
         <div
-          className={`md-grid md-cell--9 post-page-contents mobile-fix ${postOverlapClass}`}
+          className={`md-grid md-cell--12 mobile-fix ${postOverlapClass}`}
         >
           <Card className="md-grid md-cell md-cell--12 post">
             <CardText className="post-body">

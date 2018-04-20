@@ -32,7 +32,7 @@ export default class MainLayout extends React.Component {
         .replace("tags", "")
         .replace("/", "")
         .replace("-", " ");
-      title = `Tagged in ${capitalize(tag)}`;
+      title = `Tag == ${capitalize(tag)}`;
     } else if (currentPath.includes("categories")) {
       const category = currentPath
         .replace("categories", "")
