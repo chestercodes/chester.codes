@@ -31,7 +31,7 @@ class Talks extends Component {
       }
 
       return (
-        <Card className="md-grid md-cell md-cell--middle md-cell--12">
+        <Card key={t.title} className="md-grid md-cell md-cell--middle md-cell--12">
           <Media
             style={s}
             className="post-preview-cover"
@@ -45,7 +45,7 @@ class Talks extends Component {
               <div className="talk-text md-body-1">
                 <p>{t.abstract}</p>
                 <ul>
-                  {t.sessions.map(s => <li>{renderSession(s)}</li>)}
+                  {t.sessions.map(s => <li key={s.location + s.date} >{renderSession(s)}</li>)}
                 </ul>
               </div>
             </CardText>

@@ -7,7 +7,7 @@ tags:
 - blog
 - jekyll
 - jekyll-now
-date: "2015/04/03"
+date: "03/04/2015"
 slug: "First-post"
 ---
 
