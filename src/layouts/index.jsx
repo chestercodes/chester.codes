@@ -44,7 +44,7 @@ export default class MainLayout extends React.Component {
   }
   render() {
     const { children } = this.props;
-    var minHeight = 350;
+    var minHeight = 600;
     return (
       <Navigation config={config} LocalTitle={this.getLocalTitle()}>
         <div style={{

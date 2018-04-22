@@ -7,9 +7,11 @@ tags:
 - blog
 - jekyll
 - jekyll-now
-date: "03/04/2015"
 slug: "First-post"
+date: "2015/04/03"
+category: Tech
 ---
+
 
 Hello all, today a blog is born!
 
