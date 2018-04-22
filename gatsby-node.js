@@ -141,16 +141,18 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
           });
         });
 
-        const categoryList = Array.from(categorySet);
-        categoryList.forEach(category => {
-          createPage({
-            path: `/categories/${_.kebabCase(category)}/`,
-            component: categoryPage,
-            context: {
-              category
-            }
-          });
-        });
+        // don't care about categories
+        
+        // const categoryList = Array.from(categorySet);
+        // categoryList.forEach(category => {
+        //   createPage({
+        //     path: `/categories/${_.kebabCase(category)}/`,
+        //     component: categoryPage,
+        //     context: {
+        //       category
+        //     }
+        //   });
+        // });
       })
     );
   });

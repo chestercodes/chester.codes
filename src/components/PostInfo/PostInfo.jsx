@@ -10,25 +10,20 @@ class PostInfo extends Component {
   render() {
     const { postNode } = this.props;
     const post = postNode.frontmatter;
+    let s = {
+      padding: 10,
+      paddingBottom: 20
+    }
     return (
       <div className="post-info">
         <CardTitle
-          avatar={<Avatar icon={<FontIcon iconClassName="fa fa-calendar" />} />}
-          title={`Published on ${post.date}`}
+          style={s}
+          subtitle={`Published on ${post.date}`}
+        />
+        <CardTitle
+          style={s}
           subtitle={`${postNode.timeToRead} min read`}
         />
-        <Link
-          className="category-link"
-          to={`/categories/${_.kebabCase(post.category)}`}
-        >
-          <CardTitle
-            avatar={
-              <Avatar icon={<FontIcon iconClassName="fa fa-folder-open" />} />
-            }
-            title={"In category"}
-            subtitle={post.category}
-          />
-        </Link>
       </div>
     );
   }

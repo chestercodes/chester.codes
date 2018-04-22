@@ -41,7 +41,7 @@ class PostPreview extends Component {
         <Link style={{ textDecoration: "none" }} to={postInfo.path}>
           <CardTitle
             title={postInfo.title}
-            subtitle={`${postInfo.timeToRead} min read - Published on ${postInfo.date}`}
+            subtitle={`Published on ${postInfo.date} - ${postInfo.timeToRead} min read`}
           />
           <CardText>
             {postInfo.excerpt}

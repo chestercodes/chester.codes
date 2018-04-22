@@ -4,7 +4,10 @@ import Media, { MediaOverlay } from "react-md/lib/Media";
 import CardText from "react-md/lib/Cards/CardText";
 import UserLinks from "../UserLinks/UserLinks";
 import config from "../../../data/SiteConfig";
+import FontIcon from "react-md/lib/FontIcons";
 import CardTitle from "react-md/lib/Cards/CardTitle";
+import { Button, SVGIcon } from 'react-md';
+
 import "./Talks.scss";
 
 class Talks extends Component {
@@ -29,6 +32,9 @@ class Talks extends Component {
       if (t.coverPosition) {
         s.backgroundPosition = t.coverPosition
       }
+      
+      var code = t.code ? <a className="talk-icon" href={t.code}><Button raised primary iconClassName="fa fa-code">Code</Button></a> : <div />
+      var slides = t.slides ? <a className="talk-icon" href={t.slides}><Button raised primary iconClassName="fa fa-photo">Slides</Button></a> : <div />
 
       return (
         <Card key={t.title} className="md-grid md-cell md-cell--middle md-cell--12">
@@ -49,6 +55,9 @@ class Talks extends Component {
                 </ul>
               </div>
             </CardText>
+          </div>
+          <div className="talk-icons">
+            {code} {slides}
           </div>
         </Card>
       )
