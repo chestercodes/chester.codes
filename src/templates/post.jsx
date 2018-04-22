@@ -50,6 +50,7 @@ export default class PostTemplate extends React.Component {
     if (!post.category_id) {
       post.category_id = config.postDefaultCategoryID;
     }
+    var issuesUrl = "https://github.com/chestercodes/chestercodes.github.io/issues/" + post.issue;
     return (
       <div className="post-page md-grid md-grid--no-spacing">
         <Helmet>
@@ -57,7 +58,7 @@ export default class PostTemplate extends React.Component {
           <link rel="canonical" href={`${config.siteUrl}${post.id}`} />
         </Helmet>
         <SEO postPath={slug} postNode={postNode} postSEO />
-        
+
         <div
           className={`md-grid md-cell--12 mobile-fix ${postOverlapClass}`}
         >
@@ -66,8 +67,10 @@ export default class PostTemplate extends React.Component {
               <h1 className="md-display-2 post-header">{post.title}</h1>
               <PostInfo postNode={postNode} />
               <div dangerouslySetInnerHTML={{ __html: postNode.html }} />
+
             </CardText>
             <div className="post-meta">
+              <p>Any comments/questions/suggestions? <a href={issuesUrl}>I'd love to hear them!</a></p>
               <PostTags tags={post.tags} />
               <SocialLinks
                 postPath={slug}
@@ -76,10 +79,10 @@ export default class PostTemplate extends React.Component {
               />
             </div>
           </Card>
-          
+
         </div>
 
-        <PostSuggestions postNode={postNode} />
+        {/* <PostSuggestions postNode={postNode} /> */}
       </div>
     );
   }
@@ -98,6 +101,7 @@ export const pageQuery = graphql`
         date
         category
         tags
+        issue
       }
       fields {
         nextTitle
