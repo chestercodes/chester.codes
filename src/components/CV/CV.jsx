@@ -1,24 +1,19 @@
 import React, { Component } from "react";
-import Card from "react-md/lib/Cards/Card";
-import CardText from "react-md/lib/Cards/CardText";
-import UserLinks from "../UserLinks/UserLinks";
-import config from "../../../data/SiteConfig";
+import CV from "../../chestercodes/CV/CV";
+import resume from "../../chestercodes/CV/resume.json";
+import skills from "../../chestercodes/CV/skills.json";
 import "./CV.scss";
 
-class CV extends Component {
+class CVElement extends Component {
   render() {
+    var theme = "default";
+    var element = "cvElement"
     return (
-      <div className="about-container md-grid mobile-fix">
-        <Card className="md-grid md-cell--8">
-          <div className="about-wrapper">
-            <CardText>
-              <p className="about-text md-body-1">Software engineer</p>
-            </CardText>
-          </div>
-        </Card>
+      <div id={element} >
+        <CV jsonResume={resume} skills={skills} theme={theme} print={true} divId={element} />
       </div>
     );
   }
 }
 
-export default CV;
+export default CVElement;
