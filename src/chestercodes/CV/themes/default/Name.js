@@ -10,29 +10,18 @@ export default function (props) {
 }
 
 var Name = function (props) {
-
   return (
     <header style={{
       borderBottom: "1px solid black",
-      marginBottom: 20
+      //marginBottom: 20,
+      display: "flex",
+      justifyContent: "space-between"
     }}>
-      <div style={{
-        width: "45%",
-        minWidth: 150,
-        margin: 5,
-        height: "100%",
-        display: "inline-block",
-        verticalAlign: "bottom"
-      }}>
+      <div  >
         <h1 style={{ textAlign: "left" }} >{props.basics.name}</h1>
       </div>
 
-      <div style={{
-        width: "49%",
-        display: "inline-block",
-        margin: 5,
-        verticalAlign: "bottom"
-      }}>
+      <div >
         <Profiles profiles={props.basics.profiles} />
       </div>
     </header>

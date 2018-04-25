@@ -35,7 +35,7 @@ class CV extends Component {
   render() {
 
     return (
-      <div style={{ padding: 2 }}>
+      <div style={{ margin: 15 }}>
         <Default jsonResume={this.props.jsonResume} skills={this.props.skills} print={this.props.print} cvWidth={this.state.cvWidth} />
       </div>
     );

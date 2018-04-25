@@ -1,5 +1,5 @@
 import React from 'react';
-import { iconSize, getRightSideDivStyle, getLeftSideDivStyle, mixWithBorderAndPadding, mixWithBorder2AndPadding } from '../styles/common'
+import { iconSize, isMobile, getRightSideDivStyle, getLeftSideDivStyle, mixWithBorderAndPadding, mixWithBorder2AndPadding } from '../styles/common'
 import { isSelectedFunc, selectedTypes, getSkillTypeStyle, getSkillStyle, getSettingStyle } from './selected'
 import Experience from "./Experience"
 import Icons from '../icons'
@@ -47,19 +47,28 @@ class SkillTypes extends React.Component {
 
   render() {
     var allSkills = Object.keys(this.props.skillsObj.skills)
+    var isMob = isMobile(this.props.cvWidth)
+    var initialLeftStyle = isMob ? { borderLeft: "3px solid black" } : {}
+    var leftSide = isMob ? <h4>Skills</h4> : <Icons.Tools size={iconSize} />
+
+    var skillsPadding = { margin: 10 }
+
     return (
       <div>
-        <div style={getLeftSideDivStyle(this.props.cvWidth)}>
-          <Icons.Tools size={iconSize} />
-          {/* <h4>Skills</h4> */}
+        <div style={
+          Object.assign(initialLeftStyle, getLeftSideDivStyle(this.props.cvWidth))
+        }>
+          {leftSide}
         </div>
-        <div style={mixWithBorderAndPadding(getRightSideDivStyle(this.props.cvWidth))}>
-          <div>
+        <div style={
+          Object.assign({}, mixWithBorderAndPadding(getRightSideDivStyle(this.props.cvWidth)))
+        }>
+          <div style={skillsPadding}>
             {this.props.skills.map(x => <SkillType key={x.name} skill={x} skillsObj={this.props.skillsObj}
               clickSelect={this.props.clickSelect}
               isSelected={this.props.isSelected} />)}
           </div>
-          <div>
+          <div style={skillsPadding}>
             {allSkills.map(x => <Skill key={x} skillId={x} skillsObj={this.props.skillsObj}
               clickSelect={this.props.clickSelect}
               isSelected={this.props.isSelected} />)}
@@ -80,9 +89,9 @@ class SkillType extends React.Component {
   render() {
     var selected = this.isSelected(selectedTypes.SkillType, this.props.skill.name);
     var selectedStyle = getSkillTypeStyle(selected);
-    var basicStyle = { 
+    var basicStyle = {
       display: "inline-block",
-      margin: 2 
+      margin: 2
     }
     var s = Object.assign(basicStyle, selectedStyle)
     return (
@@ -107,12 +116,12 @@ class Skill extends React.Component {
     var selected = this.isSelected(selectedTypes.Skill, this.props.skillId)
     var skillName = this.props.skillsObj.skills[this.props.skillId].name
     var selectedStyle = getSkillStyle(selected);
-    var basicStyle = { 
+    var basicStyle = {
       display: "inline-block",
-      margin: 2 
+      margin: 2
     }
     var s = Object.assign(basicStyle, selectedStyle)
-    
+
     return (
       <div onClick={() => this.clickSelect(selectedTypes.Skill, this.props.skillId)}
         style={s}>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { getRightSideDivStyle, getLeftSideDivStyle, mixWithBorderAndPadding, mixWithBorder2AndPadding, iconSize } from '../styles/common'
+import { isMobile, getRightSideDivStyle, getLeftSideDivStyle, mixWithBorderAndPadding, mixWithBorder2AndPadding, iconSize } from '../styles/common'
 import { isSelectedFunc, selectedTypes, getSettingStyle } from './selected'
 import Icons from '../icons'
 
@@ -12,11 +12,16 @@ export default class Experience extends React.Component {
 
   render() {
     var rightStyle = getRightSideDivStyle(this.props.cvWidth)
+    var isMob = isMobile(this.props.cvWidth)
+    var initialLeftStyle = isMob ? { borderRight: "3px solid black" } : {}
+    var leftSide = isMob ? <h4>Experience</h4> : <Icons.BriefCase size={iconSize} />
+
     return (
       <div>
-        <div style={getLeftSideDivStyle(this.props.cvWidth)}>
-          <Icons.BriefCase size={iconSize} />
-          {/* <h4>Experience</h4> */}
+        <div style={
+          Object.assign(initialLeftStyle, getLeftSideDivStyle(this.props.cvWidth))
+        }>
+          {leftSide}
         </div>
 
         <div style={mixWithBorder2AndPadding(rightStyle)} >{
@@ -39,9 +44,9 @@ class WorkPlace extends React.Component {
   render() {
     var selected = this.props.isSelected(selectedTypes.Setting, this.props.work.company)
     var selectedStyle = getSettingStyle(selected);
-    var s = Object.assign({  }, selectedStyle)
+    var s = Object.assign({}, selectedStyle)
     return (
-      <div style={{s}}>
+      <div style={{ s }}>
         <div onClick={() => this.props.clickSelect(selectedTypes.Setting, this.props.work.company)}
           style={{
             padding: 10,
@@ -105,20 +110,14 @@ class WorkPlaceTitle extends React.Component {
 
     var diff = formatDiff();
     return (
-      <div>
-        <div style={{
-          minWidth: 300,
-          width: "45%",
-          display: "inline-block"
-        }}>
+      <div style={{
+        display: "flex",
+        justifyContent: "space-between"
+      }}>
+        <div >
           <span><b>{this.props.work.company}</b></span> - <span><i>{this.props.work.position}</i></span>
         </div>
-        <div style={{
-          minWidth: 150,
-          width: "45%",
-          display: "inline-block",
-          textAlign: "right"
-        }}>
+        <div >
           <span>{startDateFormatted}</span> - <span>{endDateFormatted}</span>
           <span><i>  ({diff})</i></span>
         </div>

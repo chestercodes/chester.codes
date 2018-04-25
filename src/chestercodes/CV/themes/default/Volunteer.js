@@ -1,5 +1,5 @@
 import React from 'react';
-import { iconSize, getRightSideDivStyle, getLeftSideDivStyle, mixWithBorder2AndPadding } from './styles/common'
+import { iconSize, isMobile, getRightSideDivStyle, getLeftSideDivStyle, mixWithBorder2AndPadding } from './styles/common'
 import Icons from './icons'
 
 export default function (props) {
@@ -16,20 +16,14 @@ export default function (props) {
         margin: 10
       }}
       >
-        <div>
-          <div style={{
-            //minWidth: 300,
-            width: "45%",
-            display: "inline-block"
-          }}>
+        <div style={{
+          display: "flex",
+          justifyContent: "space-between"
+        }}>
+          <div>
             <span><b>{vol.organization}</b></span>
           </div>
-          <div style={{
-            //minWidth: 150,
-            width: "45%",
-            display: "inline-block",
-            textAlign: "right"
-          }}>
+          <div>
             <span>{formatDate(vol.startDate)}</span> - <span>{formatDate(vol.endDate)}</span>
           </div>
         </div>
@@ -39,12 +33,15 @@ export default function (props) {
     </div>);
   };
 
+  var isMob = isMobile(props.cvWidth)
+  var initialLeftStyle = isMob ? { borderRight: "3px solid black" } : {}
+  var leftSide = isMob ? <h4>Volunteering</h4> : <Icons.TeamWork size={iconSize} />
+
   return (
     <div>
       <div style={
-        Object.assign(getLeftSideDivStyle(props.cvWidth), {})}>
-        <Icons.TeamWork size={iconSize} />
-        {/* <h4>Profile</h4> */}
+        Object.assign(getLeftSideDivStyle(props.cvWidth), initialLeftStyle)}>
+        {leftSide}
       </div>
       <div style={Object.assign(mixWithBorder2AndPadding(getRightSideDivStyle(props.cvWidth)))}>
         {props.volunteer.map((x, i) => toVolunteer(x, i))}

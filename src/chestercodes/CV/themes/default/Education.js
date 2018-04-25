@@ -1,5 +1,5 @@
 import React from 'react';
-import { iconSize, getRightSideDivStyle, getLeftSideDivStyle, mixWithBorderAndPadding } from './styles/common'
+import { iconSize, getRightSideDivStyle, getLeftSideDivStyle, mixWithBorderAndPadding, isMobile } from './styles/common'
 import Icons from './icons'
 
 export default function (props) {
@@ -9,6 +9,9 @@ export default function (props) {
       var year = date.match(/20\d\d/)
       return year;
     }
+    var fStart = formatDate(edu.startDate);
+    var fEnd = formatDate(edu.endDate);
+
     return (<div key={key}>
       <div style={{
         padding: 10,
@@ -16,36 +19,36 @@ export default function (props) {
         margin: 10
       }}
       >
-        <div>
-          <div style={{
-            //minWidth: 300,
-            width: "45%",
-            display: "inline-block"
-          }}>
+        <div style={{
+          display: "flex",
+          justifyContent: "space-between"
+        }}>
+          <div>
             <span><b>{edu.institution}</b></span>
           </div>
-          <div style={{
-            //minWidth: 150,
-            width: "45%",
-            display: "inline-block",
-            textAlign: "right"
-          }}>
-            <span>{formatDate(edu.startDate)}</span> - <span>{formatDate(edu.endDate)}</span>
+          <div>
+            <span>{fStart}</span> - <span>{fEnd}</span>
           </div>
         </div>
-        <p>{edu.studyType} - <b>{edu.gpa}</b></p>
-
+        <div style={{
+          display: "flex",
+          justifyContent: "space-evenly"
+        }}>
+          <span style={{ maxWidth: "50%" }}>{edu.studyType}</span>
+          <span style={{ maxWidth: "50%" }}><b>{edu.gpa}</b></span>
+        </div>
       </div>
     </div>);
   };
+  var isMob = isMobile(props.cvWidth)
+  var initialLeftStyle = isMob ? {borderLeft: "3px solid black"} : {}
+  var leftSide = isMob ? <h4>Education</h4> : <Icons.Education size={iconSize} />
 
   return (
-
     <div>
       <div style={
-        Object.assign(getLeftSideDivStyle(props.cvWidth), {})}>
-        <Icons.Education size={iconSize} />
-        {/* <h4>Profile</h4> */}
+        Object.assign(getLeftSideDivStyle(props.cvWidth), initialLeftStyle)}>
+        {leftSide}
       </div>
       <div style={Object.assign(mixWithBorderAndPadding(getRightSideDivStyle(props.cvWidth)))}>
         {props.education.map((x, i) => toEducation(x, i))}

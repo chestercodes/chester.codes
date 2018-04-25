@@ -1,24 +1,29 @@
 var iconSize = 50
 var iconSizePad = 30
-var leftRightDiff = 25
+var leftRightDiff = 40
 
 module.exports.iconSize = iconSize;
 
+var isMobile = cvWidth => {
+  return cvWidth < 640
+}
+
+module.exports.isMobile = isMobile
+
 module.exports.getLeftSideDivStyle = cvWidth => {
+  var width = isMobile(cvWidth) ? "100%" : iconSize + iconSizePad
   return {
-    //width: "10%",
-    //minWidth: iconSize + 30,
-    width: iconSize + iconSizePad,
+    width,
     display: "inline-block",
-    textAlign: "center",
+    textAlign: "center"
   }
 }
 
 module.exports.getRightSideDivStyle = cvWidth => {
+  var width = isMobile(cvWidth) ? "100%" : cvWidth - iconSize - iconSizePad - leftRightDiff
   return {
-    width: cvWidth - iconSize - iconSizePad - leftRightDiff,
+    width,
     display: "inline-block",
-    //marginRight: 5
   }
 }
 
@@ -31,7 +36,9 @@ var mixWithBorder = style => {
 module.exports.mixWithBorder = mixWithBorder;
 
 module.exports.mixWithBorderAndPadding = style => {
-  var borderAndPadding = mixWithBorder({ padding: "2px 8px 8px 8px" })
+  var borderAndPadding = mixWithBorder({ 
+    //padding: "2px 8px 8px 8px" 
+  })
   return Object.assign(borderAndPadding, style);
 }
 
@@ -44,7 +51,9 @@ var mixWithBorder2 = style => {
 module.exports.mixWithBorder2 = mixWithBorder2;
 
 module.exports.mixWithBorder2AndPadding = style => {
-  var borderAndPadding = mixWithBorder2({ padding: "2px 8px 8px 8px" })
+  var borderAndPadding = mixWithBorder2({ 
+    //padding: "2px 8px 8px 8px" 
+  })
   return Object.assign(borderAndPadding, style);
 }
 
@@ -58,7 +67,9 @@ var mixWithBorder3 = style => {
 module.exports.mixWithBorder3 = mixWithBorder3;
 
 module.exports.mixWithBorder3AndPadding = style => {
-  var borderAndPadding = mixWithBorder3({ padding: "2px 8px 8px 8px" })
+  var borderAndPadding = mixWithBorder3({ 
+    //padding: "2px 8px 8px 8px" 
+  })
   return Object.assign(borderAndPadding, style);
 }
 
