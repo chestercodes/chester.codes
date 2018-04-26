@@ -2,7 +2,7 @@
   "basics": {
     "name": "Chester Burbidge",
     "label": "Software Engineer",
-    "website": "www.chesterburbidge.com",
+    "website": "http://chester.codes",
     "picture": "",
     "summary": "An ambitious Software Engineer with a passion for self-development who is constantly trying to learn, practice and improve in all aspects of software development. New technologies and paradigms discovered through reading books and articles, listening to podcasts, attending talks and personal projects.",
     "location": {
@@ -15,18 +15,18 @@
     "profiles": [
       {
         "network": "Web",
-        "username": "chesterburbidge.com",
-        "url": "http://chesterburbidge.com"
+        "username": "chester.codes",
+        "url": "http://chester.codes"
       },
       {
         "network": "Twitter",
-        "username": "burbdude",
-        "url": "https://twitter.com/burbdude"
+        "username": "chestercodes",
+        "url": "https://twitter.com/chestercodes"
       },
       {
         "network": "Github",
-        "username": "CBurbidge",
-        "url": "https://github.com/CBurbidge"
+        "username": "chestercodes",
+        "url": "https://github.com/chestercodes"
       }
     ]
   },
@@ -168,7 +168,25 @@
       "website": "https://www.toplev.com/",
       "startDate": "2013-03-01",
       "endDate": "2014-03-01",
-      "summary": "Extending or performing maintenance on customer or internal systems, using in-house developed software analogous to Web Forms, combined with the .Net Framework and other technologies. Role involved understanding client's requests, writing code specications, designs and performing the implementation of code changes, in a workplace that practices agile methodologies."
+      "summary": "Extending or performing maintenance on customer or internal systems, using in-house developed software analogous to Web Forms, combined with the .Net Framework and other technologies. Role involved understanding client's requests, writing code specications, designs and performing the implementation of code changes, in a workplace that practices agile methodologies.",
+      "skills": [
+        "cPlusPlus",
+        "cSharp",
+        "css",
+        "dotNetFramework",
+        "html",
+        "linq",
+        "moq",
+        "nunit",
+        "resharper",
+        "sourceSafe",
+        "sqlServerManagementStudio",
+        "tfs",
+        "tSql",
+        "visualStudio",
+        "vbDotNet",
+        "xml"
+      ]
     }
   ],
   "volunteer": [

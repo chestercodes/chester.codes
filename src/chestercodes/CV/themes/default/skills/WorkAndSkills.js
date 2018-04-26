@@ -1,8 +1,9 @@
 import React from 'react';
-import { iconSize, isMobile, getRightSideDivStyle, getLeftSideDivStyle, mixWithBorderAndPadding, mixWithBorder2AndPadding } from '../styles/common'
-import { isSelectedFunc, selectedTypes, getSkillTypeStyle, getSkillStyle, getSettingStyle } from './selected'
+import { iconSize, isMobile, getRightSideDivStyle, getLeftSideDivStyle, mixWithBorderAndPadding } from '../styles/common'
+import { isSelectedFunc, selectedTypes, getSkillClass, getSettingClass, getSkillStyle } from './selected'
 import Experience from "./Experience"
 import Icons from '../icons'
+import "./transitions.css"
 
 export default class WorkAndSkills extends React.Component {
   constructor(props) {
@@ -88,16 +89,15 @@ class SkillType extends React.Component {
 
   render() {
     var selected = this.isSelected(selectedTypes.SkillType, this.props.skill.name);
-    var selectedStyle = getSkillTypeStyle(selected);
+    var skillClass = getSkillClass(selected)
     var basicStyle = {
       display: "inline-block",
-      margin: 2
+      padding: 3
     }
-    var s = Object.assign(basicStyle, selectedStyle)
     return (
-      <div style={s}>
+      <div className={skillClass} style={basicStyle} >
         <span onClick={() => this.clickSelect(selectedTypes.SkillType, this.props.skill.name)}>
-          <b>{this.props.skill.name}</b>
+          <b >{this.props.skill.name}</b>
         </span>
       </div>
     );
@@ -115,16 +115,15 @@ class Skill extends React.Component {
   render() {
     var selected = this.isSelected(selectedTypes.Skill, this.props.skillId)
     var skillName = this.props.skillsObj.skills[this.props.skillId].name
-    var selectedStyle = getSkillStyle(selected);
     var basicStyle = {
       display: "inline-block",
-      margin: 2
+      padding: 3
     }
-    var s = Object.assign(basicStyle, selectedStyle)
-
+    var skillClass = getSkillClass(selected)
     return (
-      <div onClick={() => this.clickSelect(selectedTypes.Skill, this.props.skillId)}
-        style={s}>
+      <div className={skillClass}
+        style={basicStyle}
+        onClick={() => this.clickSelect(selectedTypes.Skill, this.props.skillId)} >
         <span>{skillName}</span>
       </div>
     );

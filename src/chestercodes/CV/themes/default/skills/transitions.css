@@ -1,0 +1,68 @@
+
+.skill-to-s {
+    animation-duration: 500ms;
+    animation-name: toSelected;
+    animation-fill-mode: forwards;    
+}
+
+.skill-to-h {
+    animation-duration: 500ms;
+    animation-name: toHighlighted;
+    animation-fill-mode: forwards;    
+}
+
+.skill-to-v {
+    animation-duration: 500ms;
+    animation-name: toVisible;
+    animation-fill-mode: forwards;    
+}
+
+.skill-to-i {
+    animation-duration: 500ms;
+    animation-name: toInVisible;
+    animation-fill-mode: forwards;    
+}
+
+@keyframes toHighlighted {
+    to {
+        color: black;
+        font-size: 1.2em;
+        padding: 10;
+        border: 1px solid black;
+        border-radius: 5px;
+        margin: 2px;
+    }
+}
+
+
+@keyframes toSelected {
+    to {
+        color: red;
+        font-size: 1.4em;
+        padding: 10;
+        border: 2px solid red;
+        border-radius: 5px;
+        margin: 2px;
+    }
+}
+
+@keyframes toInVisible {
+    to {
+        color: grey;
+        font-size: 0.8em;
+        padding: 2;
+        margin: 2px;
+    }
+}
+
+@keyframes toVisible {
+    to {
+        color: black;
+        font-size: 1.0em;
+        padding: 5;
+        border: 1px solid black;
+        border-radius: 5px;
+        margin: 2px;
+    }
+}
+

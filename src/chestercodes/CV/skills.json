@@ -146,7 +146,7 @@
   ],
   "jsonResumeSettings": [
     {
-      "company": "Toplevel Computing Ltd",
+      "company": "Toplevel Computing",
       "keywords": [
         "cPlusPlus",
         "cSharp",
@@ -1094,7 +1094,7 @@
   "settings": {
     "toplevel": {
       "id": "toplevel",
-      "name": "Toplevel Computing Ltd",
+      "name": "Toplevel Computing",
       "description": "Toplevel computing - Graduate Developer",
       "dateRange": {
         "startDate": "2013-03-31T23:00:00.000Z",

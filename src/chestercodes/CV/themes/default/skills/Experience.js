@@ -1,6 +1,6 @@
 import React from 'react';
-import { isMobile, getRightSideDivStyle, getLeftSideDivStyle, mixWithBorderAndPadding, mixWithBorder2AndPadding, iconSize } from '../styles/common'
-import { isSelectedFunc, selectedTypes, getSettingStyle } from './selected'
+import { isMobile, getRightSideDivStyle, getLeftSideDivStyle, mixWithBorder2AndPadding, iconSize } from '../styles/common'
+import { selectedTypes, getSettingStyle, getSettingClass } from './selected'
 import Icons from '../icons'
 
 export default class Experience extends React.Component {
@@ -43,7 +43,7 @@ class WorkPlace extends React.Component {
 
   render() {
     var selected = this.props.isSelected(selectedTypes.Setting, this.props.work.company)
-    var selectedStyle = getSettingStyle(selected);
+    var selectedStyle = getSettingClass(selected);
     var s = Object.assign({}, selectedStyle)
     return (
       <div style={{ s }}>
@@ -55,7 +55,7 @@ class WorkPlace extends React.Component {
           }}
         >
           <WorkPlaceTitle work={this.props.work} />
-          {this.props.work.summary != "" && <WorkPlaceDescription work={this.props.work} />}
+          {this.props.work.summary !== "" && <WorkPlaceDescription work={this.props.work} />}
           {this.props.work.highlights && this.props.work.highlights.length > 0 && <WorkPlaceHighlights work={this.props.work} />}
 
         </div>
@@ -65,10 +65,6 @@ class WorkPlace extends React.Component {
 }
 
 class WorkPlaceTitle extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     function monthDiff(d1, d2) {
       var months;
@@ -127,10 +123,7 @@ class WorkPlaceTitle extends React.Component {
 }
 
 class WorkPlaceDescription extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
+  
   render() {
     return (
       <div>
@@ -149,10 +142,7 @@ class WorkPlaceDescription extends React.Component {
 }
 
 class WorkPlaceHighlights extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
+  
   render() {
     var toHighlight = function (h, i) {
       return <li key={i} ><div style={{

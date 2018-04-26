@@ -1,5 +1,5 @@
 import React from 'react';
-import { rightSideDivStyle, leftSideDivStyle, mixWithBorder, mixWithBorderAndPadding, mixWithBorder2, mixWithBorder2AndPadding, mixWithBorder3, mixWithBorder3AndPadding } from './styles/common'
+import { mixWithBorder } from './styles/common'
 
 export default function (props) {
   return (
@@ -13,7 +13,6 @@ var Name = function (props) {
   return (
     <header style={{
       borderBottom: "1px solid black",
-      //marginBottom: 20,
       display: "flex",
       justifyContent: "space-between"
     }}>
