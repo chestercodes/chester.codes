@@ -1,0 +1,127 @@
+/*!
+ * component v1.0.0
+ * MIT Licensed
+ */
+
+.skill-to-s {
+    -webkit-animation-duration: 500ms;
+            animation-duration: 500ms;
+    -webkit-animation-name: toSelected;
+            animation-name: toSelected;
+    -webkit-animation-fill-mode: forwards;
+            animation-fill-mode: forwards;    
+}
+
+.skill-to-h {
+    -webkit-animation-duration: 500ms;
+            animation-duration: 500ms;
+    -webkit-animation-name: toHighlighted;
+            animation-name: toHighlighted;
+    -webkit-animation-fill-mode: forwards;
+            animation-fill-mode: forwards;    
+}
+
+.skill-to-v {
+    -webkit-animation-duration: 500ms;
+            animation-duration: 500ms;
+    -webkit-animation-name: toVisible;
+            animation-name: toVisible;
+    -webkit-animation-fill-mode: forwards;
+            animation-fill-mode: forwards;    
+}
+
+.skill-to-i {
+    -webkit-animation-duration: 500ms;
+            animation-duration: 500ms;
+    -webkit-animation-name: toInVisible;
+            animation-name: toInVisible;
+    -webkit-animation-fill-mode: forwards;
+            animation-fill-mode: forwards;    
+}
+
+@-webkit-keyframes toHighlighted {
+    to {
+        color: black;
+        font-size: 1.2em;
+        padding: 10;
+        border: 1px solid black;
+        border-radius: 5px;
+        margin: 2px;
+    }
+}
+
+@keyframes toHighlighted {
+    to {
+        color: black;
+        font-size: 1.2em;
+        padding: 10;
+        border: 1px solid black;
+        border-radius: 5px;
+        margin: 2px;
+    }
+}
+
+
+@-webkit-keyframes toSelected {
+    to {
+        color: red;
+        font-size: 1.4em;
+        padding: 10;
+        border: 2px solid red;
+        border-radius: 5px;
+        margin: 2px;
+    }
+}
+
+
+@keyframes toSelected {
+    to {
+        color: red;
+        font-size: 1.4em;
+        padding: 10;
+        border: 2px solid red;
+        border-radius: 5px;
+        margin: 2px;
+    }
+}
+
+@-webkit-keyframes toInVisible {
+    to {
+        color: grey;
+        font-size: 0.8em;
+        padding: 2;
+        margin: 2px;
+    }
+}
+
+@keyframes toInVisible {
+    to {
+        color: grey;
+        font-size: 0.8em;
+        padding: 2;
+        margin: 2px;
+    }
+}
+
+@-webkit-keyframes toVisible {
+    to {
+        color: black;
+        font-size: 1.0em;
+        padding: 5;
+        border: 1px solid black;
+        border-radius: 5px;
+        margin: 2px;
+    }
+}
+
+@keyframes toVisible {
+    to {
+        color: black;
+        font-size: 1.0em;
+        padding: 5;
+        border: 1px solid black;
+        border-radius: 5px;
+        margin: 2px;
+    }
+}
+
