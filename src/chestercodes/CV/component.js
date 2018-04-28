@@ -2240,11 +2240,12 @@ var WorkAndSkills = function (_React$Component) {
   };
 
   WorkAndSkills.prototype.render = function render() {
+    var showInstructions = this.state.selectedValue === "";
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
       'div',
       null,
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Experience__["a" /* default */], { work: this.props.work, cvWidth: this.props.cvWidth }),
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(SkillTypes, { work: this.props.work, skills: this.props.skills, skillsObj: this.props.skillsObj, clickSelect: this.clickSelect, isSelected: this.isSelected, cvWidth: this.props.cvWidth })
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(SkillTypes, { showInstructions: showInstructions, work: this.props.work, skills: this.props.skills, skillsObj: this.props.skillsObj, clickSelect: this.clickSelect, isSelected: this.isSelected, cvWidth: this.props.cvWidth })
     );
   };
 
@@ -2289,6 +2290,24 @@ var SkillTypes = function (_React$Component2) {
       margin: 10
     };
 
+    var instructions = this.props.showInstructions === false ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', null) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'div',
+      { style: { padding: 20 } },
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'i',
+        null,
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'b',
+          null,
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'p',
+            null,
+            'This is my skills chart, click on a workplace, skill type or skill to start.'
+          )
+        )
+      )
+    );
+
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
       'div',
       null,
@@ -2300,7 +2319,11 @@ var SkillTypes = function (_React$Component2) {
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
         { style: Object.assign({}, Object(__WEBPACK_IMPORTED_MODULE_1__styles_common__["mixWithBorderAndPadding"])(Object(__WEBPACK_IMPORTED_MODULE_1__styles_common__["getRightSideDivStyle"])(this.props.cvWidth))) },
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', null),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          null,
+          instructions
+        ),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'h4',
           { style: titlePadding },
@@ -2360,8 +2383,17 @@ var SkillType = function (_React$Component3) {
 
     _this4.clickSelect = _this4.props.clickSelect.bind(_this4);
     _this4.isSelected = _this4.props.isSelected.bind(_this4);
+    _this4.state = { hover: false };
     return _this4;
   }
+
+  SkillType.prototype.handleMouseIn = function handleMouseIn() {
+    this.setState({ hover: true });
+  };
+
+  SkillType.prototype.handleMouseOut = function handleMouseOut() {
+    this.setState({ hover: false });
+  };
 
   SkillType.prototype.render = function render() {
     var _this5 = this;
@@ -2371,17 +2403,25 @@ var SkillType = function (_React$Component3) {
     var basicStyle = {
       display: "inline-block",
       padding: 3
-    };
-    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      // if(this.state.hover){
+      //   skillClass = getSkillClass(selectedValues.Visible)
+      // }
+
+    };return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
       'div',
-      { className: skillClass, style: basicStyle },
+      { className: skillClass, style: basicStyle,
+        onMouseOver: this.handleMouseIn.bind(this), onMouseOut: this.handleMouseOut.bind(this) },
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'span',
         { onClick: function onClick() {
             return _this5.clickSelect(__WEBPACK_IMPORTED_MODULE_2__selected__["selectedTypes"].SkillType, _this5.props.skill.name);
           } },
         this.props.skill.name
-      )
+      ),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(SkillLogos, {
+        skillIds: this.props.skill.keywords, show: this.state.hover,
+        clickSelect: this.clickSelect
+      })
     );
   };
 
@@ -2439,8 +2479,17 @@ var Setting = function (_React$Component5) {
 
     _this8.clickSelect = _this8.props.clickSelect.bind(_this8);
     _this8.isSelected = _this8.props.isSelected.bind(_this8);
+    _this8.state = { hover: false };
     return _this8;
   }
+
+  Setting.prototype.handleMouseIn = function handleMouseIn() {
+    this.setState({ hover: true });
+  };
+
+  Setting.prototype.handleMouseOut = function handleMouseOut() {
+    this.setState({ hover: false });
+  };
 
   Setting.prototype.render = function render() {
     var _this9 = this;
@@ -2451,23 +2500,88 @@ var Setting = function (_React$Component5) {
       display: "inline-block",
       padding: 3
     };
-    var skillClass = Object(__WEBPACK_IMPORTED_MODULE_2__selected__["getSkillClass"])(selected);
+    var settingClass = Object(__WEBPACK_IMPORTED_MODULE_2__selected__["getSettingClass"])(selected);
+    if (this.state.hover) {
+      settingClass = Object(__WEBPACK_IMPORTED_MODULE_2__selected__["getSettingClass"])(__WEBPACK_IMPORTED_MODULE_2__selected__["selected"].HighlightedAndSelected);
+    }
+    var slug = company.replace(" ", "");
+    var png = "/logos/settings/" + slug + ".png";
+    var imgStyle = {
+      width: 160
+    };
+
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
       'div',
-      { className: skillClass,
-        style: basicStyle,
+      { className: settingClass,
+        onMouseOver: this.handleMouseIn.bind(this), onMouseOut: this.handleMouseOut.bind(this),
+        style: basicStyle },
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', { src: png,
+        style: imgStyle,
         onClick: function onClick() {
           return _this9.clickSelect(__WEBPACK_IMPORTED_MODULE_2__selected__["selectedTypes"].Setting, company);
-        } },
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'span',
-        null,
-        company
-      )
+        } }),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(SkillLogos, {
+        skillIds: this.props.work.skills, show: this.state.hover,
+        clickSelect: this.clickSelect })
     );
   };
 
   return Setting;
+}(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
+
+var SkillLogos = function (_React$Component6) {
+  _inherits(SkillLogos, _React$Component6);
+
+  function SkillLogos(props) {
+    _classCallCheck(this, SkillLogos);
+
+    var _this10 = _possibleConstructorReturn(this, _React$Component6.call(this, props));
+
+    _this10.clickSelect = _this10.props.clickSelect.bind(_this10);
+    return _this10;
+  }
+
+  SkillLogos.prototype.render = function render() {
+    var _this11 = this;
+
+    var len = 40;
+    var toLogo = function toLogo(skillId, clickSelect) {
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        { style: {
+            padding: 2
+          } },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', {
+          height: len, width: len,
+          src: "/logos/skills/" + skillId + ".png", alt: skillId,
+          onClick: function onClick() {
+            return clickSelect(__WEBPACK_IMPORTED_MODULE_2__selected__["selectedTypes"].Skill, skillId);
+          }
+        })
+      );
+    };
+
+    var tooltipStyle = {
+      display: this.props.show ? 'flex' : 'none',
+      flexWrap: "wrap",
+      position: "absolute",
+      padding: 10,
+      backgroundColor: "white",
+      border: "1px solid black",
+      borderRadius: 10,
+      maxWidth: 500,
+      opacity: 1.0
+    };
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'div',
+      { style: tooltipStyle },
+      this.props.skillIds.map(function (s) {
+        return toLogo(s, _this11.clickSelect);
+      })
+    );
+  };
+
+  return SkillLogos;
 }(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
 
 /***/ }),

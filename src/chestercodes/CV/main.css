@@ -6,8 +6,8 @@
 .skill-to-s {
     -webkit-animation-duration: 500ms;
             animation-duration: 500ms;
-    -webkit-animation-name: toSelected;
-            animation-name: toSelected;
+    -webkit-animation-name: toSelectedSkill;
+            animation-name: toSelectedSkill;
     -webkit-animation-fill-mode: forwards;
             animation-fill-mode: forwards;    
 }
@@ -15,8 +15,8 @@
 .skill-to-h {
     -webkit-animation-duration: 500ms;
             animation-duration: 500ms;
-    -webkit-animation-name: toHighlighted;
-            animation-name: toHighlighted;
+    -webkit-animation-name: toHighlightedSkill;
+            animation-name: toHighlightedSkill;
     -webkit-animation-fill-mode: forwards;
             animation-fill-mode: forwards;    
 }
@@ -24,8 +24,8 @@
 .skill-to-v {
     -webkit-animation-duration: 500ms;
             animation-duration: 500ms;
-    -webkit-animation-name: toVisible;
-            animation-name: toVisible;
+    -webkit-animation-name: toVisibleSkill;
+            animation-name: toVisibleSkill;
     -webkit-animation-fill-mode: forwards;
             animation-fill-mode: forwards;    
 }
@@ -33,13 +33,13 @@
 .skill-to-i {
     -webkit-animation-duration: 500ms;
             animation-duration: 500ms;
-    -webkit-animation-name: toInVisible;
-            animation-name: toInVisible;
+    -webkit-animation-name: toInvisibleSkill;
+            animation-name: toInvisibleSkill;
     -webkit-animation-fill-mode: forwards;
             animation-fill-mode: forwards;    
 }
 
-@-webkit-keyframes toHighlighted {
+@-webkit-keyframes toHighlightedSkill {
     to {
         color: black;
         font-size: 1.2em;
@@ -50,7 +50,7 @@
     }
 }
 
-@keyframes toHighlighted {
+@keyframes toHighlightedSkill {
     to {
         color: black;
         font-size: 1.2em;
@@ -62,7 +62,7 @@
 }
 
 
-@-webkit-keyframes toSelected {
+@-webkit-keyframes toSelectedSkill {
     to {
         color: red;
         font-size: 1.4em;
@@ -74,7 +74,7 @@
 }
 
 
-@keyframes toSelected {
+@keyframes toSelectedSkill {
     to {
         color: red;
         font-size: 1.4em;
@@ -85,7 +85,7 @@
     }
 }
 
-@-webkit-keyframes toInVisible {
+@-webkit-keyframes toInvisibleSkill {
     to {
         color: grey;
         font-size: 0.8em;
@@ -94,7 +94,7 @@
     }
 }
 
-@keyframes toInVisible {
+@keyframes toInvisibleSkill {
     to {
         color: grey;
         font-size: 0.8em;
@@ -103,7 +103,7 @@
     }
 }
 
-@-webkit-keyframes toVisible {
+@-webkit-keyframes toVisibleSkill {
     to {
         color: black;
         font-size: 1.0em;
@@ -114,7 +114,7 @@
     }
 }
 
-@keyframes toVisible {
+@keyframes toVisibleSkill {
     to {
         color: black;
         font-size: 1.0em;
@@ -122,6 +122,100 @@
         border: 1px solid black;
         border-radius: 5px;
         margin: 2px;
+    }
+}
+
+.setting-to-s {
+    -webkit-animation-duration: 500ms;
+            animation-duration: 500ms;
+    -webkit-animation-name: toSelectedSetting;
+            animation-name: toSelectedSetting;
+    -webkit-animation-fill-mode: forwards;
+            animation-fill-mode: forwards;    
+}
+
+.setting-to-h {
+    -webkit-animation-duration: 500ms;
+            animation-duration: 500ms;
+    -webkit-animation-name: toHighlightedSetting;
+            animation-name: toHighlightedSetting;
+    -webkit-animation-fill-mode: forwards;
+            animation-fill-mode: forwards;    
+}
+
+.setting-to-v {
+    -webkit-animation-duration: 500ms;
+            animation-duration: 500ms;
+    -webkit-animation-name: toVisibleSetting;
+            animation-name: toVisibleSetting;
+    -webkit-animation-fill-mode: forwards;
+            animation-fill-mode: forwards;    
+}
+
+.setting-to-i {
+    -webkit-animation-duration: 500ms;
+            animation-duration: 500ms;
+    -webkit-animation-name: toInvisibleSetting;
+            animation-name: toInvisibleSetting;
+    -webkit-animation-fill-mode: forwards;
+            animation-fill-mode: forwards;    
+}
+
+@-webkit-keyframes toHighlightedSetting {
+    to {
+        padding: 10;
+        opacity: 1.0
+    }
+}
+
+@keyframes toHighlightedSetting {
+    to {
+        padding: 10;
+        opacity: 1.0
+    }
+}
+
+
+@-webkit-keyframes toSelectedSetting {
+    to {
+        padding: 10;
+        opacity: 1.0
+    }
+}
+
+
+@keyframes toSelectedSetting {
+    to {
+        padding: 10;
+        opacity: 1.0
+    }
+}
+
+@-webkit-keyframes toInvisibleSetting {
+    to {
+        padding: 10;
+        opacity: 0.2
+    }
+}
+
+@keyframes toInvisibleSetting {
+    to {
+        padding: 10;
+        opacity: 0.2
+    }
+}
+
+@-webkit-keyframes toVisibleSetting {
+    to {
+        padding: 10;
+        opacity: 1.0
+    }
+}
+
+@keyframes toVisibleSetting {
+    to {
+        padding: 10;
+        opacity: 1.0
     }
 }
 
