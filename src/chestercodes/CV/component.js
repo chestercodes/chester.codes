@@ -74,7 +74,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 11);
+/******/ 	return __webpack_require__(__webpack_require__.s = 10);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -351,7 +351,7 @@ if (true) {
   // By explicitly using `prop-types` you are opting into new development behavior.
   // http://fb.me/prop-types-in-prod
   var throwOnDirectAccess = true;
-  module.exports = __webpack_require__(14)(isValidElement, throwOnDirectAccess);
+  module.exports = __webpack_require__(13)(isValidElement, throwOnDirectAccess);
 } else {
   // By explicitly using `prop-types` you are opting into new production behavior.
   // http://fb.me/prop-types-in-prod
@@ -678,180 +678,6 @@ var resumeType = __WEBPACK_IMPORTED_MODULE_0_prop_types___default.a.shape({
 
 /***/ }),
 /* 9 */
-/***/ (function(module, exports) {
-
-var selected = {
-    HighlightedAndSelected: "HighlightedAndSelected",
-    Highlighted: "Highlighted",
-    Visible: "Visible",
-    Hidden: "Hidden"
-};
-
-module.exports.selected = selected;
-
-var types = {
-    Skill: "Skill",
-    SkillType: "SkillType",
-    Setting: "Setting"
-};
-
-module.exports.selectedTypes = types;
-
-module.exports.isSelectedFunc = function (stateType, stateValue, currentType, currentValue, skillsObj) {
-
-    if (stateType === undefined || stateType === null || stateValue === undefined || stateValue === null || !currentType || !currentValue) {
-        throw new Error("Bad input - '" + stateType + "' '" + stateValue + "' '" + currentType + "' '" + currentValue + "'");
-    }
-
-    var getSettingId = function getSettingId(settingName) {
-        var settingVals = Object.values(skillsObj.settings);
-        var settingWithName = settingVals.filter(function (s) {
-            return s.name === settingName;
-        });
-        if (settingWithName.length < 1) {
-            throw new Error("Bad setting name - " + settingName);
-        }
-        return settingWithName[0].id;
-    };
-
-    var getSkillId = function getSkillId(skillName) {
-        var skillVals = Object.values(skillsObj.skills);
-        var skillsWithName = skillVals.filter(function (s) {
-            return s.name === skillName;
-        });
-        if (skillsWithName.length < 1) {
-            throw new Error("Bad skill name - " + skillName);
-        }
-        return skillsWithName[0].id;
-    };
-
-    var getSkillTypeId = function getSkillTypeId(skillTypeName) {
-        var skillTypeVals = Object.values(skillsObj.skillTypes);
-        var skillsTypesWithName = skillTypeVals.filter(function (s) {
-            return s.name === skillTypeName;
-        });
-        if (skillsTypesWithName.length < 1) {
-            throw new Error("Bad skill type name - " + skillTypeName);
-        }
-        return skillsTypesWithName[0].id;
-    };
-
-    var selectedIsBlank = function selectedIsBlank() {
-        return selected.Visible;
-    };
-
-    var selectedIsSkill = function selectedIsSkill() {
-        if (currentType === types.Skill) {
-            if (currentValue === stateValue) {
-                return selected.HighlightedAndSelected;
-            } else {
-                return selected.Hidden;
-            }
-        }
-        var skill = skillsObj.skills[stateValue];
-        if (currentType === types.SkillType) {
-            var skillTypeId = getSkillTypeId(currentValue);
-            if (skill.skillTypesIds.includes(skillTypeId)) {
-                return selected.Highlighted;
-            } else {
-                return selected.Hidden;
-            }
-        }
-        if (currentType === types.Setting) {
-            var settingId = getSettingId(currentValue);
-            if (skill.settingsIds.includes(settingId)) {
-                return selected.Highlighted;
-            } else {
-                return selected.Hidden;
-            }
-        }
-        throw new Error("is bad type - " + currentType);
-    };
-
-    var selectedIsWork = function selectedIsWork() {
-        if (currentType === types.SkillType) {
-            return selected.Hidden;
-        }
-        if (currentType === types.Setting) {
-            if (currentValue === stateValue) {
-                return selected.HighlightedAndSelected;
-            } else {
-                return selected.Hidden;
-            }
-        }
-        if (currentType === types.Skill) {
-            var skill = skillsObj.skills[currentValue];
-            var settingId = getSettingId(stateValue);
-            if (skill.settingsIds.includes(settingId)) {
-                return selected.Highlighted;
-            } else {
-                return selected.Hidden;
-            }
-        }
-        throw new Error("is bad type - " + currentType);
-    };
-    var selectedIsSkillType = function selectedIsSkillType() {
-        if (currentType === types.Setting) {
-            return selected.Hidden;
-        }
-        if (currentType === types.SkillType) {
-            if (currentValue === stateValue) {
-                return selected.HighlightedAndSelected;
-            } else {
-                return selected.Hidden;
-            }
-        }
-        if (currentType === types.Skill) {
-            var skill = skillsObj.skills[currentValue];
-            var skillTypeId = getSkillTypeId(stateValue);
-            if (skill.skillTypesIds.includes(skillTypeId)) {
-                return selected.Highlighted;
-            } else {
-                return selected.Hidden;
-            }
-        }
-        throw new Error("is bad type - " + currentType);
-    };
-    if (stateType === "" && stateValue === "") return selectedIsBlank();
-    if (stateType === types.Skill) return selectedIsSkill();
-    if (stateType === types.SkillType) return selectedIsSkillType();
-    if (stateType === types.Setting) return selectedIsWork();
-
-    return selected.Visible;
-};
-
-module.exports.getSkillClass = function (s) {
-    switch (s) {
-        case selected.HighlightedAndSelected:
-            return "skill-to-s";
-        case selected.Highlighted:
-            return "skill-to-h";
-        case selected.Visible:
-            return "skill-to-v";
-        case selected.Hidden:
-            return "skill-to-i";
-        default:
-            throw new Error("Bad value get class - " + s);
-    }
-};
-
-module.exports.getSettingClass = function (s) {
-    switch (s) {
-        case selected.HighlightedAndSelected:
-            return "setting-to-s";
-        case selected.Highlighted:
-            return "setting-to-h";
-        case selected.Visible:
-            return "setting-to-v";
-        case selected.Hidden:
-            return "setting-to-i";
-        default:
-            throw new Error("Bad value get class - " + s);
-    }
-};
-
-/***/ }),
-/* 10 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -860,15 +686,12 @@ module.exports.getSettingClass = function (s) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__styles_common__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__styles_common___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__styles_common__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__skills_selected__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__skills_selected___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__skills_selected__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__icons__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__icons__ = __webpack_require__(2);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 
 
 
@@ -891,7 +714,7 @@ var Experience = function (_React$Component) {
       'h4',
       null,
       'Experience'
-    ) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__icons__["a" /* default */].BriefCase, { size: __WEBPACK_IMPORTED_MODULE_1__styles_common__["iconSize"] });
+    ) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__icons__["a" /* default */].BriefCase, { size: __WEBPACK_IMPORTED_MODULE_1__styles_common__["iconSize"] });
 
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
       'div',
@@ -1134,14 +957,14 @@ var WorkPlaceHighlights = function (_React$Component5) {
 }(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
 
 /***/ }),
-/* 11 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(12);
+module.exports = __webpack_require__(11);
 
 
 /***/ }),
-/* 12 */
+/* 11 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1149,7 +972,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _default; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_CV__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_CV__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__resume_json__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__resume_json___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__resume_json__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__skills_json__ = __webpack_require__(27);
@@ -1187,7 +1010,7 @@ var _default = function (_Component) {
 
 
 /***/ }),
-/* 13 */
+/* 12 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1196,7 +1019,7 @@ var _default = function (_Component) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__resumeType__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__themes_default__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__themes_default__ = __webpack_require__(16);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -1266,7 +1089,7 @@ CV.propTypes = {
 /* harmony default export */ __webpack_exports__["a"] = (CV);
 
 /***/ }),
-/* 14 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1282,10 +1105,10 @@ CV.propTypes = {
 var emptyFunction = __webpack_require__(4);
 var invariant = __webpack_require__(5);
 var warning = __webpack_require__(6);
-var assign = __webpack_require__(15);
+var assign = __webpack_require__(14);
 
 var ReactPropTypesSecret = __webpack_require__(7);
-var checkPropTypes = __webpack_require__(16);
+var checkPropTypes = __webpack_require__(15);
 
 module.exports = function(isValidElement, throwOnDirectAccess) {
   /* global Symbol */
@@ -1815,7 +1638,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 
 
 /***/ }),
-/* 15 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1912,7 +1735,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 
 /***/ }),
-/* 16 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1978,7 +1801,7 @@ module.exports = checkPropTypes;
 
 
 /***/ }),
-/* 17 */
+/* 16 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1987,9 +1810,9 @@ module.exports = checkPropTypes;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__resumeType__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Name__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Profile__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__skills_WorkAndSkills__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Name__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Profile__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__skills_WorkAndSkills__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__skills_WorkAndSkillsPrint__ = __webpack_require__(22);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Volunteer__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Education__ = __webpack_require__(24);
@@ -2047,7 +1870,7 @@ Default.propTypes = {
 /* harmony default export */ __webpack_exports__["a"] = (Default);
 
 /***/ }),
-/* 18 */
+/* 17 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2132,7 +1955,7 @@ var Profiles = function Profiles(props) {
 };
 
 /***/ }),
-/* 19 */
+/* 18 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2182,7 +2005,7 @@ var Summary = function Summary(props) {
 };
 
 /***/ }),
-/* 20 */
+/* 19 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2191,9 +2014,9 @@ var Summary = function Summary(props) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__styles_common__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__styles_common___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__styles_common__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__selected__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__selected__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__selected___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__selected__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Experience__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Experience__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__icons__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__transitions_css__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__transitions_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__transitions_css__);
@@ -2405,7 +2228,7 @@ var SkillTypes = function (_React$Component2) {
           'div',
           { style: skillsPadding },
           this.props.work.map(function (x) {
-            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Setting, { key: x.name, work: x, skillsObj: _this3.props.skillsObj,
+            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Setting, { key: x.company, work: x, skillsObj: _this3.props.skillsObj, cvWidth: _this3.props.cvWidth,
               clickSelect: _this3.props.clickSelect,
               isSelected: _this3.props.isSelected });
           })
@@ -2414,7 +2237,7 @@ var SkillTypes = function (_React$Component2) {
           'div',
           { style: skillsPadding },
           this.props.skills.map(function (x) {
-            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(SkillType, { key: x.name, skill: x, skillsObj: _this3.props.skillsObj,
+            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(SkillType, { key: x.name, skill: x, skillsObj: _this3.props.skillsObj, cvWidth: _this3.props.cvWidth,
               clickSelect: _this3.props.clickSelect,
               isSelected: _this3.props.isSelected });
           })
@@ -2423,7 +2246,7 @@ var SkillTypes = function (_React$Component2) {
           'div',
           { style: skillsPadding },
           allSkills.map(function (x) {
-            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Skill, { key: x, skillId: x, skillsObj: _this3.props.skillsObj,
+            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(Skill, { key: x, skillId: x, skillsObj: _this3.props.skillsObj, cvWidth: _this3.props.cvWidth,
               clickSelect: _this3.props.clickSelect,
               isSelected: _this3.props.isSelected });
           })
@@ -2482,7 +2305,7 @@ var SkillType = function (_React$Component3) {
       ),
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(SkillLogos, {
         skillIds: this.props.skill.keywords, show: this.state.hover,
-        clickSelect: this.clickSelect
+        clickSelect: this.clickSelect, cvWidth: this.props.cvWidth
       })
     );
   };
@@ -2584,7 +2407,8 @@ var Setting = function (_React$Component5) {
         } }),
       __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(SkillLogos, {
         skillIds: this.props.work.skills, show: this.state.hover,
-        clickSelect: this.clickSelect })
+        clickSelect: this.clickSelect, cvWidth: this.props.cvWidth
+      })
     );
   };
 
@@ -2610,7 +2434,7 @@ var SkillLogos = function (_React$Component6) {
     var toLogo = function toLogo(skillId, clickSelect) {
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
-        { style: {
+        { key: skillId, style: {
             padding: 2
           } },
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('img', {
@@ -2623,6 +2447,7 @@ var SkillLogos = function (_React$Component6) {
         })
       );
     };
+    var dontShowComponent = Object(__WEBPACK_IMPORTED_MODULE_1__styles_common__["isMobile"])(this.props.cvWidth);
 
     var tooltipStyle = {
       display: this.props.show ? 'flex' : 'none',
@@ -2635,7 +2460,8 @@ var SkillLogos = function (_React$Component6) {
       maxWidth: 500,
       opacity: 1.0
     };
-    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+
+    return dontShowComponent ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('div', null) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
       'div',
       { style: tooltipStyle },
       this.props.skillIds.map(function (s) {
@@ -2646,6 +2472,180 @@ var SkillLogos = function (_React$Component6) {
 
   return SkillLogos;
 }(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports) {
+
+var selected = {
+    HighlightedAndSelected: "HighlightedAndSelected",
+    Highlighted: "Highlighted",
+    Visible: "Visible",
+    Hidden: "Hidden"
+};
+
+module.exports.selected = selected;
+
+var types = {
+    Skill: "Skill",
+    SkillType: "SkillType",
+    Setting: "Setting"
+};
+
+module.exports.selectedTypes = types;
+
+module.exports.isSelectedFunc = function (stateType, stateValue, currentType, currentValue, skillsObj) {
+
+    if (stateType === undefined || stateType === null || stateValue === undefined || stateValue === null || !currentType || !currentValue) {
+        throw new Error("Bad input - '" + stateType + "' '" + stateValue + "' '" + currentType + "' '" + currentValue + "'");
+    }
+
+    var getSettingId = function getSettingId(settingName) {
+        var settingVals = Object.values(skillsObj.settings);
+        var settingWithName = settingVals.filter(function (s) {
+            return s.name === settingName;
+        });
+        if (settingWithName.length < 1) {
+            throw new Error("Bad setting name - " + settingName);
+        }
+        return settingWithName[0].id;
+    };
+
+    var getSkillId = function getSkillId(skillName) {
+        var skillVals = Object.values(skillsObj.skills);
+        var skillsWithName = skillVals.filter(function (s) {
+            return s.name === skillName;
+        });
+        if (skillsWithName.length < 1) {
+            throw new Error("Bad skill name - " + skillName);
+        }
+        return skillsWithName[0].id;
+    };
+
+    var getSkillTypeId = function getSkillTypeId(skillTypeName) {
+        var skillTypeVals = Object.values(skillsObj.skillTypes);
+        var skillsTypesWithName = skillTypeVals.filter(function (s) {
+            return s.name === skillTypeName;
+        });
+        if (skillsTypesWithName.length < 1) {
+            throw new Error("Bad skill type name - " + skillTypeName);
+        }
+        return skillsTypesWithName[0].id;
+    };
+
+    var selectedIsBlank = function selectedIsBlank() {
+        return selected.Visible;
+    };
+
+    var selectedIsSkill = function selectedIsSkill() {
+        if (currentType === types.Skill) {
+            if (currentValue === stateValue) {
+                return selected.HighlightedAndSelected;
+            } else {
+                return selected.Hidden;
+            }
+        }
+        var skill = skillsObj.skills[stateValue];
+        if (currentType === types.SkillType) {
+            var skillTypeId = getSkillTypeId(currentValue);
+            if (skill.skillTypesIds.includes(skillTypeId)) {
+                return selected.Highlighted;
+            } else {
+                return selected.Hidden;
+            }
+        }
+        if (currentType === types.Setting) {
+            var settingId = getSettingId(currentValue);
+            if (skill.settingsIds.includes(settingId)) {
+                return selected.Highlighted;
+            } else {
+                return selected.Hidden;
+            }
+        }
+        throw new Error("is bad type - " + currentType);
+    };
+
+    var selectedIsWork = function selectedIsWork() {
+        if (currentType === types.SkillType) {
+            return selected.Hidden;
+        }
+        if (currentType === types.Setting) {
+            if (currentValue === stateValue) {
+                return selected.HighlightedAndSelected;
+            } else {
+                return selected.Hidden;
+            }
+        }
+        if (currentType === types.Skill) {
+            var skill = skillsObj.skills[currentValue];
+            var settingId = getSettingId(stateValue);
+            if (skill.settingsIds.includes(settingId)) {
+                return selected.Highlighted;
+            } else {
+                return selected.Hidden;
+            }
+        }
+        throw new Error("is bad type - " + currentType);
+    };
+    var selectedIsSkillType = function selectedIsSkillType() {
+        if (currentType === types.Setting) {
+            return selected.Hidden;
+        }
+        if (currentType === types.SkillType) {
+            if (currentValue === stateValue) {
+                return selected.HighlightedAndSelected;
+            } else {
+                return selected.Hidden;
+            }
+        }
+        if (currentType === types.Skill) {
+            var skill = skillsObj.skills[currentValue];
+            var skillTypeId = getSkillTypeId(stateValue);
+            if (skill.skillTypesIds.includes(skillTypeId)) {
+                return selected.Highlighted;
+            } else {
+                return selected.Hidden;
+            }
+        }
+        throw new Error("is bad type - " + currentType);
+    };
+    if (stateType === "" && stateValue === "") return selectedIsBlank();
+    if (stateType === types.Skill) return selectedIsSkill();
+    if (stateType === types.SkillType) return selectedIsSkillType();
+    if (stateType === types.Setting) return selectedIsWork();
+
+    return selected.Visible;
+};
+
+module.exports.getSkillClass = function (s) {
+    switch (s) {
+        case selected.HighlightedAndSelected:
+            return "skill-to-s";
+        case selected.Highlighted:
+            return "skill-to-h";
+        case selected.Visible:
+            return "skill-to-v";
+        case selected.Hidden:
+            return "skill-to-i";
+        default:
+            throw new Error("Bad value get class - " + s);
+    }
+};
+
+module.exports.getSettingClass = function (s) {
+    switch (s) {
+        case selected.HighlightedAndSelected:
+            return "setting-to-s";
+        case selected.Highlighted:
+            return "setting-to-h";
+        case selected.Visible:
+            return "setting-to-v";
+        case selected.Hidden:
+            return "setting-to-i";
+        default:
+            throw new Error("Bad value get class - " + s);
+    }
+};
 
 /***/ }),
 /* 21 */
@@ -2663,7 +2663,7 @@ var SkillLogos = function (_React$Component6) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__styles_common__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__styles_common___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__styles_common__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Experience__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Experience__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__icons__ = __webpack_require__(2);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
