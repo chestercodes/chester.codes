@@ -32,34 +32,36 @@ class Talks extends Component {
       if (t.coverPosition) {
         s.backgroundPosition = t.coverPosition
       }
-      
+
       var code = t.code ? <a className="talk-icon" href={t.code}><Button raised primary iconClassName="fa fa-code">Code</Button></a> : <div />
       var slides = t.slides ? <a className="talk-icon" href={t.slides}><Button raised primary iconClassName="fa fa-photo">Slides</Button></a> : <div />
 
       return (
-        <Card key={t.title} className="md-grid md-cell md-cell--middle md-cell--12">
-          <Media
-            style={s}
-            className="post-preview-cover"
-          >
-            <MediaOverlay>
-              <CardTitle title={t.title} />
-            </MediaOverlay>
-          </Media>
-          <div className="talk-wrapper">
-            <CardText>
-              <div className="talk-text md-body-1">
-                <p>{t.abstract}</p>
-                <ul>
-                  {t.sessions.map(s => <li key={s.location + s.date} >{renderSession(s)}</li>)}
-                </ul>
-              </div>
-            </CardText>
-          </div>
-          <div className="talk-icons">
-            {code} {slides}
-          </div>
-        </Card>
+        <div style={{ maxWidth: 1200 }} className="md-grid md-grid--no-spacing md-cell--middle">
+          <Card  key={t.title} className="md-grid md-cell md-cell--middle md-cell--12">
+            <Media
+              style={s}
+              className="post-preview-cover"
+            >
+              <MediaOverlay>
+                <CardTitle title={t.title} />
+              </MediaOverlay>
+            </Media>
+            <div className="talk-wrapper">
+              <CardText>
+                <div className="talk-text md-body-1">
+                  <p>{t.abstract}</p>
+                  <ul>
+                    {t.sessions.map(s => <li key={s.location + s.date} >{renderSession(s)}</li>)}
+                  </ul>
+                </div>
+              </CardText>
+            </div>
+            <div className="talk-icons">
+              {code} {slides}
+            </div>
+          </Card>
+        </div>
       )
     }
 

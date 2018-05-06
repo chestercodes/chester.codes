@@ -52,7 +52,7 @@ export default class PostTemplate extends React.Component {
     }
     var issuesUrl = "https://github.com/chestercodes/chestercodes.github.io/issues/" + post.issue;
     return (
-      <div className="post-page md-grid md-grid--no-spacing">
+      <div  style={{ maxWidth: 1400 }} className="post-page md-grid md-grid--no-spacing">
         <Helmet>
           <title>{`${post.title} | ${config.siteTitle}`}</title>
           <link rel="canonical" href={`${config.siteUrl}${post.id}`} />
