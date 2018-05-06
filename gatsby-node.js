@@ -76,7 +76,14 @@ exports.setFieldsOnGraphQLNodeType = ({ type, boundActionCreators }) => {
 };
 
 exports.createPages = ({ graphql, boundActionCreators }) => {
-  const { createPage } = boundActionCreators;
+  const { createPage, createRedirect } = boundActionCreators;
+
+  createRedirect({
+    fromPath: `/about`,
+    isPermanent: true,
+    redirectInBrowser: true,
+    toPath: `/cv`,
+  });
 
   return new Promise((resolve, reject) => {
     const postPage = path.resolve("src/templates/post.jsx");
