@@ -18,10 +18,12 @@ class PostInfo extends Component {
       <div className="post-info">
         <CardTitle
           style={s}
+          title=""
           subtitle={`Published on ${post.date}`}
         />
         <CardTitle
           style={s}
+          title=""
           subtitle={`${postNode.timeToRead} min read`}
         />
       </div>
