@@ -5,7 +5,7 @@ excerpt: Counting to ten in different languages
 issue: 6
 tags: 
 - codeclub
-- f-sharp
+- fsharp
 - c-sharp
 - scratch
 - python

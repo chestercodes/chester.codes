@@ -4,7 +4,7 @@ title: F# Bristol talk
 excerpt: Talk 'Hunting typosquatters with F#' at F# Bristol
 issue: 21
 tags: 
-- f-sharp
+- fsharp
 - npm
 - talk
 slug: "fsharp-bristol-talk"
