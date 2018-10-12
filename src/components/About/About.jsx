@@ -12,7 +12,8 @@ class About extends Component {
         <Card className="md-grid md-cell--8">
           <div className="about-wrapper">
             <CardText>
-              <p className="about-text md-body-1">Software engineer</p>
+              <p>Chester Burbidge is a Bristol based software professional and the owner and operator of <a href="https://www.technicalunderstanding.co.uk">Technical Understanding Limited</a></p>
+              <p>Chester's experience is primarily in, cloud based .Net software development. An interactive diagram of skills can be seen on the <a href="/cv/" >CV page</a> </p>
             </CardText>
           </div>
         </Card>

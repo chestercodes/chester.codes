@@ -16,6 +16,13 @@ function GetNavList(config) {
   ];
 
   NavList.push({
+    primaryText: "About",
+    leftIcon: <FontIcon>fingerprint</FontIcon>,
+    component: Link,
+    to: "/about/"
+  });
+
+  NavList.push({
     primaryText: "CV",
     leftIcon: <FontIcon>person</FontIcon>,
     component: Link,
