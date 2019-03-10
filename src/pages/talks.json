@@ -1,5 +1,20 @@
 [
   {
+    "cover": "/talks/intro_to_fs.jpg",
+    "coverPosition":"",
+    "title": "Introduction to F#",
+    "code": "https://github.com/chestercodes/IntroToFSharp",
+    "slides": "https://gitpitch.com/chestercodes/IntroToFSharp",
+    "abstract": "Internal talk about the main features of F#",
+    "description": "Internal talk about the main features of F#",
+    "sessions": [
+      {
+        "location": "Internal",
+        "date": "2019/02/01"
+      }
+    ]
+  },
+  {
     "cover": "/talks/typosquatter_talk.jpg",
     "coverPosition":"",
     "title": "Hunting Typosquatters with F#",
