@@ -37,7 +37,7 @@ class Talks extends Component {
       var slides = t.slides ? <a className="talk-icon" href={t.slides}><Button raised primary iconClassName="fa fa-photo">Slides</Button></a> : <div />
 
       return (
-        <div style={{ maxWidth: 1200 }} className="md-grid md-grid--no-spacing md-cell--middle">
+        <div style={{ maxWidth: 1200, width: "100%", padding: 10 }} className="md-grid md-grid--no-spacing md-cell--middle">
           <Card  key={t.title} className="md-grid md-cell md-cell--middle md-cell--12">
             <Media
               style={s}
