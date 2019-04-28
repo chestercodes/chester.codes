@@ -1,5 +1,20 @@
 [
   {
+    "cover": "/talks/full_stack_development.png",
+    "coverPosition":"",
+    "title": "F#ll stack development",
+    "code": "https://github.com/chestercodes/gitpitch-talks/tree/master/full-stack-development",
+    "slides": "https://gitpitch.com/chestercodes/gitpitch-talks/master?p=full-stack-development",
+    "abstract": "This talk explores a interesting set of F# libraries that allow code sharing across the server, browser and cross platform mobile clients.",
+    "description": "The quixotic write-once-run-everywhere dream has had it's fair share of casualties over the years, with broken dreams and promises of full stack code sharing. Recent attempts at this goal, like the React(Native) set of technologies, have utilised the MVU pattern to create web and mobile applications with similar architectures.\nThis talk explores a interesting set of F# libraries that allow code sharing across the server, browser and cross platform mobile clients.\nNo previous knowledge of F# or the MVU pattern are required.",
+    "sessions": [
+      {
+        "location": "DDD Southwest",
+        "date": "2019/04/28"
+      }
+    ]
+  },
+  {
     "cover": "/talks/intro_to_fs.jpg",
     "coverPosition":"",
     "title": "Introduction to F#",
