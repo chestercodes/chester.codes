@@ -182,5 +182,36 @@ Behavioural changes can be described by commit messages using `conventional comm
 
 
 We need to store the last published library version and public API to be able to determine the next version number.
-The version can be stored as a `git tag` and the public API can be stored in a text file in the repository using the `--surface-of` command above. These will be updated during the build process.
+The version can be stored as a `git tag` and the public API can be stored in a text file in the repository using the `--surface-of` command above. These will be updated during the last part of the build process.
 
+From a developers perspective the workflow should be:
+
+- Develop library changes.
+- Push to `master` (or other publishing branch)
+- CI process builds and publishes package with new version number
+- Developer consumes package
+
+
+For this to work the CI process needs to:
+
+- If no commits since last tag, do nothing (to stop infinite loops from git push at end of process)
+- Code is built, tests are run, all OK
+- Previous version is retrieved from tags
+- Run a script to determine the new version from the `MyProject.lson` file and commits since last tag
+- Package is built with new version number
+- `MyProject.lson` file is updated from `MyProject.dll`
+- Changes to `MyProject.lson` are committed with version
+- Commit tagged with version and pushed to `master`
+- Packge is published to `nuget` feed
+
+The version determining script in the CI process needs to:
+
+- Determine behaviour changes magnitude according to `conventional commits`
+- Determine API changes magnitude derived from `MyProject.lson` in repo and built `MyProject.dll`
+- Biggest magnitude from the two above becomes the version type change
+- New version number is calculated from magnitude plus current version number
+
+
+Conventional commits and the `synver` tool give us the tools we need to create the workflow described above. 
+
+The [next post describes the steps and code needed to achieve this](/automating-dotnet-library-versioning2) in the new [github actions](https://github.com/features/actions).
