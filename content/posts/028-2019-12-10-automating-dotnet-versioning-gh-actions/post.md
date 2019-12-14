@@ -1,12 +1,12 @@
 ---
 layout: post
-title: Automating .net library versioning
+title: Automating .net library versioning - Implmentation
 excerpt: A 
-issue: 27
+issue: 28
 tags: 
 - dotnet
 - versioning
-slug: "automating-dotnet-library-versioning-process"
+slug: "automating-dotnet-library-versioning-gh-actions"
 date: "2019/12/10"
 category: Tech
 ---
@@ -65,24 +65,4 @@ The version determining script in the CI process needs to:
 - New version number is calculated from magnitude plus current version number
 
 
-Conventional commits and the `synver` tool give us the tools we need to create the workflow described above. 
-
-## Implementation
-
-An example of the process can be seen in the [AutoSemVerLib](https://github.com/chestercodes/AutoSemVerLib) github repository. It contains powershell code that  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-A CI technology is required to be the execution platform. The [next post describes the steps and code needed to achieve this](/automating-dotnet-library-versioning-gh-actions) in the new Github service [github actions](https://github.com/features/actions).
+Conventional commits and the `synver` tool give us the tools we need to create the workflow described above. A CI technology is required to be the execution platform. The [next post describes the steps and code needed to achieve this](/automating-dotnet-library-versioning-gh-actions) in the new Github service [github actions](https://github.com/features/actions).
