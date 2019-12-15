@@ -9,7 +9,21 @@ pre {
     border-radius: 5px;
 }
 
+a {
+    color: #3366BB ;
+}
+
 p {
+    code.language-text {
+        background: rgb(230, 240, 245);
+        color: black;
+        padding: 2px;
+        padding-left: 3px;
+        padding-right: 3px;
+    }
+}
+
+li {
     code.language-text {
         background: rgb(230, 240, 245);
         color: black;

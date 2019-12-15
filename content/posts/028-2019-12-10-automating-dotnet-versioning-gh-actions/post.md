@@ -16,6 +16,16 @@ category: Tech
 [Semantic versioning](https://semver.org/) is a popular method for versioning software libaries. 
 It describes three different types of change that can happen in libaries, Major, Minor and Patch. To decide the type of a change in the library, from one version to the next, one needs to take into account behaviour and API changes.
 
+
+
+https://github.com/chestercodes/AutoSemVerLib/compare/v1.0.0...v1.0.1
+
+https://github.com/chestercodes/AutoSemVerLib/compare/v1.0.1...v1.1.0
+
+https://github.com/chestercodes/AutoSemVerLib/compare/v1.1.0...v2.0.0
+
+
+
 ## Conventional commits
 
 Library changes can be described, along side the code, using a method called [convention commits](https://www.conventionalcommits.org/en). The commit describes the magnitude of the changes in the message by using certain message prefixes. 
