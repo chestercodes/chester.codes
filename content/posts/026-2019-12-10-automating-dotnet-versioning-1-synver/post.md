@@ -6,7 +6,7 @@ issue: 26
 tags: 
 - versioning
 - syntactic-versioning
-slug: "automating-dotnet-library-versioning-synver"
+slug: "automating-dotnet-library-versioning-1-synver"
 date: "2019/12/10"
 category: Tech
 ---
@@ -186,4 +186,4 @@ The `diff` command provides a way to document changes in the library API once th
 synver --diff MyProject.lson ./bin/Debug/MyProject.dll --output 1.2.3-2.0.0.txt
 ```
 
-The [next post in this series](/automating-dotnet-library-versioning-process) describes a way to use the `synver` tool to fully automate the versioning process.
+The [next post in this series](/automating-dotnet-library-versioning-2-process) describes a way to use the `synver` tool to fully automate the versioning process.
