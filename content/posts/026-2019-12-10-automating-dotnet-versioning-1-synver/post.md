@@ -30,13 +30,33 @@ It is aware of the API surface change aspects of semantic versioning and can det
 If a library `MyProject` has the following class `MyClass` with method `MyMethod` in it:
 
 ``` csharp
-public class MyClass 
+namespace MyProject
 {
-    public void MyMethod(string stringArg)
+    public class MyClass 
     {
+        public void MyMethod(string stringArg)
+        {
+        }
     }
 }
 ```
+
+The library uses reflection, or a decompiler to turn the public classes and methods into a text representation. It then creates an F# `Set<Tuple<string, string>>` of this data. The above class is represented by a Set containing the following tuples:
+
+``` fsharp
+("MyProject",         "MyProject (Namespace)")
+("MyProject.MyClass", "(Instance of MyProject.MyClass).MyMethod : stringArg:System.String -> System.Void")
+("MyProject.MyClass", "MyProject.MyClass (.NET type: Class and base: System.Object)")
+("MyProject.MyClass", "new MyProject.MyClass : System.Void -> MyProject.MyClass")
+```
+
+We can see the `namespace`, `MyMethod`, `class` and default constructor present. 
+
+Syntactic Versioning creates source and target representations of the library and then can derive the magnitude change using the following rules.
+
+- `Major` - if any tuples in the source set are not present in the target set, this is a Major change
+- `Minor` - if any new tuples are present in the target set then this is a Minor change
+- `Patch` - if the sets are the same then this is a Patch change
 
 If `MyClass` then has another method `MyMethod2` added to it:
 
@@ -53,7 +73,13 @@ public class MyClass
 }
 ```
 
-Syntactic versioning can be used on the before/after built `.dll` files and will detect this to be a `Minor` magnitude change. Whereas, if `MyMethod` changes the type of arg to be a `bool`:
+Syntactic versioning can be used on the source/target built `.dll` files and will detect a new tuple
+
+``` fsharp
+("MyProject.MyClass", "(Instance of MyProject.MyClass).MyMethod2 : boolArg:System.Boolean -> System.Void")
+```
+
+This is therefore a `Minor` magnitude change. Whereas, if `MyMethod` changes the type of arg to be a `bool`:
 
 ``` csharp
 public class MyClass 
@@ -64,7 +90,15 @@ public class MyClass
 }
 ```
 
-Syntactic versioning will detect this to be a `Major` magnitude change.
+The tuple:
+
+``` fsharp
+("MyProject.MyClass", "(Instance of MyProject.MyClass).MyMethod : stringArg:System.String -> System.Void")
+// is replaced by
+("MyProject.MyClass", "(Instance of MyProject.MyClass).MyMethod : boolArg:System.Boolean -> System.Void")
+```
+
+Syntactic versioning will detect the lack of the first tuple in the target set and return a `Major` magnitude change.
 
 ## synver
 
