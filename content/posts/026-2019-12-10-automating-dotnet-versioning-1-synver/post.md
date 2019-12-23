@@ -54,9 +54,9 @@ We can see the `namespace`, `MyMethod`, `class` and default constructor present.
 
 Syntactic Versioning creates source and target representations of the library and then can derive the magnitude change using the following rules.
 
-- `Major` - if any tuples in the source set are not present in the target set, this is a Major change
-- `Minor` - if any new tuples are present in the target set then this is a Minor change
-- `Patch` - if the sets are the same then this is a Patch change
+- **Major** - if any tuples in the source set are not present in the target set, this is a Major change
+- **Minor** - if any new tuples are present in the target set then this is a Minor change
+- **Patch** - if the sets are the same then this is a Patch change
 
 If `MyClass` then has another method `MyMethod2` added to it:
 

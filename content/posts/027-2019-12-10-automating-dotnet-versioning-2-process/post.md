@@ -11,23 +11,22 @@ date: "2019/12/11"
 category: Tech
 ---
 
-> This is the second post in a series on a method of automating .net library versioning. The [first post described the synver dotnet tool](/automating-dotnet-library-versioning-synver) which can be used to find the magnitude of library API changes according to the semantic versioning rules. This post is best understood with familiarity of the previous.
+> This is the second post in a series on a method of automating .net library versioning. The [first post described the synver dotnet tool](/automating-dotnet-library-versioning-synver) which can be used to find the magnitude of library API changes according to the semantic versioning rules. 
 
 [Semantic versioning](https://semver.org/) is a popular method for versioning software libaries. 
 It describes three different types of change that can happen in libaries, Major, Minor and Patch. To decide the type of a change in the library, from one version to the next, one needs to take into account behaviour and API changes.
 
+Unlike public API changes, It's impossible to detect and verify the magnitude of changes in behaviour of code in an automated way, the responsibility of documenting behaviour changes is left to the developer. 
+
 ## Conventional commits
 
-Library changes can be described, along side the code, using a method called [convention commits](https://www.conventionalcommits.org/en). The commit describes the magnitude of the changes in the message by using certain message prefixes. 
+Library changes can be described alongside the code, using a method called [convention commits](https://www.conventionalcommits.org/en). The commit message describes the magnitude of the changes using certain message prefixes. 
 
 - `BREAKING CHANGE` is used in the messages of commits that contain `Major` level changes. 
 - `feat` is used to denote `Minor` level changes.  
 - `fix` or `chore` are used to denote `Patch` level changes.  
 
-Conventional commits provides an easy way to add automation to the versioning process. It is possible to write utilities that look at the commit messages from the last version to the current commit and [derive the next version number and generate documentation](https://github.com/conventional-changelog/standard-version). 
-
-Unlike public API changes, It's impossible to detect and verify the magnitude of changes in behaviour of code in an automated way, the responsibility of documenting behaviour changes is left to the developer.
-
+Using this convention it is possible to derive the next version number and generate documentation from the [commit messages since the last version](https://github.com/conventional-changelog/standard-version). 
 
 ## Automated workflow.
 
@@ -35,7 +34,7 @@ Behavioural changes can be described in commit messages using conventional commi
 
 
 We need to store the last published library version and public API to be able to determine the next version number.
-The version can be stored as a `git tag` and the public API can be stored in a text file `MyProject.lson` in the repository using `synver`'s `--surface-of` command. These will be updated during the last part of the build process.
+The version can be stored as a `git tag` and the public API can be stored in a text file `MyProject.lson` in the repository using `synver`'s `--surface-of` command. These will be updated in the repo when the package is published during the build process.
 
 From a developers perspective the workflow should be:
 
@@ -65,11 +64,9 @@ The version determining script in the CI process needs to:
 - New version number is calculated from magnitude plus current version number
 
 
-Conventional commits and the `synver` tool give us the tools we need to create the workflow described above. 
-
 ## Implementation
 
-An implementation of the process can be seen in the [AutoSemVerLib](https://github.com/chestercodes/AutoSemVerLib) github repository. The library contains the following powershell scripts:
+The above steps can be implemented as part of a CI process using scripts that are located in the library repository. An example of this can be seen in the [AutoSemVerLib](https://github.com/chestercodes/AutoSemVerLib) github repository. The library contains the following powershell scripts:
 
 - `versioning/AutoSemVer.ps1` - Contains generic functions to call `synver` and calculate version magnitude differences. Can be treated like a re-usable module. The script is configured with environment variables:
 - - `TAG_VERSION_REGEX` - Regex that defines version format in git tags.
@@ -106,4 +103,4 @@ PushToFeed $packagePath
 
 The script imports `BuildVersioning.ps1` and the `NeedToRun` function returns `$false` if there are no commits since the last tag. If the library builds then the `Bump` function returns the next version, derived from the `MyProject.dll` and `MyProject.lson` files. The package is created in the `out` directory from the version, the documentation is created and the `MyProject.lson` file updated in a commit that is pushed to the repository. The built nuget package is finally pushed.
 
-A CI technology is required to be the execution platform and a package feed is required to host the package. The [next post describes the steps and code needed to achieve this](/automating-dotnet-library-versioning-3-github) with [Github actions](https://github.com/features/actions) and the [GitHub Package Registry](https://github.com/features/packages).
+A CI technology is required to be the execution platform and a package feed is required to host the package. The [next post describes the steps and code needed to achieve this](/automating-dotnet-library-versioning-3-github) with [Github Actions](https://github.com/features/actions) and the [GitHub Package Registry](https://github.com/features/packages).
