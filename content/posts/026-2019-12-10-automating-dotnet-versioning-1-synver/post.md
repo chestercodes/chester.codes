@@ -27,6 +27,8 @@ An article from the [FsAdvent 2016](https://sergeytihon.com/2016/10/23/f-advent-
 Syntactic Versioning is a nuget library that can determine the public API differences between `.dll` files.
 It is aware of the API surface change aspects of semantic versioning and can determine the magnitude of the difference between two public APIs, as well as the new version number if given the old. 
 
+### MyProject
+
 If a library `MyProject` has the following class `MyClass` with method `MyMethod` in it:
 
 ``` csharp
@@ -130,15 +132,17 @@ OPTIONS:
     --help                display this list of options.
 ```
 
-This tool has four main commands, `surface-of`, `diff`, `bump` and `magnitude`.
+This tool has four main commands, `--surface-of`, `--diff`, `--bump` and `--magnitude`.
 
-The `--surface-of` command takes a path of a dll and produces the API in an intruiging format called [LSON (Lisp inspired serialisation)](https://github.com/fsprojects/LSON):
+### --surface-of
+
+The `--surface-of` command takes a path and serialises the API in a format called [LSON (Lisp inspired serialisation)](https://github.com/fsprojects/LSON):
 
 ```
 synver --surface-of path/to/some.dll
 ```
 
-`MyProject` is represented in (manually formatted) LSON as:
+[MyProject](#myproject) is represented in (manually formatted) LSON as:
 
 ``` clojure
 (namespaces ((
@@ -155,9 +159,11 @@ synver --surface-of path/to/some.dll
 )
 ```
 
-In this we can roughly see the the class `MyClass` in the project `MyProject` which has the instance member `MyMethod` that takes in a `string` and returns `void` and a default constructor.
+Here we can see the class `MyClass` in the project `MyProject` which has the instance member `MyMethod` that takes in a `string` and returns `void` and a default constructor.
 
-The `--diff` command takes two dll paths and produces the difference in the API in human readable format:
+### --diff
+
+The `--diff` command takes two paths and produces the difference in the API in a readable format:
 
 ```
 synver --diff path/to/first.dll path/to/second.dll
@@ -165,7 +171,7 @@ synver --diff path/to/first.dll path/to/second.dll
 
 When applied to the breaking change described above this displays:
 
-``` 
+``` java
 
 * MyProject.MyClass
 
@@ -179,6 +185,8 @@ When applied to the breaking change described above this displays:
 ```
 
 This shows the difference in the .dll files before and after the breaking change.
+
+### --magnitude and --bump
 
 The `--magnitude` command takes two paths and returns either `Major` or `Minor` depending on the change.
 

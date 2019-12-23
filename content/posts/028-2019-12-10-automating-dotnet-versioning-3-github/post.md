@@ -63,7 +63,7 @@ The step to run the `BuildAndPublish.ps1` script needs to have environment varia
       run: powershell -file BuildAndPublish.ps1 -Verbose
 ```
 
-The step executes the `run` node, which simply calls the powershell script. This will fail the step if there is a non-zero exit code or output is detected at STDERR.
+The step executes the `run` node, which simply calls the powershell script. This will fail the step if there is a non-zero exit code.
 
 The `${{ secrets.GIT_TOKEN }}` is a [GitHub secret](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets) which is a [Personal Access Token](https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line) created with permissions to be able to push to the repository and package registry. The rest of the environment variables are required to configure the behaviour of the powershell scripts to work with the github repository.
 

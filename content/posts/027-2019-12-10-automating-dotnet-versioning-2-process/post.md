@@ -20,7 +20,7 @@ Unlike public API changes, It's impossible to detect and verify the magnitude of
 
 ## Conventional commits
 
-Library changes can be described alongside the code, using a method called [convention commits](https://www.conventionalcommits.org/en). The commit message describes the magnitude of the changes using certain message prefixes. 
+Library changes can be described alongside the code, using a method called [conventional commits](https://www.conventionalcommits.org/en). The commit message describes the magnitude of the changes using certain message prefixes. 
 
 - `BREAKING CHANGE` is used in the messages of commits that contain `Major` level changes. 
 - `feat` is used to denote `Minor` level changes.  
@@ -34,7 +34,7 @@ Behavioural changes can be described in commit messages using conventional commi
 
 
 We need to store the last published library version and public API to be able to determine the next version number.
-The version can be stored as a `git tag` and the public API can be stored in a text file `MyProject.lson` in the repository using `synver`'s `--surface-of` command. These will be updated in the repo when the package is published during the build process.
+The version can be stored on the commit as a git tag and the public API can be stored in a text file `MyProject.lson` in the repository using `synver`'s `--surface-of` command. These will be updated in the repo when the package is published during the build process.
 
 From a developers perspective the workflow should be:
 
