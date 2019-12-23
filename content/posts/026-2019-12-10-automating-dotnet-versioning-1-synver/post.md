@@ -11,7 +11,7 @@ date: "2019/12/10"
 category: Tech
 ---
 
-> This is an entry for the [F# Advent Calendar 2019](https://sergeytihon.com/tag/fsadvent). It is the first in a three part series exploring a way of automating .net library versioning. This post doesn't contain any F#, but describes a library written in F# which was the product of a blog post from the FsAdvent 2016.
+> This is an entry for the [F# Advent Calendar 2019](https://sergeytihon.com/tag/fsadvent). It is the first in a three part series exploring a way of automating .net library versioning. This post describes a library written in F# which was the product of a blog post from the FsAdvent 2016.
 
 [Semantic versioning](https://semver.org/) is a popular method for versioning software libaries. 
 It describes three different types of change that can happen in libaries, Major, Minor and Patch:
@@ -25,7 +25,7 @@ An article from the [FsAdvent 2016](https://sergeytihon.com/2016/10/23/f-advent-
 ## Syntactic Versioning
 
 Syntactic Versioning is a nuget library that can determine the public API differences between `.dll` files.
-It is aware of the API surface change aspects of semantic versioning and can determine the magnitude of the difference between two libraries, as well as the new version number if given the old. 
+It is aware of the API surface change aspects of semantic versioning and can determine the magnitude of the difference between two public APIs, as well as the new version number if given the old. 
 
 If a library `MyProject` has the following class `MyClass` with method `MyMethod` in it:
 
@@ -41,7 +41,7 @@ namespace MyProject
 }
 ```
 
-The library uses reflection, or a decompiler to turn the public classes and methods into a text representation. It then creates an F# `Set<Tuple<string, string>>` of this data. The above class is represented by a Set containing the following tuples:
+The library uses reflection or a decompiler to turn the public classes and methods into a text representation and creates an F# `Set<Tuple<string, string>>` of the API. The above class is represented by a Set containing the following tuples:
 
 ``` fsharp
 ("MyProject",         "MyProject (Namespace)")
@@ -50,12 +50,12 @@ The library uses reflection, or a decompiler to turn the public classes and meth
 ("MyProject.MyClass", "new MyProject.MyClass : System.Void -> MyProject.MyClass")
 ```
 
-We can see the `namespace`, `MyMethod`, `class` and default constructor present. 
+We can see the text representations of the `namespace`, `MyMethod`, `class` and default constructor respectively. 
 
-Syntactic Versioning creates source and target representations of the library and then can derive the magnitude change using the following rules.
+Syntactic Versioning determines source and target representations of the API and then can derive the magnitude change using the following rules:
 
-- **Major** - if any tuples in the source set are not present in the target set, this is a Major change
-- **Minor** - if any new tuples are present in the target set then this is a Minor change
+- **Major** - if any tuples in the source set are not present in the target set, this is breaking the APIs backwards compatability and therefore a Major change
+- **Minor** - if any new tuples are present in the target set then this is extending functionality and is a Minor change
 - **Patch** - if the sets are the same then this is a Patch change
 
 If `MyClass` then has another method `MyMethod2` added to it:
@@ -73,7 +73,7 @@ public class MyClass
 }
 ```
 
-Syntactic versioning can be used on the source/target built `.dll` files and will detect a new tuple
+Syntactic versioning can be used on the source/target built `.dll` files and will detect a new tuple, not present in the source set:
 
 ``` fsharp
 ("MyProject.MyClass", "(Instance of MyProject.MyClass).MyMethod2 : boolArg:System.Boolean -> System.Void")
@@ -94,7 +94,9 @@ The tuple:
 
 ``` fsharp
 ("MyProject.MyClass", "(Instance of MyProject.MyClass).MyMethod : stringArg:System.String -> System.Void")
-// is replaced by
+```
+is replaced by:
+``` fsharp
 ("MyProject.MyClass", "(Instance of MyProject.MyClass).MyMethod : boolArg:System.Boolean -> System.Void")
 ```
 
@@ -136,7 +138,7 @@ The `--surface-of` command takes a path of a dll and produces the API in an intr
 synver --surface-of path/to/some.dll
 ```
 
-`MyClass` appears as so:
+`MyProject` is represented in (manually formatted) LSON as:
 
 ``` clojure
 (namespaces ((
@@ -176,9 +178,9 @@ When applied to the breaking change described above this displays:
             -> System.Void
 ```
 
-This shows, in a `git diff` style syntax, the difference in the .dll files before and after the breaking change.
+This shows the difference in the .dll files before and after the breaking change.
 
-The `--magnitude` command takes two dll paths and returns either `Major` or `Minor` depending on the change.
+The `--magnitude` command takes two paths and returns either `Major` or `Minor` depending on the change.
 
 ```
 synver --magnitude path/to/first.dll path/to/second.dll
@@ -186,7 +188,7 @@ synver --magnitude path/to/first.dll path/to/second.dll
 Major 
 ```
 
-The `--bump` command takes the current version number, two dll paths and returns the new version number, according to the syntax change.
+The `--bump` command takes the current version number, two paths and returns the new version number, according to the syntax change.
 
 ```
 synver --bump 1.2.3 path/to/first.dll path/to/second.dll
