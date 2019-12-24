@@ -7,7 +7,7 @@ tags:
 - dotnet
 - versioning
 slug: "automating-dotnet-library-versioning-2-process"
-date: "2019/12/11"
+date: "2019/12/26"
 category: Tech
 ---
 
