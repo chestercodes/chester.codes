@@ -13,8 +13,8 @@ category: Tech
 
 > This is the second post in a series on a method of automating .net library versioning. The [first post described the synver dotnet tool](/automating-dotnet-library-versioning-synver) which can be used to find the magnitude of library API changes according to the semantic versioning rules. 
 
-[Semantic versioning](https://semver.org/) is a popular method for versioning software libaries. 
-It describes three different types of change that can happen in libaries, Major, Minor and Patch. To decide the type of a change in the library, from one version to the next, one needs to take into account library behaviour and API changes.
+[Semantic versioning](https://semver.org/) is a popular method for versioning software libraries. 
+It describes three different types of change that can happen in libraries, Major, Minor and Patch. To decide the type of a change in the library, from one version to the next, one needs to take into account library behaviour and API changes.
 
 Unlike public API changes, It's impossible to detect and verify the magnitude of changes in behaviour of code in an automated way, the responsibility of documenting behaviour changes is left to the developer. 
 
@@ -40,8 +40,8 @@ c61a4b3 chore: Tidied code up                               # c3c552a -> c61a4b3
 c3c552a (tag: v1.0.0) Changes for v1.0.0                    # c3c552a = v1.0.0
 ```
 
-In this example we can see the version `v1.0.0` is tagged at the commit `c3c552a`. If it was decided to introduce a new version at the commit `c61a4b3` it would create version `v1.0.1` as the commits between the two are prefixed with `fix` and `chore` and this introduces a `Patch` level change. 
-If the new version was made at `88732bd` then the commit history between `c3c552a -> 88732bd` includes `feat` which calls for a `Minor` change and produces `v1.1.0`. If the version were to be introduced at `c00e854` the version would include a `Major` change commit and therefore be `v2.0.0`
+In the example version `v1.0.0` is tagged at the commit `c3c552a`. If a new version is at the commit `c61a4b3` the commits between the two are prefixed with `fix` and `chore` and this introduces a `Patch` level change to produce `v1.0.1`. 
+If the new version was at `88732bd` then the commit history between `c3c552a -> 88732bd` includes `feat` which calls for a `Minor` change and produces `v1.1.0`. If the version were to be introduced at `c00e854` the version would include a `Major` change commit and therefore be `v2.0.0`
 
 ## Automated workflow.
 
@@ -49,7 +49,7 @@ Behavioural changes can be described in commit messages using conventional commi
 
 
 We need to store the last published library version and public API to be able to determine the next version number.
-The version can be stored on the commit as a git tag and the public API can be stored in a text file `MyProject.lson` in the repository using `synver`'s `--surface-of` command. These will be updated in the repo when the package is published during the build process.
+The version can be stored on the commit as a `git tag` and the public API can be stored in a text file `MyProject.lson` in the repository using `synver`'s `--surface-of` command. These will be updated in the repo when the package is published during the build process.
 
 From a developer's perspective the workflow should be:
 

@@ -20,7 +20,7 @@ These services can be used to implement a fully automated CI and publishing pipe
 
 ### Creating the action
 
-A GitHub Action is created by the inclusion of a `.github/workflow/<SomeName>.yml` file in the base of the GitHub hosted repository. Actions contain steps that form a pipeline, they are executed in a sandboxed container of a specified os type with [lots of pre-installed software](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/software-installed-on-github-hosted-runners).
+A GitHub Action is created by the inclusion of a `.github/workflow/<SomeName>.yml` file in the base of the GitHub hosted repository. Actions contain steps that form a pipeline, they are executed in a container of a specified os type with [lots of pre-installed software](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/software-installed-on-github-hosted-runners).
 The process in `AutoSemVerLib` requires two executables be present, `dotnet` and `powershell`, these are present in the windows hosted runners.
 
 A windows based pipeline `BuildAndPublish` that is triggered by the pushing of commits to the `master` branch and has a single step to checkout the code, can be defined with:
@@ -87,9 +87,9 @@ The commit produced by the `chestercodes-bot` after the breaking change to the A
 These posts have described a way to automate nuget package versioning. 
 A fully automated versioning process is probably not a good idea for public packages with lots of consumers, where introducing breaking changes needs to be thought about very carefully. 
 
-Automating the versioning could be useful for situations where the version magnitude change is less important than ensuring that there's a unique version for built library changes. I have worked with a nuget feed that allowed packages to be pushed to it and overwrite existing versions when developers forgot to manually change the version in the `nuspec` file. This caused a lot of confusion when trying to reason about the version of code being run in production.
+Automating the versioning could be useful where the version magnitude change is less important than ensuring that there's a unique version for library builds. I have worked with a nuget feed that allowed packages to be pushed to it with existing versions when developers forgot to manually change the version. This caused a lot of confusion when trying to reason about the version of code being run in production.
 
-A good middle ground could be to have an automation step that:
+A potential middle ground could be an automation step that:
 
 - builds the code from an intermediary branch (say `develop`)
 - calculates the next version number, publishes a `<next>.<version>.<number>-alpha` package

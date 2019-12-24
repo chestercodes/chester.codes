@@ -13,8 +13,8 @@ category: Tech
 
 > This is an entry for the [F# Advent Calendar 2019](https://sergeytihon.com/tag/fsadvent). It is the first in a three part series exploring a way of automating .net library versioning. This post describes a library written in F# which was the product of a blog post from the FsAdvent 2016.
 
-[Semantic versioning](https://semver.org/) is a popular method for versioning software libaries. 
-It describes three different types of change that can happen in libaries, Major, Minor and Patch:
+[Semantic versioning](https://semver.org/) is a popular method for versioning software libraries. 
+It describes three possible types of change of software libraries, Major, Minor and Patch:
 
 - **Major** - a change of expected behaviour or a non-backwards compatible change in the API.
 - **Minor** - a backwards compatible change that adds functionality to a library. 
@@ -24,8 +24,8 @@ An article from the [FsAdvent 2016](https://sergeytihon.com/2016/10/23/f-advent-
 
 ## Syntactic Versioning
 
-Syntactic Versioning is a library that can determine the public API differences between `.dll` files and is designed to be used on different builds of a .NET library. 
-It is aware of the API surface change aspects of semantic versioning and can determine the version magnitude of the difference between built libraries and derive the new version number if given the old. 
+Syntactic Versioning is a library that can be used to determine the public API differences between `.dll` files. 
+It is aware of the API surface change rules of semantic versioning and can be used on different builds of a .NET library to determine version magnitude changes. 
 
 ### MyProject
 
@@ -43,7 +43,7 @@ namespace MyProject
 }
 ```
 
-Syntactic Versioning uses reflection or a decompiler to turn the public classes and methods of `MyProject` into a text representation and creates an F# `Set<Tuple<string, string>>` of the API. The above code is represented by a Set containing the following tuples:
+Syntactic Versioning uses reflection (or a decompiler) to map the public classes and methods of `MyProject` into a `Set<Tuple<string, string>>`. The above code is represented by a Set containing the following tuples:
 
 ``` fsharp
 ("MyProject",         "MyProject (Namespace)")
@@ -56,7 +56,7 @@ We can see the text representations of the `namespace`, `MyMethod`, `class` and 
 
 Syntactic Versioning uses source and target representations of the API and then can derive the magnitude change using the following rules:
 
-- **Major** - if any tuples in the source set are not present in the target set, this is breaking the APIs backwards compatability and therefore a Major change
+- **Major** - if any tuples in the source set are not present in the target set, this is breaking the APIs backwards compatibility and therefore a Major change
 - **Minor** - if any new tuples are present in the target set then this is extending functionality and is a Minor change
 - **Patch** - if the sets are the same then this is a Patch change
 
