@@ -7,7 +7,7 @@ tags:
 - dotnet
 - versioning
 slug: "automating-dotnet-library-versioning-3-github"
-date: "2019/12/12"
+date: "2019/12/27"
 category: Tech
 ---
 
@@ -16,11 +16,11 @@ category: Tech
 
 GitHub have introduced new platforms for building and hosting software packages. GitHub Actions can be used to build code when pushed to the repository (or with other triggers) and GitHub Package Repository can be used as an artifact store for many types of software packages. 
 
-These services can be used to implement a fully automated CI and publishing pipeline for the `MyProject` nuget package. In this process any commits pushed to the `AutoSemVerLib` repository's `master` branch will trigger a GitHub Action to run the `BuildAndPublish.ps1` script. If successful this will build `MyProject` and publish it to the GitHub Package Registry.
+These services can be used to implement a fully automated CI and publishing pipeline for a `MyProject` nuget package. In this process any commits pushed to the `AutoSemVerLib` repository's `master` branch will trigger a GitHub Action to run the `BuildAndPublish.ps1` script. If successful this will build `MyProject` and publish it to the GitHub Package Registry.
 
 ### Creating the action
 
-A GitHub Action is created by the inclusion of a `.yml` file in a `workflow` directory in a `.github` directory in the base of the GitHub hosted repository. This file describes the commands and execution environment required. 
+A GitHub Action is created by the inclusion of a `<SomeName>.yml` file in a `workflow` directory in a `.github` directory in the base of the GitHub hosted repository. 
 
 Actions contain steps that form a pipeline, they can be run on different operating systems and code execution runtimes. Steps can be shared in the [GitHub marketplace](https://github.com/marketplace?type=actions). Each pipeline is executed in a sandboxed container of the specified os type with [lots of pre-installed software.](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/software-installed-on-github-hosted-runners) The process in `AutoSemVerLib` requires two executables be present, `dotnet` and `powershell`, these are present in the windows hosted runners.
 
@@ -63,26 +63,31 @@ The step to run the `BuildAndPublish.ps1` script needs to have environment varia
       run: powershell -file BuildAndPublish.ps1 -Verbose
 ```
 
-The step executes the `run` node, which simply calls the powershell script. This will fail the step if there is a non-zero exit code.
+The step executes the `run` node, which simply calls the powershell script and will fail the step if there is a non-zero exit code.
 
 The `${{ secrets.GIT_TOKEN }}` is a [GitHub secret](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/creating-and-using-encrypted-secrets) which is a [Personal Access Token](https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line) created with permissions to be able to push to the repository and package registry. The rest of the environment variables are required to configure the behaviour of the powershell scripts to work with the github repository.
 
-## Commits in repo
+## In Action
 
-The commits in the `AutoSemVerLib` repo show the process in action. 
+When the Action is included in the repo, the pipeline will trigger when code is pushed to the master branch and executions can be seen in the `Actions` tab in the GitHub user interface.
 
-[Patch level change](https://github.com/chestercodes/AutoSemVerLib/compare/v1.0.0...v1.0.1)
+Below shows a successful run of the `BuildAndPublish` pipeline, the steps to checkout the code, install nuget.exe and run the `BuildAndPublish.ps1` script can all be seen with their console output. 
 
-[Minor level change](https://github.com/chestercodes/AutoSemVerLib/compare/v1.0.1...v1.1.0)
+![PipelineRunning](PipelineRunning.jpg)
 
-[Major level change](https://github.com/chestercodes/AutoSemVerLib/compare/v1.1.0...v2.0.0)
+
+The [commits in the AutoSemVerLib](https://github.com/chestercodes/AutoSemVerLib/commits/master) repo show the process in action. Library changes and documentation can be seen for [Patch](https://github.com/chestercodes/AutoSemVerLib/compare/v1.0.0...v1.0.1), [Minor](https://github.com/chestercodes/AutoSemVerLib/compare/v1.0.1...v1.1.0) and [Major](https://github.com/chestercodes/AutoSemVerLib/compare/v1.1.0...v2.0.0) level magnitude changes to the public API as determined by Syntactic Versioning. The commits also show [Patch](https://github.com/chestercodes/AutoSemVerLib/compare/v2.0.0...v2.0.1), [Minor](https://github.com/chestercodes/AutoSemVerLib/compare/v2.0.1...v2.1.0) and [Major](https://github.com/chestercodes/AutoSemVerLib/compare/v2.1.0...v3.0.0) changes as parsed from the commit messages.
+
+The commit produced by the `chestercodes-bot` after the breaking change to the API is a good example of the output of the process. It shows the increase of the version number by a major version, the new API representation stored in the `MyProject.lson` file and the documentation of the change in the API and the commit message in the `versioning/v2.0.0.txt` file.
+
+![Commit](BreakingApiChange.jpg)
 
 ## Conclusion
 
 These posts have described a way to automate nuget package versioning. 
 A fully automated versioning process is probably not a good idea for packages with lots of consumers, where backwards incompatability needs to be thought about very carefully. 
 
-Automating the versioning could be useful for situations where the version magnitude change is less important than ensuring that there's a unique for built library changes. I have worked with a nuget feed that allowed packages to be pushed to it with existing versions, which caused confusion when trying to debug application builds.
+Automating the versioning could be useful for situations where the version magnitude change is less important than ensuring that there's a unique for built library changes. I have worked with a nuget feed that allowed packages to be pushed to it and overwrite existing versions, which caused confusion when trying to reason about the versions being run.
 
-A nice middle ground might be to have an automation step which builds the code from an intermediary branch, gets the next version number and creates a pull request from a new commit with the changes in version and documentation that can be pushed to the `master` branch and published.
+A nice middle ground might be to have an automation step that builds the code from an intermediary branch, gets the next version number and creates a pull request from a new commit with the changes in version and documentation that can be pushed to the `master` branch and published.
 
