@@ -6,7 +6,7 @@ issue: 26
 tags: 
 - versioning
 - syntactic-versioning
-slug: "automating-dotnet-library-versioning-1-synver"
+slug: "automating-dotnet-library-versioning-synver"
 date: "2019/12/25"
 category: Tech
 ---
@@ -20,11 +20,11 @@ It describes three different types of change that can happen in libaries, Major,
 - **Minor** - a backwards compatible change that adds functionality to a library. 
 - **Patch** - a backwards compatible change that fixes a bug or other small change.
 
-An article from the [FsAdvent 2016](https://sergeytihon.com/2016/10/23/f-advent-calendar-in-english-2016/) describes a [method of detecting api version magnitude changes](http://blog.stermon.com/articles/2016/12/01/semantic-versioning-dotnet-libs-and-nuget-pkgs) and this has been turned into a [nuget library](https://github.com/fsprojects/SyntacticVersioning) and dotnet tool.
+An article from the [FsAdvent 2016](https://sergeytihon.com/2016/10/23/f-advent-calendar-in-english-2016/) describes a [method of detecting api version magnitude changes](http://blog.stermon.com/articles/2016/12/01/semantic-versioning-dotnet-libs-and-nuget-pkgs) and this has been turned into a nuget package called [Syntactic Versioning](https://github.com/fsprojects/SyntacticVersioning) and a dotnet tool called `synver`.
 
 ## Syntactic Versioning
 
-Syntactic Versioning is a nuget library that can determine the public API differences between `.dll` files and is designed to be used on different builds of a .NET library. 
+Syntactic Versioning is a library that can determine the public API differences between `.dll` files and is designed to be used on different builds of a .NET library. 
 It is aware of the API surface change aspects of semantic versioning and can determine the version magnitude of the difference between built libraries and derive the new version number if given the old. 
 
 ### MyProject
@@ -136,7 +136,7 @@ This tool has four main commands, `--surface-of`, `--diff`, `--bump` and `--magn
 
 ### --surface-of
 
-The `--surface-of` command takes a path and serialises the API in a format called [LSON (Lisp inspired serialisation)](https://github.com/fsprojects/LSON):
+The `--surface-of` command takes a path and serialises the API into a format called [LSON (Lisp inspired serialisation)](https://github.com/fsprojects/LSON):
 
 ```
 synver --surface-of path/to/some.dll
@@ -163,13 +163,13 @@ Here we can see the class `MyClass` in the project `MyProject` which has the ins
 
 ### --diff
 
-The `--diff` command takes two paths and produces the difference in the API in a readable format:
+The `--diff` command takes source and target paths and returns the difference in the API in a readable format:
 
 ```
-synver --diff path/to/first.dll path/to/second.dll
+synver --diff path/to/source.dll path/to/target.dll
 ```
 
-When applied to the breaking change described above this displays:
+When applied to the breaking change in `MyClass` described above this displays:
 
 ``` java
 
@@ -188,28 +188,27 @@ This shows the breaking change in `MyClass` of the `MyMethod(string stringArg)` 
 
 ### --magnitude and --bump
 
-The `--magnitude` command takes two paths and returns the version magnitude of the change.
+The `--magnitude` command takes source and target paths and returns the magnitude of the version change.
 
 ```
-synver --magnitude path/to/first.dll path/to/second.dll
+synver --magnitude path/to/source.dll path/to/target.dll
 
 Major 
 ```
 
-The `--bump` command takes the current version number, two paths and returns the new version number, according to the syntax change.
+The `--bump` command takes the current version number, source and target paths and returns the new version number, according to the syntax change.
 
 ```
-synver --bump 1.2.3 path/to/first.dll path/to/second.dll
+synver --bump 1.2.3 path/to/source.dll path/to/target.dll
 
 2.0.0
 ```
 
 ## Library API as text
 
-The commands can take paths to `.dll` files as arguments, but it can be tricky to get a previous version of the `.dll` file to be used with the tool. Luckily Syntactic Versioning can also use text files to determine differences. 
+The commands can take paths to `.dll` files as arguments, but it can be tricky to get a previous version of a library `.dll`. Luckily Syntactic Versioning can also use text files produced by the `--surface-of` command to determine differences. 
 
-The `--surface-of` and `--diff` commands can also output their results to a file using the `--output` argument. 
-
+The `--surface-of` and `--diff` commands can output their results to a file using the `--output` argument. 
 To write the lson representation of the built `MyProject.dll` to the file `MyProject.lson`, `synver` can be called with:
 
 ```
@@ -230,4 +229,4 @@ The `diff` command provides a way to document changes in the library API once th
 synver --diff MyProject.lson ./bin/Debug/MyProject.dll --output 1.2.3-2.0.0.txt
 ```
 
-The [next post in this series](/automating-dotnet-library-versioning-2-process) describes a way to use the `synver` tool to fully automate the versioning process.
+The [next post in this series](/automating-dotnet-library-versioning-the-process) describes a way to use the `synver` tool to fully automate the versioning process.

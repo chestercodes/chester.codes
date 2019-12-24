@@ -6,7 +6,7 @@ issue: 27
 tags: 
 - dotnet
 - versioning
-slug: "automating-dotnet-library-versioning-2-process"
+slug: "automating-dotnet-library-versioning-the-process"
 date: "2019/12/26"
 category: Tech
 ---
@@ -14,7 +14,7 @@ category: Tech
 > This is the second post in a series on a method of automating .net library versioning. The [first post described the synver dotnet tool](/automating-dotnet-library-versioning-synver) which can be used to find the magnitude of library API changes according to the semantic versioning rules. 
 
 [Semantic versioning](https://semver.org/) is a popular method for versioning software libaries. 
-It describes three different types of change that can happen in libaries, Major, Minor and Patch. To decide the type of a change in the library, from one version to the next, one needs to take into account behaviour and API changes.
+It describes three different types of change that can happen in libaries, Major, Minor and Patch. To decide the type of a change in the library, from one version to the next, one needs to take into account library behaviour and API changes.
 
 Unlike public API changes, It's impossible to detect and verify the magnitude of changes in behaviour of code in an automated way, the responsibility of documenting behaviour changes is left to the developer. 
 
@@ -28,7 +28,7 @@ Library changes can be described alongside the code, using a method called [conv
 
 Using this convention it is possible to derive the next version number and generate documentation from the [commit messages since the last version](https://github.com/conventional-changelog/standard-version). 
 
-An example of conventional commits can be seen in the following git log for a fictitious DSL parser:
+An example of conventional commits can be seen in the following `git log --oneline` for a fictitious DSL parser:
 
 ```
 d7dfb26 fix: Merge conflicts.
@@ -40,12 +40,12 @@ c61a4b3 chore: Tidied code up                               # c3c552a -> c61a4b3
 c3c552a (tag: v1.0.0) Changes for v1.0.0                    # c3c552a = v1.0.0
 ```
 
-In this example we can see the version v1.0.0 is tagged at the commit `c3c552a`. If it was decided to introduce a new version at the commit `c61a4b3` it would create version `v1.0.1` as the commits between the two are prefixed with `fix` and `chore` and this introduces a `Patch` level change. 
+In this example we can see the version `v1.0.0` is tagged at the commit `c3c552a`. If it was decided to introduce a new version at the commit `c61a4b3` it would create version `v1.0.1` as the commits between the two are prefixed with `fix` and `chore` and this introduces a `Patch` level change. 
 If the new version was made at `88732bd` then the commit history between `c3c552a -> 88732bd` includes `feat` which calls for a `Minor` change and produces `v1.1.0`. If the version were to be introduced at `c00e854` the version would include a `Major` change commit and therefore be `v2.0.0`
 
 ## Automated workflow.
 
-Behavioural changes can be described in commit messages using conventional commits and API (syntactic) changes can be derived with the `synver` tool. Combining these methods we can automate nuget library versioning. 
+Behavioural changes can be described in commit messages using conventional commits and API (syntactic) changes can be derived with the `synver` tool. Combining these methods we can automate nuget package library versioning. 
 
 
 We need to store the last published library version and public API to be able to determine the next version number.
@@ -86,7 +86,7 @@ The above steps can be implemented as part of a CI process using scripts that ar
 - - `TAG_VERSION_REGEX` - Regex that defines version format in git tags.
 - - `BUILT_NAME_REL` - Path of the `.dll` file when built.
 - - `CURRENT_API_NAME` - Path of the lson representation of the API file in the repository.
-- `BuildVersioning.ps1` - Contains functions that are specific to the build, source control and publishing technologies. In this case .net core, GitHub and GitHub packages. It also contains code about the documentation produced by the automated process. The script is configured with environment variables that define the git and github config.
+- `BuildVersioning.ps1` - Contains functions that are specific to the build, source control and publishing technologies. In this case `dotnet` core, GitHub and GitHub packages. It also contains code to generate the documentation produced by the automated process. The script is configured with environment variables that define the git and github config.
 - `BuildAndPublish.ps1` - High level script which runs the build, pack and publish. This script imports the `BuildVersioning.ps1` script, which imports the `AutoSemVer.ps1` script and uses the functions.
 
 
@@ -115,6 +115,9 @@ $packagePath = ls -Path ./out -Filter "*.nupkg" | sort LastWriteTime `
 PushToFeed $packagePath
 ```
 
-The script imports `BuildVersioning.ps1` and the `NeedToRun` function returns `$false` if there are no commits since the last tag. If the library builds then the `Bump` function returns the next version, derived from the `MyProject.dll` and `MyProject.lson` files. The package is created in the `out` directory from the version, the documentation is created and the `MyProject.lson` file updated in a commit that is pushed to the repository. The built nuget package is finally pushed.
+This flowchart shows the logic of the script:
 
-A CI technology is required to be the execution platform and a package feed is required to host the package. The [next post describes the steps and code needed to achieve this](/automating-dotnet-library-versioning-3-github) with [Github Actions](https://github.com/features/actions) and the [GitHub Package Registry](https://github.com/features/packages).
+![Flowchart](Flowchart.jpg)
+
+
+A CI technology is required to be the execution platform and a package feed is required to host the package. The [next post describes the steps and code needed to achieve this](/automating-dotnet-library-versioning-github) with [Github Actions](https://github.com/features/actions) and the [GitHub Package Registry](https://github.com/features/packages).

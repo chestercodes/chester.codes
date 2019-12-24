@@ -6,12 +6,12 @@ issue: 28
 tags: 
 - dotnet
 - versioning
-slug: "automating-dotnet-library-versioning-3-github"
+slug: "automating-dotnet-library-versioning-github"
 date: "2019/12/27"
 category: Tech
 ---
 
-> This is the final post in a series on a method of automating .net library versioning. The [second post describes the proposed automated process](/automating-dotnet-library-versioning-2-process). This post is best understood with familiarity of the previous ones.
+> This is the final post in a series on a method of automating .net library versioning. The [second post describes the proposed automated process](/automating-dotnet-library-versioning-the-process). This post is best understood with familiarity of the previous ones.
 
 
 GitHub have introduced new platforms for building and hosting software packages. GitHub Actions can be used to build code when pushed to the repository (or with other triggers) and GitHub Package Repository can be used as an artifact store for many types of software packages. 
