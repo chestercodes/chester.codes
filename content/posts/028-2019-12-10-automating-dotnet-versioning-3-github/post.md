@@ -16,13 +16,12 @@ category: Tech
 
 GitHub have introduced new platforms for building and hosting software packages. GitHub Actions can be used to build code when pushed to the repository (or with other triggers) and GitHub Package Repository can be used as an artifact store for many types of software packages. 
 
-These services can be used to implement a fully automated CI and publishing pipeline for a `MyProject` nuget package. In this process any commits pushed to the `AutoSemVerLib` repository's `master` branch will trigger a GitHub Action to run the `BuildAndPublish.ps1` script. If successful this will build `MyProject` and publish it to the GitHub Package Registry.
+These services can be used to implement a fully automated CI and publishing pipeline for a `MyProject` nuget package. In this process any commits pushed to the `AutoSemVerLib` [repository](https://github.com/chestercodes/AutoSemVerLib/)'s `master` branch will trigger a GitHub Action to run the `BuildAndPublish.ps1` script. If successful this will build `MyProject` and publish it to the GitHub Package Registry.
 
 ### Creating the action
 
-A GitHub Action is created by the inclusion of a `<SomeName>.yml` file in a `workflow` directory in a `.github` directory in the base of the GitHub hosted repository. 
-
-Actions contain steps that form a pipeline, they can be run on different operating systems and code execution runtimes. Steps can be shared in the [GitHub marketplace](https://github.com/marketplace?type=actions). Each pipeline is executed in a sandboxed container of the specified os type with [lots of pre-installed software.](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/software-installed-on-github-hosted-runners) The process in `AutoSemVerLib` requires two executables be present, `dotnet` and `powershell`, these are present in the windows hosted runners.
+A GitHub Action is created by the inclusion of a `.github/workflow/<SomeName>.yml` file in the base of the GitHub hosted repository. Actions contain steps that form a pipeline, they are executed in a sandboxed container of a specified os type with [lots of pre-installed software](https://help.github.com/en/actions/automating-your-workflow-with-github-actions/software-installed-on-github-hosted-runners).
+The process in `AutoSemVerLib` requires two executables be present, `dotnet` and `powershell`, these are present in the windows hosted runners.
 
 A windows based pipeline `BuildAndPublish` that is triggered by the pushing of commits to the `master` branch and has a single step to checkout the code, can be defined with:
 
@@ -39,6 +38,7 @@ jobs:
     - uses: actions/checkout@v1
 ```
 
+Steps can be shared in the [GitHub marketplace](https://github.com/marketplace?type=actions), there are third party written steps to achieve common build/deployment tasks. 
 To push the produced package the pipeline needs to have the `nuget` executable present. This can be added with the `warrenbuckley/Setup-Nuget@v1` step from the marketplace. 
 
 ``` yaml
@@ -69,9 +69,9 @@ The `${{ secrets.GIT_TOKEN }}` is a [GitHub secret](https://help.github.com/en/a
 
 ## In Action
 
-When the Action is included in the repo, the pipeline will trigger when code is pushed to the master branch and executions can be seen in the `Actions` tab in the GitHub user interface.
+When the Action is included in the repo, the pipeline will trigger when code is pushed to the master branch and executions can be seen in the `Actions` tab in the GitHub repo user interface.
 
-Below shows a successful run of the `BuildAndPublish` pipeline, the steps to checkout the code, install nuget.exe and run the `BuildAndPublish.ps1` script can all be seen with their console output. 
+The image below shows a successful run of the `BuildAndPublish` pipeline, the steps to checkout the code, install nuget.exe and run the `BuildAndPublish.ps1` script can all be seen with their console output. 
 
 ![PipelineRunning](PipelineRunning.jpg)
 
@@ -85,9 +85,14 @@ The commit produced by the `chestercodes-bot` after the breaking change to the A
 ## Conclusion
 
 These posts have described a way to automate nuget package versioning. 
-A fully automated versioning process is probably not a good idea for packages with lots of consumers, where backwards incompatability needs to be thought about very carefully. 
+A fully automated versioning process is probably not a good idea for public packages with lots of consumers, where introducing breaking changes needs to be thought about very carefully. 
 
-Automating the versioning could be useful for situations where the version magnitude change is less important than ensuring that there's a unique for built library changes. I have worked with a nuget feed that allowed packages to be pushed to it and overwrite existing versions, which caused confusion when trying to reason about the versions being run.
+Automating the versioning could be useful for situations where the version magnitude change is less important than ensuring that there's a unique version for built library changes. I have worked with a nuget feed that allowed packages to be pushed to it and overwrite existing versions when developers forgot to manually change the version in the `nuspec` file. This caused a lot of confusion when trying to reason about the version of code being run in production.
 
-A nice middle ground might be to have an automation step that builds the code from an intermediary branch, gets the next version number and creates a pull request from a new commit with the changes in version and documentation that can be pushed to the `master` branch and published.
+A good middle ground could be to have an automation step that:
 
+- builds the code from an intermediary branch (say `develop`)
+- calculates the next version number, publishes an `<next>.<version>.<number>-alpha` package
+- creates a pull request, to `master` from a new commit with the changes in lson file and documentation
+
+This would provide a nice mixture of automation and manual checking with regards to expected next version number.

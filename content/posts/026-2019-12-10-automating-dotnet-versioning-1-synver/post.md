@@ -24,8 +24,8 @@ An article from the [FsAdvent 2016](https://sergeytihon.com/2016/10/23/f-advent-
 
 ## Syntactic Versioning
 
-Syntactic Versioning is a nuget library that can determine the public API differences between `.dll` files.
-It is aware of the API surface change aspects of semantic versioning and can determine the magnitude of the difference between two public APIs, as well as the new version number if given the old. 
+Syntactic Versioning is a nuget library that can determine the public API differences between `.dll` files and is designed to be used on different builds of a .NET library. 
+It is aware of the API surface change aspects of semantic versioning and can determine the version magnitude of the difference between built libraries and derive the new version number if given the old. 
 
 ### MyProject
 
@@ -43,7 +43,7 @@ namespace MyProject
 }
 ```
 
-The library uses reflection or a decompiler to turn the public classes and methods into a text representation and creates an F# `Set<Tuple<string, string>>` of the API. The above class is represented by a Set containing the following tuples:
+Syntactic Versioning uses reflection or a decompiler to turn the public classes and methods of `MyProject` into a text representation and creates an F# `Set<Tuple<string, string>>` of the API. The above code is represented by a Set containing the following tuples:
 
 ``` fsharp
 ("MyProject",         "MyProject (Namespace)")
@@ -54,7 +54,7 @@ The library uses reflection or a decompiler to turn the public classes and metho
 
 We can see the text representations of the `namespace`, `MyMethod`, `class` and default constructor respectively. 
 
-Syntactic Versioning determines source and target representations of the API and then can derive the magnitude change using the following rules:
+Syntactic Versioning uses source and target representations of the API and then can derive the magnitude change using the following rules:
 
 - **Major** - if any tuples in the source set are not present in the target set, this is breaking the APIs backwards compatability and therefore a Major change
 - **Minor** - if any new tuples are present in the target set then this is extending functionality and is a Minor change
@@ -184,11 +184,11 @@ When applied to the breaking change described above this displays:
             -> System.Void
 ```
 
-This shows the difference in the .dll files before and after the breaking change.
+This shows the breaking change in `MyClass` of the `MyMethod(string stringArg)` being replaced by the `MyMethod(bool boolArg)`.
 
 ### --magnitude and --bump
 
-The `--magnitude` command takes two paths and returns either `Major` or `Minor` depending on the change.
+The `--magnitude` command takes two paths and returns the version magnitude of the change.
 
 ```
 synver --magnitude path/to/first.dll path/to/second.dll
