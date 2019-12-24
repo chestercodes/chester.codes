@@ -117,7 +117,7 @@ PushToFeed $packagePath
 
 This flowchart shows the logic of the script:
 
-![Flowchart](Flowchart.jpg)
+![Flowchart](Flowchart.png)
 
 
 A CI technology is required to be the execution platform and a package feed is required to host the package. The [next post describes the steps and code needed to achieve this](/automating-dotnet-library-versioning-github) with [Github Actions](https://github.com/features/actions) and the [GitHub Package Registry](https://github.com/features/packages).

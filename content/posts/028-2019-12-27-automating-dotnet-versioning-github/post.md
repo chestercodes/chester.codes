@@ -39,14 +39,14 @@ jobs:
 ```
 
 Steps can be shared in the [GitHub marketplace](https://github.com/marketplace?type=actions), there are third party written steps to achieve common build/deployment tasks. 
-To push the produced package the pipeline needs to have the `nuget` executable present. This can be added with the `warrenbuckley/Setup-Nuget@v1` step from the marketplace. 
+To push the produced package the pipeline needs to have the `nuget` executable present which can be added with the `warrenbuckley/Setup-Nuget@v1` step. 
 
 ``` yaml
     - name: Setup Nuget.exe
       uses: warrenbuckley/Setup-Nuget@v1
 ```
 
-The step to run the `BuildAndPublish.ps1` script needs to have environment variables set to configure the script. These are easily set with the `env` nodes:
+The `Run build and publish script` step that runs the `BuildAndPublish.ps1` script needs to have environment variables set to configure the execution. These are easily set with the `env` nodes:
 
 ``` yaml
     - name: Run build and publish script
@@ -92,7 +92,7 @@ Automating the versioning could be useful for situations where the version magni
 A good middle ground could be to have an automation step that:
 
 - builds the code from an intermediary branch (say `develop`)
-- calculates the next version number, publishes an `<next>.<version>.<number>-alpha` package
+- calculates the next version number, publishes a `<next>.<version>.<number>-alpha` package
 - creates a pull request, to `master` from a new commit with the changes in lson file and documentation
 
 This would provide a nice mixture of automation and manual checking with regards to expected next version number.

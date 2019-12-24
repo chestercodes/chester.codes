@@ -1,9 +1,9 @@
 
 ```mermaid
 graph TD;
-    IS[Import BuildVersion.ps1]-->N2R[NeedToRun];
+    IS[Import BuildVersioning.ps1]-->N2R[NeedToRun];
     N2R-->NRN[false]-->S[exit 0];
-    N2R-->NRY[true]-->B[Build, run tests];
+    N2R-->NRY[true]-->B[Build project];
     B-->BN[Fail]-->NXS[exit != 0];
     B-->BY[Ok]-->NV[Bump version from MyProject.lson/dll];
     NV-->PN[Pack library to out directory];
