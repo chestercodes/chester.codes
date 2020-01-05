@@ -1,0 +1,27 @@
+
+```mermaid
+
+graph TD;
+    A1P1-->AT001[Talks To]-->A2P1
+    A2P1-->AT001[Talks To]-->A1P1
+
+    A1P1-->A1T001[Talks To]-->DB1[Database 1];
+    A1P1[Api 1 Deployed Project]-->A1R001[References]-->LF1[Lib1];
+    
+    A2P1[Api 2 Deployed Project]-->A2R001[References]-->LF1[Lib1];
+    A2P1-->A2T001[Talks To]-->DB2[Database 2];
+
+```
+
+
+
+```mermaid
+
+graph TD;
+    A1P1[Deployed Project]-->A1R002[References Project]-->A1P2[Project.Data];
+    A1P2-->A1R001[References Package]-->LF1[Nuget Library 1];
+    A1P2-->A1T001[Talks To]-->DB1[Database 1];
+    A1P1-->A1T002[Talks To]-->DP1[Config Service];
+    
+    
+```
