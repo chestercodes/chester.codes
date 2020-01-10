@@ -1,11 +1,12 @@
 ---
 layout: post
-title: Project dependency analysis with F# and neo4j
+title: Project dependency analysis with F# and Neo4J
 excerpt: A 
 issue: 29
 tags: 
 - dotnet
 - neo4j
+- fsharp
 slug: "project-dependency-analysis-with-fsharp-and-neofourj"
 date: "2020/01/10"
 category: Tech
@@ -28,7 +29,7 @@ Neo4j is a popular graph database that can be used to create and query a graph s
 
 
 
-### Modeling project data with F#
+### Modeling project data
 
 The ProjectAnalyser F# console application is going to parse the project and config files into nodes and relationships. 
 
@@ -106,5 +107,7 @@ From this file we can derive the following nodes and relationships:
 
 ### Project and database relationships
 
-The project, database and `CAN_TALK_TO` relationships can be 
+The project, database and `CAN_TALK_TO` relationships can be derived from the configuration files in the project file directories. 
+If there are certain files in the directory, such as Web.config, parameters.xml, then the project can be defined as a deployed project. 
 
+Each deployed project's configuration can be parsed for information on how to connect to other defined projects and databases. 
