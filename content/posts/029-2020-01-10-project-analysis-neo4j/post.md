@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Project dependency analysis with F# and Neo4J
+title: Project dependency analysis with F# and Neo4j
 excerpt: A 
 issue: 30
 tags: 
@@ -162,4 +162,25 @@ type Relationship =
 ```
 
 Each case contains a tuple of the correct types for the potential start and end nodes.
+
+
+### Loading data into neo4j
+
+The console app will parse all of the project files in a directory and output the nodes and relationships into .csv files which can be loaded into neo4j and queried. 
+Neo4j is easily run in a docker container and the .csv files can be added to a mounted `import` folder where they will be available to import at the url `file:///<filename>`.
+
+The `projects.csv` file can import nodes with the label `Project` and properties `name`, `deployed` and `platform` with the query:
+
+``` sql
+LOAD CSV WITH HEADERS FROM 'file:///projects.csv' AS line 
+CREATE (:Project { name: line.name, deployed: line.deployed, platform: line.platform });
+```
+
+The other nodes can be loaded with variations of the above. The relationships can also be loaded in from csv files, the `ProjectReferencesProject` relationships can be loaded in with: 
+
+``` sql
+LOAD CSV WITH HEADERS FROM "file:///project_ref_project.csv" AS csvLine
+MATCH (s:Project {name: csvLine.start}),(e:Project {name: csvLine.end})
+CREATE (s)-[:REFERENCES]->(e);
+```
 
