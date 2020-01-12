@@ -28,9 +28,14 @@ graph TD;
 
 
 ```mermaid
-
 graph TD;
-    SomeApi[SomeProject :Project ]-->R001[:References - v12.0.0.0, netframework]-->L01[Newtonsoft.Json :Library];
-    SomeApi-->R003[:References]-->L03[System.Net.Http :Library];
-    SomeApi-->R004[:References]-->OtherProj[Other.Project :Project];
+    SomeApi[SomeProject :Project ]-->R001[:REFERENCES - v12.0.0.0, netframework]-->L01[Newtonsoft.Json :Library];
+    SomeApi-->R003[:REFERENCES]-->L03[System.Net.Http :Library];
+    SomeApi-->R004[:REFERENCES]-->OtherProj[Other.Project :Project];
+```
+
+```mermaid
+graph TD;
+    SomeApi[SomeProject :Project ]-->R001[:CAN_TALK_TO]-->L01[AuthService :Project];
+    SomeApi-->R003[:CAN_TALK_TO]-->L03[MainDatabase :Database];
 ```
