@@ -18,10 +18,11 @@ In the .Net landscape projects can be written in C#, VB.Net and F# and run on on
 
 I participated in a company hackathon just before christmas with the intention of exploring the relationships between the ~50 deployed services, code projects and databases in the platform. The projects are written in either C# or VB.Net and run on either `netframework` or `netcore`. The projects reference external nuget libraries that can be built for either `netstandardXX` or `netXXX`. 
 
-Dependent relationships can be modelled nicely by a graph data structure, with the projects, databases and libraries being the nodes with defined relationships joining them.
+Dependent relationships can be modelled nicely by a graph data structure. Graphs consist of nodes that represent entities and relationships that describe how the entities relate to each other. In this model the nodes are projects, libraries and databases which can reference or talk to each other. An example of the nodes and relationships can be seen in this hypothetical .Net software platform diagram:
 
-![ProjectDependencies](ProjectDependencies.jpg)
+![ProjectDependencies](DotNetProjects.jpg)
 
+The nodes and relationship information can be obtained by cloning all of a platform's code into a directory and scanning this directory with an [F# console app](https://github.com/chestercodes/dependency-visualiser/tree/master/src/ProjectAnalyser). An example of such a platform can be seen in the [dependency-visualiser-example](https://github.com/chestercodes/dependency-visualiser-example) repository.
 
 ### Project and library info
 
