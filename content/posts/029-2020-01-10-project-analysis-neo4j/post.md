@@ -168,7 +168,7 @@ Each case contains a tuple of the correct types for the potential start and end 
 ### Loading data into neo4j
 
 The console app will parse all of the project files in a directory and output the nodes and relationships into .csv files which can be loaded into neo4j and queried. 
-Neo4j is easily run in a docker container and the .csv files can be added to a mounted `import` folder where they will be available to import at the url `file:///<filename>`.
+Neo4j is easily run in a docker container and the .csv files can be added to a mounted `import` folder where they will be available to import at the url `file:///<filename>`. An example of using `docker-compose` to run this setup can be seen in the [repository](https://github.com/chestercodes/dependency-visualiser/blob/master/src/Visual/docker-compose.yml). With the container running queries can be run by navigating to `http://localhost:7474` and connecting the web ui to the database.
 
 The `projects.csv` file can import nodes with the label `Project` and properties `name`, `deployed` and `platform` with the query:
 
@@ -185,3 +185,6 @@ MATCH (s:Project {name: csvLine.start}),(e:Project {name: csvLine.end})
 CREATE (s)-[:REFERENCES]->(e);
 ```
 
+The other required queries can be seen in the repository. With the .csv file data loaded the graph can be queried.
+
+### Project information queries
