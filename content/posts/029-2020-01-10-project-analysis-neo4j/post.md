@@ -188,3 +188,26 @@ CREATE (s)-[:REFERENCES]->(e);
 The other required queries can be seen in the repository. With the .csv file data loaded the graph can be queried.
 
 ### Project information queries
+
+With all of the nodes and relationships loaded we can get a birds eye of the platform by querying for the nodes:
+
+``` sql
+MATCH (n) RETURN n LIMIT 100
+```
+
+The query matches the first 100 nodes with any label (Project, Library or Database) and returns the node to be displayed in the UI, which by default also shows the relationships between the nodes:
+
+![NodesAndRelationships](ExampleRepo.jpg)
+
+The UI looks cool but its not the most practical way for applications to query the TODO
+
+``` sql
+MATCH p=(s:Project)-[r:REFERENCES]->(e:Library{name: "Newtonsoft.Json" })  
+RETURN s.name, r.version, r.platform
+```
+
+``` sql
+MATCH p=(p1)-[r:CAN_TALK_TO]->(p2:Project{ name:'AuthService' }) 
+RETURN p1.name LIMIT 250
+```
+
