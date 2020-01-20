@@ -12,7 +12,7 @@ date: "2020/01/10"
 category: Tech
 ---
 
-It's common for software companies to have many deployed services that communicate with each other and connect to databases over the network. Each service can consist of one or more code projects that can reference other projects and code libraries. Code projects can be written in different programming languages running on a common runtime.
+It's common for software platforms to consist of many deployed services that communicate with each other and connect to databases over the network. Each service can be made of one or more code projects that can reference other projects and code libraries. Code projects can be written in different programming languages running on a common runtime.
 
 In the .Net landscape projects can be written in C#, VB.Net and F# and run on one of two runtimes, either .Net Framework (`netframework`) or dotnet core (`netcore`). Projects can reference two types of libraries, .Net Framework (`netXXX`) or .Net Standard (`netstandardXX`) which can be packaged via `Nuget` or as a part of the runtime.
 
@@ -28,7 +28,7 @@ The nodes and relationship information can be obtained by cloning all of a platf
 
 The project, library nodes and `REFERENCES` relationships can be derived from the code project files (.csproj, .vbproj, fsproj). These are xml files containing information on the project references and the libraries used in the project. 
 
-Project files take slightly different forms depending on whether they are `netframework` or `netcore` but they contain three types of xml elementsThe references between projects are described by the  `ProjectReference` elements. The library references are described by `Reference` for `netframework` and `PackageReference` for `netcore`.
+Project files take slightly different forms depending on whether they are `netframework` or `netcore` but they contain three types of xml elements. The references between projects are described by the  `ProjectReference` elements. The library references are described by `Reference` for `netframework` and `PackageReference` for `netcore`.
   
 An example of the relevant nodes of a `netframework` project file `SomeProject.csproj` can be seen below:
 
@@ -197,7 +197,7 @@ MATCH (n) RETURN n LIMIT 100
 
 The query matches the first 100 nodes with any label (Project, Library or Database) and returns the node to be displayed in the UI, which by default also shows the relationships between the nodes:
 
-![NodesAndRelationships](ExampleRepo.jpg)
+![NodesAndRelationships](images/neo-fs/ExampleRepo.jpg)
 
 The UI looks cool but its not the most practical way for applications to query the TODO
 
