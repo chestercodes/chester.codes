@@ -12,13 +12,13 @@ date: "2020/01/10"
 category: Tech
 ---
 
-It's common for software platforms to consist of many deployed services that communicate with each other and connect to databases over the network. Each service can be made of one or more code projects that can reference other projects and code libraries. Code projects can be written in different programming languages running on a common runtime.
+It's common for software platforms to consist of many deployed services that communicate with each other and connect to resources over the network. Each service can be made of one or more code projects that can reference other projects and code libraries. Code projects can be written in different programming languages running on a common runtime.
 
 In the .Net landscape projects can be written in C#, VB.Net and F# and run on one of two runtimes, either .Net Framework (`netframework`) or dotnet core (`netcore`). Projects can reference two types of libraries, .Net Framework (`netXXX`) or .Net Standard (`netstandardXX`) which can be packaged via `Nuget` or as a part of the runtime.
 
-I participated in a company hackathon just before christmas with the intention of exploring the relationships between the ~50 deployed services, code projects and databases in the platform. The projects are written in either C# or VB.Net and run on either `netframework` or `netcore`. The projects reference external nuget libraries that can be built for either `netstandardXX` or `netXXX`. 
+I participated in a company hackathon just before christmas with the intention of exploring the relationships between the ~50 deployed services, code projects and databases/resources in the platform. The projects are written in either C# or VB.Net and run on either `netframework` or `netcore`. The projects reference external nuget libraries that can be built for either `netstandardXX` or `netXXX`. 
 
-Dependent relationships can be modelled nicely by a graph data structure. Graphs consist of nodes that represent entities and relationships that describe how the entities relate to each other. In this model the nodes are projects, libraries and databases which can reference or talk to each other. An example of the nodes and relationships can be seen in this hypothetical .Net software platform diagram:
+Dependent relationships can be modelled nicely by a graph data structure. Graphs consist of nodes that represent entities and relationships that describe how the entities relate to each other. In this model the nodes are projects, libraries and resources which can reference or talk to each other. An example of the nodes and relationships can be seen in this hypothetical .Net software platform diagram:
 
 ![ProjectDependencies](DotNetProjects.jpg)
 
@@ -60,16 +60,16 @@ From this file we can derive the following nodes and relationships:
 ![ProjectsAndLibraries](ProjectsAndLibraries.jpg)
 
 
-### Project and database relationships
+### Project and resource relationships
 
-The project, database and `CAN_TALK_TO` relationships can be derived from the configuration files in the project file directories. 
+The project, resource and `CAN_TALK_TO` relationships can be derived from the configuration files in the project file directories. 
 If there are certain files in the directory, such as Web.config, appSettings.json, then the project can be defined as a deployed project. 
 
-Each deployed project's configuration can be parsed for information on how to connect to other defined projects and databases. The lines of each config file will be matched against regular expressions to determine whether it can connect to the database or project. These regex to database and project mappings can be defined in a json file:
+Each deployed project's configuration can be parsed for information on how to connect to other defined projects and resources. The lines of each config file will be matched against regular expressions to determine whether it can connect to the resource or project. These regex to resource and project mappings can be defined in a json file:
 
 ``` js
 {
-  "databases": {
+  "resources": {
     ";Database=MainDatabase;": "MainDatabase"
   },
   "projects": {
@@ -128,19 +128,19 @@ type LibraryNode =
 
 A `NugetLib` contains `name` and `version` strings and a `NugetPackageType` which can be `Framework` (`netXXX`), `Standard` (`netstandardXX`) or `Unknown`. A `LibraryNode` can either be a `NugetLib` or a `RuntimeLib`, which wraps a string of the library name.
 
-The last node type is a `DatabaseNode` which wraps a string of the database name:
+The last node type is a `ResourceNode` which wraps a string of the name:
 
 ``` fsharp
-type DatabaseNode = DatabaseNode of string
+type ResourceNode = ResourceNode of string
 ```
 
-The nodes can be either a `Project`, `Library` or `Database` and can be described by the union:
+The nodes can be either a `Project`, `Library` or `Resource` and can be described by the union:
 
 ``` fsharp
 type Node = 
   | Project  of ProjectNode
   | Library  of LibraryNode
-  | Database of DatabaseNode
+  | Resource of ResourceNode
 ```
 
 There are two main types of relationships between the nodes, `REFERENCES` and `CAN_TALK_TO`. The possible start and end nodes types for each relationship are:
@@ -149,7 +149,7 @@ There are two main types of relationships between the nodes, `REFERENCES` and `C
   --------     |   ---------        |   --------
   REFERENCES   |  CodeProject       |  LibraryNode
   REFERENCES   |  CodeProject       |  CodeProject
-  CAN_TALK_TO  |  DeployedProject   |  DatabaseNode
+  CAN_TALK_TO  |  DeployedProject   |  ResourceNode
   CAN_TALK_TO  |  DeployedProject   |  DeployedProject
 
 These can be modelled into the `Relationship` union:
@@ -159,7 +159,7 @@ type Relationship =
   | ProjectReferencesLibrary         of CodeProject     * LibraryNode
   | ProjectReferencesProject         of CodeProject     * CodeProject
   | DeployedProjectCanTalkToOther    of DeployedProject * DeployedProject
-  | DeployedProjectCanTalkToDatabase of DeployedProject * DatabaseNode
+  | DeployedProjectCanTalkToResource of DeployedProject * ResourceNode
 ```
 
 Each case contains a tuple of the correct types for the potential start and end nodes.
@@ -195,7 +195,7 @@ With all of the nodes and relationships loaded we can get a birds eye of the pla
 MATCH (n) RETURN n LIMIT 100
 ```
 
-The query matches the first 100 nodes with any label (Project, Library or Database) and returns the node to be displayed in the UI, which by default also shows the relationships between the nodes:
+The query matches the first 100 nodes with any label (Project, Library or Resource) and returns the node to be displayed in the UI, which by default also shows the relationships between the nodes:
 
 ![NodesAndRelationships](images/neo-fs/ExampleRepo.jpg)
 
