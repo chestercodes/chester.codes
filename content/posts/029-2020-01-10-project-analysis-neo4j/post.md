@@ -199,15 +199,20 @@ The query matches the first 100 nodes with any label (Project, Library or Resour
 
 ![NodesAndRelationships](images/neo-fs/ExampleRepo.jpg)
 
-The UI looks cool but its not the most practical way for applications to query the TODO
+Neo4j can be queried for relationships, the names of nodes connected by the `CAN_TALK_TO` relationship to the node with `name = 'AuthService'` and label `Project` can be found with the query:
 
 ``` sql
-MATCH p=(s:Project)-[r:REFERENCES]->(e:Library{name: "Newtonsoft.Json" })  
+MATCH p=(p1)-[r:CAN_TALK_TO]->(p2:Project{name:'AuthService'}) 
+RETURN p1.name
+```
+
+![AuthServiceQuery](AuthServiceQuery.jpg)
+
+
+
+``` sql
+MATCH p=(s:Project)-[r:REFERENCES]->(e:Library{name:"Newtonsoft.Json"})  
 RETURN s.name, r.version, r.platform
 ```
 
-``` sql
-MATCH p=(p1)-[r:CAN_TALK_TO]->(p2:Project{ name:'AuthService' }) 
-RETURN p1.name LIMIT 250
-```
 
