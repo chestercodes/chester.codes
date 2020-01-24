@@ -199,7 +199,16 @@ The query matches the first 100 nodes with any label (Project, Library or Resour
 
 ![NodesAndRelationships](images/neo-fs/ExampleRepo.jpg)
 
-Neo4j can be queried for relationships, the names of nodes connected by the `CAN_TALK_TO` relationship to the node with `name = 'AuthService'` and label `Project` can be found with the query:
+The graph can be queried with the `MATCH` keyword, desired properties of the nodes and relationships can be specified using an arrow like syntax. 
+
+``` sql
+MATCH p=(sn :MatchLabel)-[r :RELATIONSHIP_TYPE]->(en{prop: 'MatchPropValue'}) 
+RETURN p
+```
+
+This query looks for results `p` with the start node `sn` of label `MatchLabel`, connected by the relationship `r` of type `CAN_TALK_TO` to the end node `en` that has the property `prop` with value `MatchPropValue`. 
+
+To find out which projects require authentication the graph can be queried for nodes connected by the `CAN_TALK_TO` relationship to the node with `name = 'AuthService'` and label `Project`:
 
 ``` sql
 MATCH p=(p1)-[r:CAN_TALK_TO]->(p2:Project{name:'AuthService'}) 
@@ -208,11 +217,13 @@ RETURN p1.name
 
 ![AuthServiceQuery](AuthServiceQuery.jpg)
 
-
+If an internal nuget library `Internal.Company.Lib` is used on the platform and  
 
 ``` sql
-MATCH p=(s:Project)-[r:REFERENCES]->(e:Library{name:"Newtonsoft.Json"})  
+MATCH p=(s:Project)-[r:REFERENCES]->(e:Library{name:"Internal.Company.Lib"})  
 RETURN s.name, r.version, r.platform
 ```
+
+![LibQuery](LibQuery.jpg)
 
 
