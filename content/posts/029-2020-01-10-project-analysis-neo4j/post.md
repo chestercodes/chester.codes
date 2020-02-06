@@ -185,7 +185,8 @@ MATCH (s:Project {name: csvLine.start}),(e:Project {name: csvLine.end})
 CREATE (s)-[:REFERENCES]->(e);
 ```
 
-The other required queries can be seen in the repository. With the .csv file data loaded the graph can be queried.
+All the required queries can be seen in the [repository](https://github.com/chestercodes/dependency-visualiser/blob/master/src/Visual/LoadData.cql). 
+
 
 ### Project information queries
 
@@ -206,9 +207,9 @@ MATCH p=(sn :MatchLabel)-[r :RELATIONSHIP_TYPE]->(en{prop: 'MatchPropValue'})
 RETURN p
 ```
 
-This query looks for results `p` with the start node `sn` of label `MatchLabel`, connected by the relationship `r` of type `CAN_TALK_TO` to the end node `en` that has the property `prop` with value `MatchPropValue`. 
+This query looks for results `p` with the start node `sn` of label `MatchLabel`, connected by the relationship `r` of type `RELATIONSHIP_TYPE` to the end node `en` that has the property `prop` with value `MatchPropValue`. 
 
-To find out which projects require authentication the graph can be queried for nodes connected by the `CAN_TALK_TO` relationship to the node with `name = 'AuthService'` and label `Project`:
+To find out which projects require authentication the graph can be queried for nodes connected by the `CAN_TALK_TO` relationship nodes with `name = 'AuthService'` and label `Project`:
 
 ``` sql
 MATCH p=(p1)-[r:CAN_TALK_TO]->(p2:Project{name:'AuthService'}) 
@@ -217,7 +218,7 @@ RETURN p1.name
 
 ![AuthServiceQuery](AuthServiceQuery.jpg)
 
-If an internal nuget library `Internal.Company.Lib` is used on the platform and  
+If an internal nuget library `Internal.Company.Lib` is used on the platform and a   
 
 ``` sql
 MATCH p=(s:Project)-[r:REFERENCES]->(e:Library{name:"Internal.Company.Lib"})  
