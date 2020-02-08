@@ -14,7 +14,7 @@ category: Tech
 
 It's common for software platforms to consist of many deployed services that communicate with each other and connect to resources over the network. Each service can be made of one or more code projects that can reference other projects and code libraries. Code projects can be written in different programming languages running on a common runtime.
 
-In the .Net landscape projects can be written in C#, VB.Net and F# and run on one of two runtimes, either .Net Framework (`netframework`) or dotnet core (`netcore`). Projects can reference two types of libraries, .Net Framework (`netXXX`) or .Net Standard (`netstandardXX`) which can be packaged via `Nuget` or as a part of the runtime.
+In the .Net landscape projects can be written in C#, VB.Net and F# and run on one of two runtimes, either .Net Framework (`netframework`) or dotnet core (`netcore`). Projects can reference two types of libraries, .Net Framework (`netXXX`) or .Net Standard (`netstandardXX`) which can be packaged via Nuget or as a part of the runtime.
 
 I participated in a company hackathon just before christmas with the intention of exploring the relationships between the ~50 deployed services, code projects and databases/resources in the platform. The projects are written in either C# or VB.Net and run on either `netframework` or `netcore`. The projects reference external nuget libraries that can be built for either `netstandardXX` or `netXXX`. 
 
@@ -96,12 +96,12 @@ The config file produces the following relationships:
 
 ### Modeling project data
 
-The ProjectAnalyser console application is going to parse the project and config files into nodes and relationships. 
+The console application is going to parse the project and config files into nodes and relationships. 
 
 To perform this task it is useful to define the domain. The project nodes can be modelled with:
 
 ``` fsharp
-type ProjectType = NotKnown | NetFramework | NetCore
+type ProjectType = NetFramework | NetCore | NotKnown
 type CodeProject = CodeProject of name:string * ProjectType
 
 type DeployedProject = DeployedProject of string
@@ -116,7 +116,7 @@ The type `CodeProject` wraps a tuple of a `string` labelled `name` and a `Projec
 The Libraries can be modelled with:
 
 ``` fsharp
-type NugetPackageType = Unknown | Framework | Standard
+type NugetPackageType = Framework | Standard | Unknown
 type NugetLib =         NugetLib of name:string * version:string * NugetPackageType
 
 type RuntimeLib = RuntimeLib of string
@@ -168,7 +168,10 @@ Each case contains a tuple of the correct types for the potential start and end 
 ### Loading data into neo4j
 
 The console app will parse all of the project files in a directory and output the nodes and relationships into .csv files which can be loaded into neo4j and queried. 
-Neo4j is easily run in a docker container and the .csv files can be added to a mounted `import` folder where they will be available to import at the url `file:///<filename>`. An example of using `docker-compose` to run this setup can be seen in the [repository](https://github.com/chestercodes/dependency-visualiser/blob/master/src/Visual/docker-compose.yml). With the container running queries can be run by navigating to `http://localhost:7474` and connecting the web ui to the database.
+
+Neo4j is easily run in a docker container and the .csv files can be added to a mounted `import` folder where they will be available to import at the url `file:///<filename>`. An example of using `docker-compose` to run this setup can be seen in the [repository](https://github.com/chestercodes/dependency-visualiser/blob/master/src/Visual/docker-compose.yml). 
+
+With the container running the url `http://localhost:7474` shows the UI and queries can be executed by connecting the web ui to the database.
 
 The `projects.csv` file can import nodes with the label `Project` and properties `name`, `deployed` and `platform` with the query:
 
@@ -185,7 +188,7 @@ MATCH (s:Project {name: csvLine.start}),(e:Project {name: csvLine.end})
 CREATE (s)-[:REFERENCES]->(e);
 ```
 
-All the required queries can be seen in the [repository](https://github.com/chestercodes/dependency-visualiser/blob/master/src/Visual/LoadData.cql). 
+All the required data loading queries can be seen in the [repository](https://github.com/chestercodes/dependency-visualiser/blob/master/src/Visual/LoadData.cql). 
 
 
 ### Project information queries
@@ -209,7 +212,9 @@ RETURN p
 
 This query looks for results `p` with the start node `sn` of label `MatchLabel`, connected by the relationship `r` of type `RELATIONSHIP_TYPE` to the end node `en` that has the property `prop` with value `MatchPropValue`. 
 
-To find out which projects require authentication the graph can be queried for nodes connected by the `CAN_TALK_TO` relationship nodes with `name = 'AuthService'` and label `Project`:
+#### Query - Projects that depend on others
+
+To find out which projects require authentication the graph can be queried for nodes connected by the `CAN_TALK_TO` relationship nodes with `name` equal to `AuthService` and label `Project`:
 
 ``` sql
 MATCH p=(p1)-[r:CAN_TALK_TO]->(p2:Project{name:'AuthService'}) 
@@ -218,7 +223,10 @@ RETURN p1.name
 
 ![AuthServiceQuery](AuthServiceQuery.jpg)
 
-If an internal nuget library `Internal.Company.Lib` is used on the platform and a   
+#### Query - Library audit
+
+If an internal library `Internal.Company.Lib` is used on the platform and a   
+TODO!!
 
 ``` sql
 MATCH p=(s:Project)-[r:REFERENCES]->(e:Library{name:"Internal.Company.Lib"})  
@@ -227,4 +235,16 @@ RETURN s.name, r.version, r.platform
 
 ![LibQuery](LibQuery.jpg)
 
+#### Query - Code convention check
 
+Queries can be written to check for breaking of internal code conventions. It is quite common for code solutions to include a seperate project for the domain logic with a name that ends in `.Domain`. It might be useful to keep domain projects free from database or http libraries, such as `Dapper` and `Flurl.Http`. It possible to check for projects that break this convention:
+
+```` sql
+MATCH p=(ps)-[r:REFERENCES]->(e:Library)
+WHERE ps.name ENDS WITH ".Domain" AND (e.name IN ['Dapper', 'Flurl.Http'])
+RETURN ps.name
+```
+
+## Conclusion
+
+TODO!!!
