@@ -117,7 +117,7 @@ The Libraries can be modelled with:
 
 ``` fsharp
 type NugetPackageType = Framework | Standard | Unknown
-type NugetLib =         NugetLib of name:string * version:string * NugetPackageType
+type NugetLib = NugetLib of name:string * version:string * NugetPackageType
 
 type RuntimeLib = RuntimeLib of string
 
@@ -203,6 +203,8 @@ The query matches the first 100 nodes with any label (Project, Library or Resour
 
 ![NodesAndRelationships](images/neo-fs/ExampleRepo.jpg)
 
+Here orange nodes are `Project`s, red nodes are `Library`s and the green nodes are `Resource`s. The arrows between them show the relationships `REFERENCES` and `CAN_TALK_TO`.
+
 The graph can be queried with the `MATCH` keyword, desired properties of the nodes and relationships can be specified using an arrow like syntax. 
 
 ``` sql
@@ -225,8 +227,7 @@ RETURN p1.name
 
 #### Query - Library audit
 
-If an internal library `Internal.Company.Lib` is used on the platform and a   
-TODO!!
+It can be useful to get an a view of the libraries that projects use. If an internal library `Internal.Company.Lib` which targets `netXXX` and `netstandardXX` is used on the platform and a critical bug is fixed in a new version we can write a query to find the projects that consume the library:
 
 ``` sql
 MATCH p=(s:Project)-[r:REFERENCES]->(e:Library{name:"Internal.Company.Lib"})  
@@ -237,14 +238,21 @@ RETURN s.name, r.version, r.platform
 
 #### Query - Code convention check
 
-Queries can be written to check for breaking of internal code conventions. It is quite common for code solutions to include a seperate project for the domain logic with a name that ends in `.Domain`. It might be useful to keep domain projects free from database or http libraries, such as `Dapper` and `Flurl.Http`. It possible to check for projects that break this convention:
+Queries can be written to check for breaking of internal code conventions. It is quite common for code solutions to include a separate project for the domain logic with a name that ends in `.Domain`. It might be useful to keep domain projects free from database or http libraries, such as `Dapper` and `Flurl.Http`. It possible to check for projects that break this convention:
 
-```` sql
+``` sql
 MATCH p=(ps)-[r:REFERENCES]->(e:Library)
-WHERE ps.name ENDS WITH ".Domain" AND (e.name IN ['Dapper', 'Flurl.Http'])
+WHERE ps.name ENDS WITH ".Domain" AND e.name IN ['Dapper', 'Flurl.Http']
 RETURN ps.name
 ```
 
+Running this on the [dependency-visualiser-example](https://github.com/chestercodes/dependency-visualiser-example) repository shows no convention violations.
+
+![ConventionQuery](ConventionQuery.jpg)
+
 ## Conclusion
 
-TODO!!!
+This post has shown how a .Net software platform dependencies can be modelled and analysed with F# and neo4j. 
+This is my first experience using neo4j and i've been impressed with the intuitive nature of the query language.
+
+The code for the console app [is on github](https://github.com/chestercodes/dependency-visualiser) in case anyone wants to use it to analyse their platforms.
