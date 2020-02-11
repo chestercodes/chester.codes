@@ -2,7 +2,7 @@
 layout: post
 title: Software platform dependency analysis with F# and Neo4j
 excerpt: A 
-issue: 30
+issue: 29
 tags: 
 - dotnet
 - neo4j
