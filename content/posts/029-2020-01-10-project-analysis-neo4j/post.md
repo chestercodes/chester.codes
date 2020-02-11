@@ -1,14 +1,14 @@
 ---
 layout: post
-title: Project dependency analysis with F# and Neo4j
+title: Software platform dependency analysis with F# and Neo4j
 excerpt: A 
 issue: 30
 tags: 
 - dotnet
 - neo4j
 - fsharp
-slug: "project-dependency-analysis-with-fsharp-and-neofourj"
-date: "2020/01/10"
+slug: "software-platform-dependency-analysis-with-fsharp-and-neofourj"
+date: "2020/02/12"
 category: Tech
 ---
 
@@ -78,7 +78,9 @@ Each deployed project's configuration can be parsed for information on how to co
 }
 ```
 
-The appSettings.json file below matches both of the `MainDatabase` and `AuthService` regexs above:
+The json includes a `resources` object which takes regexs as keys and the resource name as a value to define the resources. It includes a `projects` object which has a regex for the key and an absolute path of the destination project file on disk as a value. 
+
+`SomeProject`'s appSettings.json file below matches both of the `MainDatabase` and `AuthService` regexs above:
 
 ``` js
 {
@@ -167,7 +169,7 @@ Each case contains a tuple of the correct types for the potential start and end 
 
 ### Loading data into neo4j
 
-The console app will parse all of the project files in a directory and output the nodes and relationships into .csv files which can be loaded into neo4j and queried. 
+The console app recursively searches a directory with all of the platform code parsing all of the project files and outputting the nodes and relationships into .csv files which can be loaded into neo4j and queried. 
 
 Neo4j is easily run in a docker container and the .csv files can be added to a mounted `import` folder where they will be available to import at the url `file:///<filename>`. An example of using `docker-compose` to run this setup can be seen in the [repository](https://github.com/chestercodes/dependency-visualiser/blob/master/src/Visual/docker-compose.yml). 
 
