@@ -203,7 +203,7 @@ MATCH (n) RETURN n LIMIT 100
 
 The query matches the first 100 nodes with any label (Project, Library or Resource) and returns the node to be displayed in the UI, which by default also shows the relationships between the nodes:
 
-![NodesAndRelationships](images/neo-fs/ExampleRepo.jpg)
+![NodesAndRelationships](/images/neo-fs/ExampleRepo.jpg)
 
 Here orange nodes are `Project`s, red nodes are `Library`s and the green nodes are `Resource`s. The arrows between them show the relationships `REFERENCES` and `CAN_TALK_TO`.
 
