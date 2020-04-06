@@ -65,8 +65,7 @@ let ``emojiFrom creates 😊 emoji from :)`` () =
     
     let result = emojiFrom ":)"
     
-    let emojisAreEqual = expected = result
-    Assert.IsTrue emojisAreEqual
+    Assert.AreEqual (expected, result)
 
 [<Test>]
 let ``emojiFrom creates 😢 emoji from :(`` () =
@@ -74,8 +73,7 @@ let ``emojiFrom creates 😢 emoji from :(`` () =
     
     let result = emojiFrom ":("
     
-    let emojisAreEqual = expected = result
-    Assert.IsTrue emojisAreEqual
+    Assert.AreEqual (expected, result)
 ```
 
 The services code contains an `EmojiAppender` service to append `Emoji` types onto strings:
@@ -99,6 +97,34 @@ namespace MyProject.Services
         }
     }
 }
+```
+
+The string value of the `Emoji` type is retrieved by the `Item` property and added to the provided string `str`. `MyProject.Services.Tests` tests this:
+
+``` fsharp
+module MyProject.Services.Tests
+
+open NUnit.Framework
+open MyProject.Domain
+open MyProject.Services
+
+[<Test>]
+let ``Test appends 😊 0 times`` () =
+    let appender = EmojiAppender()
+    let happy = Emoji(":)")
+
+    let result = appender.AppendNTimes("I feel ", happy, 0)
+    
+    Assert.AreEqual("I feel ", result)
+
+[<Test>]
+let ``Test appends 😊 5 times`` () =
+    let appender = EmojiAppender()
+    let happy = Emoji(":)")
+
+    let result = appender.AppendNTimes("I feel ", happy, 5)
+    
+    Assert.AreEqual("I feel 😊😊😊😊😊", result)
 ```
 
 
