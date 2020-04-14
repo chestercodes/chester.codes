@@ -14,9 +14,20 @@ date: "2020/04/05"
 category: Tech
 ---
 
+> This post details a solution to a problem encountered when running tests in docker that I haven't seen anywhere else.
+
+## TLDR;
+
+Running `dotnet test` in a `Dockerfile` can return an exit code value of 1, which will cause the docker image layer to not be created and the test output file to be irretrievable from the created layer.
+
+To get around this it's possible to save some state (a text file) that indicates that the test run failed and then check for this in the final step of the `Dockerfile`. This means that the test output files can be retreived from the image layer that ran the tests and published to the pipeline. 
+
+
+## Full post...
+
 Modern software development practices include a continuous integration pipeline that builds and verifies the correctness of software by running automated tests. Docker can be used to run `dotnet` commands to build, test and package applications in a reliable way.
 
-`dotnet test` can write it's output to a text file to detail each test's result, this can be useful to keep track of test metrics over time and to find tests that fail often. This post details a solution to a problem encountered when running tests in docker that I haven't seen anywhere else.
+`dotnet test` can write it's output to a text file to detail each test's result, this can be useful to keep track of test metrics over time and to find tests that fail often. 
 
 ### The setup
 
@@ -128,6 +139,7 @@ let ``Test appends 😊 5 times`` () =
 ```
 
 
+
 ### Docker-ing
 
 A basic `Dockerfile` to build and run the tests can be achieved with:
@@ -151,3 +163,39 @@ RUN dotnet test MyProject.Domain.Tests/MyProject.Domain.Tests.fsproj \
 RUN dotnet test MyProject.Services.Tests/MyProject.Services.Tests.fsproj \
         --logger ('trx;LogFileName={0}/MyProject.Services.Tests.trx' -f $env:TESTDIR)
 ```
+
+The `Dockerfile` takes an `ARG` of `TESTDIR` which it then creates in the container. 
+It `COPY`s the contents of the repo into the `/src` folder in the container it then runs `dotnet test` for each test project which builds and runs the tests and saves the results to `trx` files in the `TESTDIR`.
+
+The trx files can be copied out of the directory in the container by using `docker run` on the last image layer produced by the `Dockerfile` and copying the files from the `TESTDIR` directory to a "publish" directory in the container, that is mounted to the host machine.
+
+Powershell to run and perform the test file copy is as follows:
+
+``` powershell
+$containerTestDir = "C:/wd/test"
+docker build --build-arg TESTDIR=$containerTestDir .
+
+$testResultsDirectory = "C:/temp"
+$containerPublishDir = "C:/wd/publish"
+
+$lastImageId = docker images -q | select -first 1
+
+docker run --rm --mount type=bind,src=$testResultsDirectory,dst=$containerPublishDir `
+    $lastImageId `
+    pwsh -command cp ('{0}/*' -f $containerTestDir) $containerPublishDir
+
+# trx files now available on host machine at $testResultsDirectory
+```
+
+## The problem
+
+`docker` runs each `RUN` command and will only create a layer if the exit code of the command is 0. The test files are only accessible if the image layer has been created and this will not be possible if any of the tests fail.
+
+When the above is run the first two tests will pass and the `MyProject.Domain.Tests.trx` file will be created but the Services tests will fail and the `MyProject.Domain.Tests.trx` won't be created and publishing the test files will only show the tests from the first file.
+
+![Console](/images/docknet-test/FailedConsole.jpg)
+
+![TestView](/images/docknet-test/FailedTestView.jpg)
+
+## A solution
+
