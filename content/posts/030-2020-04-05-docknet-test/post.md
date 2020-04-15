@@ -122,7 +122,7 @@ open MyProject.Services
 [<Test>]
 let ``Test appends 😊 0 times`` () =
     let appender = EmojiAppender()
-    let happy = Emoji(":)")
+    let happy = Emoji "😊"
 
     let result = appender.AppendNTimes("I feel ", happy, 0)
     
@@ -131,7 +131,7 @@ let ``Test appends 😊 0 times`` () =
 [<Test>]
 let ``Test appends 😊 5 times`` () =
     let appender = EmojiAppender()
-    let happy = Emoji(":)")
+    let happy = Emoji "😊"
 
     let result = appender.AppendNTimes("I feel ", happy, 5)
     
