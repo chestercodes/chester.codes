@@ -14,13 +14,13 @@ date: "2020/04/05"
 category: Tech
 ---
 
-> This post details a solution to a problem encountered when running tests in docker that I haven't seen anywhere else.
+> This post details a solution to a problem encountered when running tests in docker that I haven't seen documented anywhere else.
 
 ## TLDR;
 
 Running `dotnet test` will return an exit code 1 if the tests fail. If this occurs in a `Dockerfile` it will cause the docker image layer to not be created and the test output file to be irretrievable.
 
-A workaround is to save some state (a text file) that indicates that the test run failed and then check for this in the final step of the `Dockerfile`. This means that the test output files can be retreived from the image layer that ran the tests and published to the pipeline. 
+A workaround is to save some state (a text file) that indicates that the test run failed and then check for this in the final step of the `Dockerfile`. This means that the test output files can be retrieved from the image layer that ran the tests and published to the pipeline. 
 
 
 ## Full post...
@@ -138,7 +138,7 @@ let ``Test appends 😊 5 times`` () =
     Assert.AreEqual("I feel 😊😊😊😊😊", result)
 ```
 
-
+The service contains an "off-by-one" error from the incorrect initialisation of the loop, so the second test should only append 😊 four times and fail.
 
 ### Docker-ing
 
@@ -191,11 +191,67 @@ docker run --rm --mount type=bind,src=$testResultsDirectory,dst=$containerPublis
 
 `docker` runs each `RUN` command and will only create a layer if the exit code of the command is 0. The test files are only accessible if the image layer has been created and this will not be possible if any of the tests fail.
 
-When the above is run the first two tests will pass and the `MyProject.Domain.Tests.trx` file will be created but the Services tests will fail and the `MyProject.Domain.Tests.trx` won't be created and publishing the test files will only show the tests from the first file.
+When the above is run in an Azure Devops pipeline the first two tests will pass and the `MyProject.Domain.Tests.trx` file will be created but the Services tests will fail and the `MyProject.Services.Tests.trx` won't be created and publishing the test files will only show the tests from the first file.
 
-![Console](/images/docknet-test/FailedConsole.jpg)
+![Console](FailedConsole.jpg)
 
-![TestView](/images/docknet-test/FailedTestView.jpg)
+![TestView](FailedTestView.jpg)
 
 ## A solution
 
+The `Dockerfile` needs to record if the `dotnet test` invocation returns a non-zero exit code, but not fail the docker build until all of the tests have been run. The easiest method of recording this state is to create a blank file whose existence can be checked at the end of the build.
+
+The above logic needs to applied to each test and can be achieved with the following powershell:
+
+``` powershell
+function RunTestProj($absPath){
+    $name = $absPath.Replace('\ '.Replace(' ', ''), '_').Replace('.', '_')
+    write-host ('Running dotnet test for {0} -> {1}' -f $absPath, $name)
+    dotnet test $absPath --logger ('trx;LogFileName={0}/{1}.trx' -f $env:TESTDIR, $name)
+    if($LASTEXITCODE -ne 0){
+        out-file -filepath ('{0}/failed' -f $env:TESTDIR)
+    }
+}
+gci -Recurse **/*Tests.*proj |% { 
+    RunTestProj (resolve-path -relative $_.FullName)
+}
+```
+
+This finds all of the project files (.cs|.fs|.vb)proj and passes each one into a `RunTestProj` function that calls `dotnet test` with a suitable results file name. If any of the tests fail it will write out a blank file to the `$env:TESTDIR` directory called `failed`.
+
+This file can be check for in the last line of the docker file with:
+
+``` docker
+RUN if(test-path ('{0}/failed' -f $env:TESTDIR)){ exit 1 }
+```
+
+The complete `Dockerfile` becomes:
+
+``` docker
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1
+ARG TESTDIR=
+SHELL ["pwsh", "-command"]
+RUN mkdir $env:TESTDIR
+WORKDIR /src
+COPY . .
+RUN \
+    function RunTestProj($absPath){                                             \
+        $name = $absPath.Replace('\ '.Replace(' ', ''), '_').Replace('.', '_'); \
+        write-host ('Running dotnet test for {0} -> {1}' -f $absPath, $name);   \
+        dotnet test $absPath                                                    \
+          --logger ('trx;LogFileName={0}/{1}.trx' -f $env:TESTDIR, $name) ;     \
+        if($LASTEXITCODE -ne 0){                                                \
+            out-file -filepath ('{0}/failed' -f $env:TESTDIR) ;                 \
+        } ;                                                                     \
+    }                                                                           \
+    gci -Recurse **/*Tests.*proj |% {                                           \ 
+        RunTestProj (resolve-path -relative $_.FullName)                        \
+    }
+RUN if(test-path ('{0}/failed' -f $env:TESTDIR)){ exit 1 }
+```
+
+## Conclusion
+
+There are arguments against running tests in the build stage of docker based pipelines, but hopefully this tip can help if you find yourself needing to do it.
+
+The code and examples of Azure Devops pipeline files can be found [on my github](https://github.com/chestercodes/docknet-test)
