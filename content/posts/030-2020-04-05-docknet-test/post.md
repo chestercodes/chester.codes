@@ -18,9 +18,9 @@ category: Tech
 
 ## TLDR;
 
-Running `dotnet test` in a `Dockerfile` can return an exit code value of 1, which will cause the docker image layer to not be created and the test output file to be irretrievable from the created layer.
+Running `dotnet test` will return an exit code 1 if the tests fail. If this occurs in a `Dockerfile` it will cause the docker image layer to not be created and the test output file to be irretrievable.
 
-To get around this it's possible to save some state (a text file) that indicates that the test run failed and then check for this in the final step of the `Dockerfile`. This means that the test output files can be retreived from the image layer that ran the tests and published to the pipeline. 
+A workaround is to save some state (a text file) that indicates that the test run failed and then check for this in the final step of the `Dockerfile`. This means that the test output files can be retreived from the image layer that ran the tests and published to the pipeline. 
 
 
 ## Full post...
