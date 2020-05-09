@@ -74,7 +74,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 15);
+/******/ 	return __webpack_require__(__webpack_require__.s = 12);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -571,7 +571,7 @@ if (true) {
   // By explicitly using `prop-types` you are opting into new development behavior.
   // http://fb.me/prop-types-in-prod
   var throwOnDirectAccess = true;
-  module.exports = __webpack_require__(18)(isValidElement, throwOnDirectAccess);
+  module.exports = __webpack_require__(15)(isValidElement, throwOnDirectAccess);
 } else {
   // By explicitly using `prop-types` you are opting into new production behavior.
   // http://fb.me/prop-types-in-prod
@@ -626,175 +626,6 @@ var formatDate = function formatDate(date) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-
-
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- * 
- */
-
-function makeEmptyFunction(arg) {
-  return function () {
-    return arg;
-  };
-}
-
-/**
- * This function accepts and discards inputs; it has no side effects. This is
- * primarily useful idiomatically for overridable function endpoints which
- * always need to be callable, since JS lacks a null-call idiom ala Cocoa.
- */
-var emptyFunction = function emptyFunction() {};
-
-emptyFunction.thatReturns = makeEmptyFunction;
-emptyFunction.thatReturnsFalse = makeEmptyFunction(false);
-emptyFunction.thatReturnsTrue = makeEmptyFunction(true);
-emptyFunction.thatReturnsNull = makeEmptyFunction(null);
-emptyFunction.thatReturnsThis = function () {
-  return this;
-};
-emptyFunction.thatReturnsArgument = function (arg) {
-  return arg;
-};
-
-module.exports = emptyFunction;
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-
-
-
-/**
- * Use invariant() to assert state which your program assumes to be true.
- *
- * Provide sprintf-style format (only %s is supported) and arguments
- * to provide information about what broke and what you were
- * expecting.
- *
- * The invariant message will be stripped in production, but the invariant
- * will remain to ensure logic does not differ in production.
- */
-
-var validateFormat = function validateFormat(format) {};
-
-if (true) {
-  validateFormat = function validateFormat(format) {
-    if (format === undefined) {
-      throw new Error('invariant requires an error message argument');
-    }
-  };
-}
-
-function invariant(condition, format, a, b, c, d, e, f) {
-  validateFormat(format);
-
-  if (!condition) {
-    var error;
-    if (format === undefined) {
-      error = new Error('Minified exception occurred; use the non-minified dev environment ' + 'for the full error message and additional helpful warnings.');
-    } else {
-      var args = [a, b, c, d, e, f];
-      var argIndex = 0;
-      error = new Error(format.replace(/%s/g, function () {
-        return args[argIndex++];
-      }));
-      error.name = 'Invariant Violation';
-    }
-
-    error.framesToPop = 1; // we don't care about invariant's own frame
-    throw error;
-  }
-}
-
-module.exports = invariant;
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- * Copyright (c) 2014-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-
-
-
-var emptyFunction = __webpack_require__(8);
-
-/**
- * Similar to invariant but only logs a warning if the condition is not met.
- * This can be used to log issues in development environments in critical
- * paths. Removing the logging code for production environments will keep the
- * same logic and follow the same code paths.
- */
-
-var warning = emptyFunction;
-
-if (true) {
-  var printWarning = function printWarning(format) {
-    for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-      args[_key - 1] = arguments[_key];
-    }
-
-    var argIndex = 0;
-    var message = 'Warning: ' + format.replace(/%s/g, function () {
-      return args[argIndex++];
-    });
-    if (typeof console !== 'undefined') {
-      console.error(message);
-    }
-    try {
-      // --- Welcome to debugging React ---
-      // This error was thrown as a convenience so that you can use this stack
-      // to find the callsite that caused this warning to fire.
-      throw new Error(message);
-    } catch (x) {}
-  };
-
-  warning = function warning(condition, format) {
-    if (format === undefined) {
-      throw new Error('`warning(condition, format, ...args)` requires a warning ' + 'message argument');
-    }
-
-    if (format.indexOf('Failed Composite propType: ') === 0) {
-      return; // Ignore CompositeComponent proptype check.
-    }
-
-    if (!condition) {
-      for (var _len2 = arguments.length, args = Array(_len2 > 2 ? _len2 - 2 : 0), _key2 = 2; _key2 < _len2; _key2++) {
-        args[_key2 - 2] = arguments[_key2];
-      }
-
-      printWarning.apply(undefined, [format].concat(args));
-    }
-  };
-}
-
-module.exports = warning;
-
-/***/ }),
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -810,7 +641,7 @@ module.exports = ReactPropTypesSecret;
 
 
 /***/ }),
-/* 12 */
+/* 9 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -939,7 +770,7 @@ var resumeType = __WEBPACK_IMPORTED_MODULE_0_prop_types___default.a.shape({
 });
 
 /***/ }),
-/* 13 */
+/* 10 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1188,7 +1019,7 @@ var WorkPlaceHighlights = function (_React$Component5) {
 }(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
 
 /***/ }),
-/* 14 */
+/* 11 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1284,14 +1115,14 @@ var SkillLogos = function (_React$Component) {
 
 
 /***/ }),
-/* 15 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(16);
+module.exports = __webpack_require__(13);
 
 
 /***/ }),
-/* 16 */
+/* 13 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1299,10 +1130,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _default; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_CV__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__resume_json__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_CV__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__resume_json__ = __webpack_require__(31);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__resume_json___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__resume_json__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__skills_json__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__skills_json__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__skills_json___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__skills_json__);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -1345,7 +1176,7 @@ var _default = function (_Component) {
 
 
 /***/ }),
-/* 17 */
+/* 14 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1353,8 +1184,8 @@ var _default = function (_Component) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__resumeType__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__CVStateless__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__resumeType__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__CVStateless__ = __webpack_require__(18);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -1449,7 +1280,7 @@ CV.propTypes = {
 /* harmony default export */ __webpack_exports__["a"] = (CV);
 
 /***/ }),
-/* 18 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1462,13 +1293,31 @@ CV.propTypes = {
 
 
 
-var emptyFunction = __webpack_require__(8);
-var invariant = __webpack_require__(9);
-var warning = __webpack_require__(10);
-var assign = __webpack_require__(19);
+var assign = __webpack_require__(16);
 
-var ReactPropTypesSecret = __webpack_require__(11);
-var checkPropTypes = __webpack_require__(20);
+var ReactPropTypesSecret = __webpack_require__(8);
+var checkPropTypes = __webpack_require__(17);
+
+var printWarning = function() {};
+
+if (true) {
+  printWarning = function(text) {
+    var message = 'Warning: ' + text;
+    if (typeof console !== 'undefined') {
+      console.error(message);
+    }
+    try {
+      // --- Welcome to debugging React ---
+      // This error was thrown as a convenience so that you can use this stack
+      // to find the callsite that caused this warning to fire.
+      throw new Error(message);
+    } catch (x) {}
+  };
+}
+
+function emptyFunctionThatReturnsNull() {
+  return null;
+}
 
 module.exports = function(isValidElement, throwOnDirectAccess) {
   /* global Symbol */
@@ -1612,12 +1461,13 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
       if (secret !== ReactPropTypesSecret) {
         if (throwOnDirectAccess) {
           // New behavior only for users of `prop-types` package
-          invariant(
-            false,
+          var err = new Error(
             'Calling PropTypes validators directly is not supported by the `prop-types` package. ' +
             'Use `PropTypes.checkPropTypes()` to call them. ' +
             'Read more at http://fb.me/use-check-prop-types'
           );
+          err.name = 'Invariant Violation';
+          throw err;
         } else if ("development" !== 'production' && typeof console !== 'undefined') {
           // Old behavior for people using React.PropTypes
           var cacheKey = componentName + ':' + propName;
@@ -1626,15 +1476,12 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
             // Avoid spamming the console because they are often not actionable except for lib authors
             manualPropTypeWarningCount < 3
           ) {
-            warning(
-              false,
+            printWarning(
               'You are manually calling a React.PropTypes validation ' +
-              'function for the `%s` prop on `%s`. This is deprecated ' +
+              'function for the `' + propFullName + '` prop on `' + componentName  + '`. This is deprecated ' +
               'and will throw in the standalone `prop-types` package. ' +
               'You may be seeing this warning due to a third-party PropTypes ' +
-              'library. See https://fb.me/react-warning-dont-call-proptypes ' + 'for details.',
-              propFullName,
-              componentName
+              'library. See https://fb.me/react-warning-dont-call-proptypes ' + 'for details.'
             );
             manualPropTypeCallCache[cacheKey] = true;
             manualPropTypeWarningCount++;
@@ -1678,7 +1525,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
   }
 
   function createAnyTypeChecker() {
-    return createChainableTypeChecker(emptyFunction.thatReturnsNull);
+    return createChainableTypeChecker(emptyFunctionThatReturnsNull);
   }
 
   function createArrayOfTypeChecker(typeChecker) {
@@ -1728,8 +1575,8 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 
   function createEnumTypeChecker(expectedValues) {
     if (!Array.isArray(expectedValues)) {
-       true ? warning(false, 'Invalid argument supplied to oneOf, expected an instance of array.') : void 0;
-      return emptyFunction.thatReturnsNull;
+       true ? printWarning('Invalid argument supplied to oneOf, expected an instance of array.') : void 0;
+      return emptyFunctionThatReturnsNull;
     }
 
     function validate(props, propName, componentName, location, propFullName) {
@@ -1771,21 +1618,18 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 
   function createUnionTypeChecker(arrayOfTypeCheckers) {
     if (!Array.isArray(arrayOfTypeCheckers)) {
-       true ? warning(false, 'Invalid argument supplied to oneOfType, expected an instance of array.') : void 0;
-      return emptyFunction.thatReturnsNull;
+       true ? printWarning('Invalid argument supplied to oneOfType, expected an instance of array.') : void 0;
+      return emptyFunctionThatReturnsNull;
     }
 
     for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
       var checker = arrayOfTypeCheckers[i];
       if (typeof checker !== 'function') {
-        warning(
-          false,
+        printWarning(
           'Invalid argument supplied to oneOfType. Expected an array of check functions, but ' +
-          'received %s at index %s.',
-          getPostfixForTypeWarning(checker),
-          i
+          'received ' + getPostfixForTypeWarning(checker) + ' at index ' + i + '.'
         );
-        return emptyFunction.thatReturnsNull;
+        return emptyFunctionThatReturnsNull;
       }
     }
 
@@ -1998,7 +1842,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 
 
 /***/ }),
-/* 19 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2095,7 +1939,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 
 /***/ }),
-/* 20 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2108,11 +1952,24 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 
 
 
+var printWarning = function() {};
+
 if (true) {
-  var invariant = __webpack_require__(9);
-  var warning = __webpack_require__(10);
-  var ReactPropTypesSecret = __webpack_require__(11);
+  var ReactPropTypesSecret = __webpack_require__(8);
   var loggedTypeFailures = {};
+
+  printWarning = function(text) {
+    var message = 'Warning: ' + text;
+    if (typeof console !== 'undefined') {
+      console.error(message);
+    }
+    try {
+      // --- Welcome to debugging React ---
+      // This error was thrown as a convenience so that you can use this stack
+      // to find the callsite that caused this warning to fire.
+      throw new Error(message);
+    } catch (x) {}
+  };
 }
 
 /**
@@ -2137,12 +1994,29 @@ function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
         try {
           // This is intentionally an invariant that gets caught. It's the same
           // behavior as without this statement except with a better message.
-          invariant(typeof typeSpecs[typeSpecName] === 'function', '%s: %s type `%s` is invalid; it must be a function, usually from ' + 'the `prop-types` package, but received `%s`.', componentName || 'React class', location, typeSpecName, typeof typeSpecs[typeSpecName]);
+          if (typeof typeSpecs[typeSpecName] !== 'function') {
+            var err = Error(
+              (componentName || 'React class') + ': ' + location + ' type `' + typeSpecName + '` is invalid; ' +
+              'it must be a function, usually from the `prop-types` package, but received `' + typeof typeSpecs[typeSpecName] + '`.'
+            );
+            err.name = 'Invariant Violation';
+            throw err;
+          }
           error = typeSpecs[typeSpecName](values, typeSpecName, componentName, location, null, ReactPropTypesSecret);
         } catch (ex) {
           error = ex;
         }
-        warning(!error || error instanceof Error, '%s: type specification of %s `%s` is invalid; the type checker ' + 'function must return `null` or an `Error` but returned a %s. ' + 'You may have forgotten to pass an argument to the type checker ' + 'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' + 'shape all require an argument).', componentName || 'React class', location, typeSpecName, typeof error);
+        if (error && !(error instanceof Error)) {
+          printWarning(
+            (componentName || 'React class') + ': type specification of ' +
+            location + ' `' + typeSpecName + '` is invalid; the type checker ' +
+            'function must return `null` or an `Error` but returned a ' + typeof error + '. ' +
+            'You may have forgotten to pass an argument to the type checker ' +
+            'creator (arrayOf, instanceOf, objectOf, oneOf, oneOfType, and ' +
+            'shape all require an argument).'
+          )
+
+        }
         if (error instanceof Error && !(error.message in loggedTypeFailures)) {
           // Only monitor this failure once because there tends to be a lot of the
           // same error.
@@ -2150,7 +2024,9 @@ function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
 
           var stack = getStack ? getStack() : '';
 
-          warning(false, 'Failed %s type: %s%s', location, error.message, stack != null ? stack : '');
+          printWarning(
+            'Failed ' + location + ' type: ' + error.message + (stack != null ? stack : '')
+          );
         }
       }
     }
@@ -2161,13 +2037,13 @@ module.exports = checkPropTypes;
 
 
 /***/ }),
-/* 21 */
+/* 18 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__themes_default__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__themes_default__ = __webpack_require__(19);
 
 
 
@@ -2187,7 +2063,7 @@ module.exports = checkPropTypes;
 });
 
 /***/ }),
-/* 22 */
+/* 19 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2195,15 +2071,15 @@ module.exports = checkPropTypes;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__resumeType__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Name__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Profile__ = __webpack_require__(24);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__skills_WorkAndSkills__ = __webpack_require__(25);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__skills_WorkAndSkillsPrint__ = __webpack_require__(30);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Volunteer__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Education__ = __webpack_require__(32);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__Experience__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__Awards__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__resumeType__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Name__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Profile__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__skills_WorkAndSkills__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__skills_WorkAndSkillsPrint__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Volunteer__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Education__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__Experience__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__Awards__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__LeftRight__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__styles_common__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__styles_common___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12__styles_common__);
@@ -2271,7 +2147,7 @@ Default.propTypes = {
 /* harmony default export */ __webpack_exports__["a"] = (Default);
 
 /***/ }),
-/* 23 */
+/* 20 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2356,7 +2232,7 @@ var Profiles = function Profiles(props) {
 };
 
 /***/ }),
-/* 24 */
+/* 21 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2408,7 +2284,7 @@ var Summary = function Summary(props) {
 };
 
 /***/ }),
-/* 25 */
+/* 22 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2417,10 +2293,10 @@ var Summary = function Summary(props) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__interactive_selected__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__interactive_selected___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__interactive_selected__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Experience__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Experience__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__interactive_transitions_css__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__interactive_transitions_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__interactive_transitions_css__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__interactive_SkillTypes__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__interactive_SkillTypes__ = __webpack_require__(23);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -2569,7 +2445,7 @@ var WorkAndSkills = function (_React$Component) {
 
 
 /***/ }),
-/* 26 */
+/* 23 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2581,9 +2457,9 @@ var WorkAndSkills = function (_React$Component) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__icons__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__transitions_css__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__transitions_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__transitions_css__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__SkillType__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Setting__ = __webpack_require__(28);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Skill__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__SkillType__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Setting__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Skill__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__LeftRight__ = __webpack_require__(3);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -2689,7 +2565,7 @@ var SkillTypes = function (_React$Component) {
 
 
 /***/ }),
-/* 27 */
+/* 24 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2700,7 +2576,7 @@ var SkillTypes = function (_React$Component) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__selected___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__selected__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__transitions_css__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__transitions_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__transitions_css__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__SkillLogos__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__SkillLogos__ = __webpack_require__(11);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -2771,7 +2647,7 @@ var SkillType = function (_React$Component) {
 
 
 /***/ }),
-/* 28 */
+/* 25 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2782,7 +2658,7 @@ var SkillType = function (_React$Component) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__selected___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__selected__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__transitions_css__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__transitions_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__transitions_css__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__SkillLogos__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__SkillLogos__ = __webpack_require__(11);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -2859,7 +2735,7 @@ var Setting = function (_React$Component) {
 
 
 /***/ }),
-/* 29 */
+/* 26 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2924,7 +2800,7 @@ var Skill = function (_React$Component) {
 
 
 /***/ }),
-/* 30 */
+/* 27 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3068,7 +2944,7 @@ var Keyword = function (_React$Component4) {
 }(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
 
 /***/ }),
-/* 31 */
+/* 28 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3165,7 +3041,7 @@ var Keyword = function (_React$Component4) {
 });
 
 /***/ }),
-/* 32 */
+/* 29 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3282,7 +3158,7 @@ var Keyword = function (_React$Component4) {
 });
 
 /***/ }),
-/* 33 */
+/* 30 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3315,16 +3191,16 @@ var Keyword = function (_React$Component4) {
 });
 
 /***/ }),
-/* 34 */
+/* 31 */
 /***/ (function(module, exports) {
 
-module.exports = {"basics":{"name":"Chester Burbidge","label":"Software Engineer","website":"https://chester.codes","picture":"","summary":"A software professional with a passion for the craft, constantly learning and improving. \n\nExperienced with various methodologies across the full software development lifecycle. I have written code for mobile, the desktop and the full web stack, using a variety of programing languages and paradigms. \n\nA regular attender, and occasional presenter, of technical talks on various topics. Interested in teaching through volunteering my time to the Code Club initiative.","summary-winops":"A software professional who is constantly learning and improving. Experienced with designing, building and deploying IAAS, PAAS and serverless cloud solutions on AWS and Azure. I have experience running .NET services and websites in a Windows Server environment. Passionate about automation and everything as code. I have used technologies for infrastructure as code (terraform and cloud specific), configuration management (Chef mostly) and general scripting (Powershell, bash, python etc).","summary-dotnet":"A passionate and capable developer with experience of a wide range of the Microsoft and .NET technologies. I have written code for a variety of 'back end' environments, including web sites and services using C# .NET framework on Windows Server and F# .NET Core on linux. Client side experience includes writing JavaScript and typescript code using different paradigms and libraries including React JS, Angular JS and jQuery. I have worked with agile methodologies across the full software development lifecycle. A regular attender, and occasional presenter, of technical talks on various topics.","location":{"address":"","postalCode":"","city":"","countryCode":"","region":""},"profiles":[{"network":"Web","username":"chester.codes","url":"https://chester.codes"},{"network":"Twitter","username":"chestercodes","url":"https://twitter.com/chestercodes"},{"network":"Github","username":"chestercodes","url":"https://github.com/chestercodes"}]},"work":[{"company":"Scott Logic","position":"Software Engineer","website":"https://www.scottlogic.com/","startDate":"2017-10-16","endDate":"2018-09-07","summary":"","highlights":["Designed and implemented ETL pipeline on Azure using Data Factory V2. Implemented data warehouse reporting solution using SQL Datawarehouse and PowerBI.","Wrote AWS infrastructure code for data engineering project using Terraform. Deployed a wide range of resources such as Kinesis, EC2 VMs and ECS containers.","Developed REST API for automated download and analysis of github repositories using .Net Core running F# on ubuntu.","Introduced SpecFlow into project to increase efficiency of test development and provide living documentation of automated tests.","Ran internal study group for advancing company knowledge on cloud computing."],"skills":["apacheSpark","aspWebApi","azureDataFactory","azureSql","azureSqlDw","azureResourceManager","azureHdInsights","awsECR","awsECS","bashScripting","bootstrap","continuousIntegration","cSharp","css","docker","dotNetCore","dotNetFramework","esSixPromises","fSharp","git","html","javascript","jira","linq","mstest","nodeJs","nunit","reactJs","resharper","restfulWebservices","sqlServerManagementStudio","specflow","terraform","tSql","visualStudio","vstest"]},{"company":"Abide Financial","position":"Software Engineer","website":"http://www.abide-financial.com/","startDate":"2015-03-01","endDate":"2017-10-15","summary":"","highlights":["Developed code to enrich and validate financial transaction data using C# and T-SQL, using 'best practices' and TDD where possible.","Developed AWS lambda functions using python and node.js for environment automation. Tasks including database setup and automated resource spin up/down.","Implemented CI and deployment solutions for AWS resources including EC2 and Lambda. This required extensive use of Teamcity and Octopus deploy. ","Created NuGet packages to promote 'best practices' in build and deployment automation.","Wrote Powershell scripts for file archival and other Windows Server administration tasks.  Automated configuration of log aggregation agents on production systems.","Spread 'best practices' in methods and technologies through organising department wide, weekly workshops."],"skills":["angularJs","akkaDotNet","aspDotNetMvc","awsCloudformation","awsDynamoDB","awsEC2","awsLambda","awsKinesis","awsOpsworks","awsRedshift","awsSqs","awsS3","bashScripting","bootstrap","cake","chef","continuousIntegration","cSharp","css","dotNetFramework","esSixPromises","fSharp","git","html","javascript","jira","linq","moq","mstest","nodeJs","nunit","octopusDeploy","packer","powershell","python","resharper","restfulWebservices","sqlServerManagementStudio","specflow","teamcity","tSql","visualStudio","vstest","xml"]},{"company":"FundsLibrary","position":"Junior Developer","website":"https://www.fundslibrary.co.uk","startDate":"2014-03-01","endDate":"2015-03-01","summary":"Maintained the Fundslibrary website in an agile environment.\nPracticed modern software development practices including TDD, CI and SOLID practices.\nBackend developement involved C#, ASP.NET MVC and SQL Server to create web services and sites.\nClient side development used typescript, LESS and libraries such as KnockoutJs and jQuery.","skills":["aspDotNetMvc","aspDotNetWebforms","bootstrap","continuousIntegration","cSharp","css","dotNetFramework","esSixPromises","git","grunt","html","jasmine","javascript","jira","jquery","karma","knockoutJs","less","linq","restfulWebservices","sqlServerManagementStudio","tSql","typescript","visualStudio","xslt","xml"]},{"company":"Toplevel Computing","position":"Graduate Developer","website":"https://www.toplev.com/","startDate":"2013-03-01","endDate":"2014-03-01","summary":"Maintained proprietary web development product and extended behaviour to customer specifications. Role involved writing specications, designs and performing the implementation of code changes.","skills":["cPlusPlus","cSharp","css","dotNetFramework","html","linq","moq","nunit","resharper","sourceSafe","sqlServerManagementStudio","tfs","tSql","visualStudio","vbDotNet","xml"]}],"volunteer":[{"organization":"Codeclub","position":"Club leader","website":"https://www.codeclub.org.uk/","startDate":"2015-10-01","endDate":"2016-04-01","summary":"After school club for primary school children. Taught scratch, HTML CSS and python."},{"organization":"Codeclub","position":"Club leader","website":"https://www.codeclub.org.uk/","startDate":"2013-09-01","endDate":"2014-04-01","summary":"After school club for primary school children. Taught scratch, HTML CSS and python."}],"education":[{"institution":"The University of Exeter","startDate":"2010-10-01","endDate":"2012-10-01","studyType":"Phd Physics: The electrical properties of cell membranes","gpa":"Degree Not Attained"},{"institution":"The University of Exeter","startDate":"2007-09-01","endDate":"2010-09-01","studyType":"BSc. (Hons.) Mathematics and Physics","gpa":"2:1"},{"institution":"Queen Mary's College","startDate":"2005-09-01","endDate":"2007-09-01","studyType":"A Levels","gpa":"Mathematics (A), Physics (B), Electronics (B), BTEC Music Practice (Distinction). AS Level: Further Mathematics AS (C)"}],"awards":[],"publications":[],"skills":[{"name":"Back End","level":"Advanced","keywords":["akkaDotNet","apacheSpark","aspDotNetMvc","aspWebApi","aspDotNetWebforms","azureDataFactory","azureSql","azureSqlDw","azureHdInsights","awsDynamoDB","awsEC2","awsLambda","awsKinesis","awsRedshift","awsSqs","awsS3","cPlusPlus","cSharp","dotNetCore","dotNetFramework","fSharp","linq","nodeJs","python","tSql","vbDotNet"]},{"name":"Devops","level":"Advanced","keywords":["azureResourceManager","awsCloudformation","awsECR","awsECS","awsOpsworks","bashScripting","cake","chef","continuousIntegration","docker","git","octopusDeploy","packer","powershell","terraform","teamcity"]},{"name":"Front End","level":"Competent","keywords":["angularJs","bootstrap","css","d3","esSixPromises","gatsbyJs","graphQl","grunt","html","javascript","jquery","knockoutJs","less","reactJs","typescript"]},{"name":"Other","level":"Advanced","keywords":["cordova","ionicFramework","jira","latex","resharper","restfulWebservices","rlanguage","sourceSafe","sqlServerManagementStudio","tfs","visualStudio","xslt","xml"]},{"name":"Testing","level":"Advanced","keywords":["jasmine","karma","moq","mstest","nunit","puppeteer","specflow","vstest"]}],"languages":[],"interests":[],"references":[]}
+module.exports = {"basics":{"name":"Chester Burbidge","label":"Software Engineer","website":"https://chester.codes","picture":"","summary":"A software professional with a passion for the craft, constantly learning and improving. \n\nExperienced with various methodologies across the full software development lifecycle. I have written code for mobile, the desktop and the full web stack, using a variety of programming languages and paradigms. \n\nA regular attender, and occasional presenter, of technical talks on various topics. Interested in teaching through volunteering my time to the Code Club initiative.","summary-winops":"A software professional who is constantly learning and improving. Experienced with designing, building and deploying IAAS, PAAS and serverless cloud solutions on AWS and Azure. I have experience running .NET services and websites in a Windows Server environment. Passionate about automation and everything as code. I have used technologies for infrastructure as code (terraform and cloud specific), configuration management (Chef mostly) and general scripting (Powershell, bash, python etc).","summary-dotnet":"A passionate and capable developer with experience of a wide range of the Microsoft and .NET technologies. I have written code for a variety of 'back end' environments, including web sites and services using C# .NET framework on Windows Server and F# .NET Core on linux. Client side experience includes writing JavaScript and typescript code using different paradigms and libraries including React JS, Angular JS and jQuery. I have worked with agile methodologies across the full software development lifecycle. A regular attender, and occasional presenter, of technical talks on various topics.","summary-fsharp":"A passionate and capable developer with experience of a wide range of programming styles and technologies. \n\nI have written code for mobile, the desktop and the full web stack, across the full software development lifecycle.\n\nI am especially interested in functional programming using F#, having learnt the power and simplicity of the concepts, and have written sizable internal projects with the language.\n\nClient side experience includes writing JavaScript and typescript code using React JS, as well as F# using Fable and the SAFE stack.\n\nA regular attender, and occasional presenter, of technical talks on various topics.","location":{"address":"","postalCode":"","city":"","countryCode":"","region":""},"profiles":[{"network":"Web","username":"chester.codes","url":"https://chester.codes"},{"network":"Twitter","username":"chestercodes","url":"https://twitter.com/chestercodes"},{"network":"Github","username":"chestercodes","url":"https://github.com/chestercodes"}]},"work":[{"company":"Parmenion","position":"Software Developer (contract, 3 extensions)","website":"https://www.parmenion.co.uk/","startDate":"2018-10-15","endDate":"2020-05-29","summary":"","highlights":["Extension of D2C services of investment platform and maintenence of existing legacy systems, including most Microsoft technologies of the last 10 years.","Part of small group that led the migration of ~70 .Net framework and core services to windows containers.  ","Developed internal tools, mostly in own time, for speeding up local development processes and project dependency analysis. "],"skills":["aspDotNetMvc","aspWebApi","aspDotNetCore","aspDotNetWebforms","azureContainerRegistry","azureDevops","bashScripting","cake","continuousIntegration","cSharp","css","docker","dotNetCore","dotNetFramework","esSixPromises","entityFramework","entityFrameworkCore","fSharp","gatsbyJs","git","grunt","html","javascript","knockoutJs","linq","moq","mstest","neo4j","nodeJs","nunit","powershell","puppeteer","reactJs","resharper","restfulWebservices","sqlServerManagementStudio","specflow","tSql","typescript","visualStudio","vstest","vbDotNet","windowsContainers","xml","xUnit"]},{"company":"Scott Logic","position":"Software Engineer","website":"https://www.scottlogic.com/","startDate":"2017-10-16","endDate":"2018-09-07","summary":"","highlights":["Designed and implemented ETL pipeline on Azure using Data Factory V2. Implemented data warehouse reporting solution using SQL Datawarehouse and PowerBI.","Wrote AWS infrastructure code for data engineering project using Terraform. Deployed a wide range of resources such as Kinesis, EC2 VMs and ECS containers.","Developed REST API for automated download and analysis of github repositories using .Net Core running F# on ubuntu.","Introduced SpecFlow into project to increase efficiency of test development and provide living documentation of automated tests.","Ran internal study group for advancing company knowledge on cloud computing."],"skills":["apacheSpark","aspWebApi","azureDataFactory","azureSql","azureSqlDw","azureResourceManager","azureHdInsights","awsECR","awsECS","bashScripting","bootstrap","continuousIntegration","cSharp","css","docker","dotNetCore","dotNetFramework","esSixPromises","fSharp","git","html","javascript","jira","linq","mstest","nodeJs","nunit","reactJs","resharper","restfulWebservices","sqlServerManagementStudio","specflow","terraform","tSql","visualStudio","vstest"]},{"company":"Abide Financial","position":"Software Engineer","website":"http://www.abide-financial.com/","startDate":"2015-03-01","endDate":"2017-10-15","summary":"","highlights":["Developed code to enrich and validate financial transaction data using C# and T-SQL, using 'best practices' and TDD where possible.","Developed AWS lambda functions using python and node.js for environment automation. Tasks including database setup and automated resource spin up/down.","Implemented CI and deployment solutions for AWS resources including EC2 and Lambda. This required extensive use of Teamcity and Octopus deploy. ","Created NuGet packages to promote 'best practices' in build and deployment automation.","Wrote Powershell scripts for file archival and other Windows Server administration tasks.  Automated configuration of log aggregation agents on production systems.","Spread 'best practices' in methods and technologies through organising department wide, weekly workshops."],"skills":["angularJs","akkaDotNet","aspDotNetMvc","awsCloudformation","awsDynamoDB","awsEC2","awsLambda","awsKinesis","awsOpsworks","awsRedshift","awsSqs","awsS3","bashScripting","bootstrap","cake","chef","continuousIntegration","cSharp","css","dotNetFramework","esSixPromises","fSharp","git","html","javascript","jira","linq","moq","mstest","nodeJs","nunit","octopusDeploy","packer","powershell","python","resharper","restfulWebservices","sqlServerManagementStudio","specflow","teamcity","tSql","visualStudio","vstest","xml"]},{"company":"FundsLibrary","position":"Junior Developer","website":"https://www.fundslibrary.co.uk","startDate":"2014-03-01","endDate":"2015-03-01","summary":"Maintained the Fundslibrary website in an agile environment.\nPracticed modern software development practices including TDD, CI and SOLID practices.\nBackend developement involved C#, ASP.NET MVC and SQL Server to create web services and sites.\nClient side development used typescript, LESS and libraries such as KnockoutJs and jQuery.","skills":["aspDotNetMvc","aspDotNetWebforms","bootstrap","continuousIntegration","cSharp","css","dotNetFramework","esSixPromises","git","grunt","html","jasmine","javascript","jira","jquery","karma","knockoutJs","less","linq","restfulWebservices","sqlServerManagementStudio","tSql","typescript","visualStudio","xslt","xml"]},{"company":"Toplevel Computing","position":"Graduate Developer","website":"https://www.toplev.com/","startDate":"2013-03-01","endDate":"2014-03-01","summary":"Maintained proprietary web development product and extended behaviour to customer specifications. Role involved writing specications, designs and performing the implementation of code changes.","skills":["cPlusPlus","cSharp","css","dotNetFramework","html","linq","moq","nunit","resharper","sourceSafe","sqlServerManagementStudio","tfs","tSql","visualStudio","vbDotNet","xml"]}],"volunteer":[{"organization":"Codeclub","position":"Club leader","website":"https://www.codeclub.org.uk/","startDate":"2015-10-01","endDate":"2016-04-01","summary":"After school club for primary school children. Taught scratch, HTML CSS and python."},{"organization":"Codeclub","position":"Club leader","website":"https://www.codeclub.org.uk/","startDate":"2013-09-01","endDate":"2014-04-01","summary":"After school club for primary school children. Taught scratch, HTML CSS and python."}],"education":[{"institution":"The University of Exeter","startDate":"2010-10-01","endDate":"2012-10-01","studyType":"Phd Physics: The electrical properties of cell membranes","gpa":"Degree Not Attained"},{"institution":"The University of Exeter","startDate":"2007-09-01","endDate":"2010-09-01","studyType":"BSc. (Hons.) Mathematics and Physics","gpa":"2:1"},{"institution":"Queen Mary's College","startDate":"2005-09-01","endDate":"2007-09-01","studyType":"A Levels","gpa":"Mathematics (A), Physics (B), Electronics (B), BTEC Music Practice (Distinction). AS Level: Further Mathematics AS (C)"}],"awards":[],"publications":[],"skills":[{"name":"Back End","level":"Advanced","keywords":["akkaDotNet","apacheSpark","aspDotNetMvc","aspWebApi","aspDotNetCore","aspDotNetWebforms","azureDataFactory","azureSql","azureSqlDw","azureHdInsights","awsDynamoDB","awsEC2","awsLambda","awsKinesis","awsRedshift","awsSqs","awsS3","cPlusPlus","cSharp","dotNetCore","dotNetFramework","entityFramework","entityFrameworkCore","fSharp","linq","neo4j","nodeJs","python","safeStack","tSql","vbDotNet"]},{"name":"Devops","level":"Advanced","keywords":["azureContainerRegistry","azureResourceManager","awsCloudformation","awsECR","awsECS","awsOpsworks","bashScripting","cake","chef","continuousIntegration","docker","git","octopusDeploy","packer","powershell","terraform","teamcity","windowsContainers"]},{"name":"Front End","level":"Competent","keywords":["angularJs","bootstrap","css","d3","esSixPromises","elmish","fable","gatsbyJs","graphQl","grunt","html","javascript","jquery","knockoutJs","less","reactJs","safeStack","typescript"]},{"name":"Other","level":"Advanced","keywords":["azureDevops","cordova","ionicFramework","jira","latex","resharper","restfulWebservices","rlanguage","sourceSafe","sqlServerManagementStudio","tfs","visualStudio","xslt","xml"]},{"name":"Testing","level":"Advanced","keywords":["jasmine","karma","moq","mstest","nunit","puppeteer","specflow","vstest","xUnit"]}],"languages":[],"interests":[],"references":[]}
 
 /***/ }),
-/* 35 */
+/* 32 */
 /***/ (function(module, exports) {
 
-module.exports = {"jsonResumeSkills":[{"name":"Back End","level":"Advanced","keywords":["akkaDotNet","apacheSpark","aspDotNetMvc","aspWebApi","aspDotNetWebforms","azureDataFactory","azureSql","azureSqlDw","azureHdInsights","awsDynamoDB","awsEC2","awsLambda","awsKinesis","awsRedshift","awsSqs","awsS3","cPlusPlus","cSharp","dotNetCore","dotNetFramework","fSharp","linq","nodeJs","python","tSql","vbDotNet"]},{"name":"Devops","level":"Advanced","keywords":["azureResourceManager","awsCloudformation","awsECR","awsECS","awsOpsworks","bashScripting","cake","chef","continuousIntegration","docker","git","octopusDeploy","packer","powershell","terraform","teamcity"]},{"name":"Front End","level":"Competent","keywords":["angularJs","bootstrap","css","d3","esSixPromises","gatsbyJs","graphQl","grunt","html","javascript","jquery","knockoutJs","less","reactJs","typescript"]},{"name":"Other","level":"Advanced","keywords":["cordova","ionicFramework","jira","latex","resharper","restfulWebservices","rlanguage","sourceSafe","sqlServerManagementStudio","tfs","visualStudio","xslt","xml"]},{"name":"Testing","level":"Advanced","keywords":["jasmine","karma","moq","mstest","nunit","puppeteer","specflow","vstest"]}],"jsonResumeSettings":[{"company":"Toplevel Computing","keywords":["cPlusPlus","cSharp","css","dotNetFramework","html","linq","moq","nunit","resharper","sourceSafe","sqlServerManagementStudio","tfs","tSql","visualStudio","vbDotNet","xml"]},{"company":"FundsLibrary","keywords":["aspDotNetMvc","aspDotNetWebforms","bootstrap","continuousIntegration","cSharp","css","dotNetFramework","esSixPromises","git","grunt","html","jasmine","javascript","jira","jquery","karma","knockoutJs","less","linq","restfulWebservices","sqlServerManagementStudio","tSql","typescript","visualStudio","xslt","xml"]},{"company":"Abide Financial","keywords":["angularJs","akkaDotNet","aspDotNetMvc","awsCloudformation","awsDynamoDB","awsEC2","awsLambda","awsKinesis","awsOpsworks","awsRedshift","awsSqs","awsS3","bashScripting","bootstrap","cake","chef","continuousIntegration","cSharp","css","dotNetFramework","esSixPromises","fSharp","git","html","javascript","jira","linq","moq","mstest","nodeJs","nunit","octopusDeploy","packer","powershell","python","resharper","restfulWebservices","sqlServerManagementStudio","specflow","teamcity","tSql","visualStudio","vstest","xml"]},{"company":"Scott Logic","keywords":["apacheSpark","aspWebApi","azureDataFactory","azureSql","azureSqlDw","azureResourceManager","azureHdInsights","awsECR","awsECS","bashScripting","bootstrap","continuousIntegration","cSharp","css","docker","dotNetCore","dotNetFramework","esSixPromises","fSharp","git","html","javascript","jira","linq","mstest","nodeJs","nunit","reactJs","resharper","restfulWebservices","sqlServerManagementStudio","specflow","terraform","tSql","visualStudio","vstest"]}],"skills":{"angularJs":{"id":"angularJs","name":"Angular Js","description":"AngularJS is a JavaScript-based open-source front-end web application framework mainly maintained by Google.","skillTypesIds":["frontend"],"settingsIds":["abide"]},"akkaDotNet":{"id":"akkaDotNet","name":"AKKA.NET","description":".NET actor system implementation framework, port of the popular scala framework.","skillTypesIds":["backend"],"settingsIds":["abide"]},"apacheSpark":{"id":"apacheSpark","name":"Apache Spark","description":"Apache Spark is an open-source cluster-computing framework. Spark provides an interface for programming entire clusters with implicit data parallelism and fault tolerance","skillTypesIds":["backend"],"settingsIds":["scottlogic"]},"aspDotNetMvc":{"id":"aspDotNetMvc","name":"ASP.NET MVC","description":"ASP.NET MVC is a web application framework developed by Microsoft, which implements the model–view–controller (MVC) pattern.","skillTypesIds":["backend"],"settingsIds":["fundslibrary","abide"]},"aspWebApi":{"id":"aspWebApi","name":"ASP.NET Web API","description":"ASP.NET Web API is a framework that makes it easy to build HTTP services that reach a broad range of clients, including browsers and mobile devices.","skillTypesIds":["backend"],"settingsIds":["scottlogic"]},"aspDotNetWebforms":{"id":"aspDotNetWebforms","name":"ASP.NET WebForms","description":"ASP.NET is a server-side web application framework designed for web development to produce dynamic web pages","skillTypesIds":["backend"],"settingsIds":["fundslibrary"]},"azureDataFactory":{"id":"azureDataFactory","name":"Azure Data Factory","description":"Azure Data Factory is a cloud-based data integration service that allows you to create data-driven workflows in the cloud for orchestrating and automating data movement and data transformation","skillTypesIds":["backend"],"settingsIds":["scottlogic"]},"azureSql":{"id":"azureSql","name":"Azure SQL","description":"Microsoft Azure SQL Database is a managed cloud database (SaaS) provided as part of Microsoft Azure","skillTypesIds":["backend"],"settingsIds":["scottlogic"]},"azureSqlDw":{"id":"azureSqlDw","name":"Azure SQL Data Warehouse","description":"SQL Data Warehouse is a cloud-based Enterprise Data Warehouse that leverages Massively Parallel Processing to quickly run complex queries across petabytes of data","skillTypesIds":["backend"],"settingsIds":["scottlogic"]},"azureResourceManager":{"id":"azureResourceManager","name":"Azure Resource Manager","description":"Azure Resource Manager is a technology used to provision resources within the Azure platform.","skillTypesIds":["devops"],"settingsIds":["scottlogic"]},"azureHdInsights":{"id":"azureHdInsights","name":"Azure HdInsights","description":"Azure HDInsight is a fully managed cloud service that makes it easy, fast and cost-effective to process massive amounts of data. Use popular open-source frameworks such as Hadoop, Spark, Hive, LLAP, Kafka, Storm, R and more.","skillTypesIds":["backend"],"settingsIds":["scottlogic"]},"awsCloudformation":{"id":"awsCloudformation","name":"AWS Cloudformation","description":"AWS CloudFormation provides a common language for you to describe and provision all the infrastructure resources in your cloud environment. CloudFormation allows you to use a simple text file to model and provision, in an automated and secure manner, all the resources needed for your applications across all regions and accounts. This file serves as the single source of truth for your cloud environment","skillTypesIds":["devops"],"settingsIds":["abide"]},"awsDynamoDB":{"id":"awsDynamoDB","name":"AWS DynamoDB","description":"Amazon DynamoDB is a fast and flexible NoSQL database service for all applications that need consistent, single-digit millisecond latency at any scale. It is a fully managed cloud database and supports both document and key-value store models","skillTypesIds":["backend"],"settingsIds":["abide"]},"awsEC2":{"id":"awsEC2","name":"AWS EC2","description":"Amazon Elastic Compute Cloud (Amazon EC2) is a web service that provides secure, resizable compute capacity in the cloud. It is designed to make web-scale cloud computing easier for developers.","skillTypesIds":["backend"],"settingsIds":["abide"]},"awsECR":{"id":"awsECR","name":"AWS ECR","description":"Amazon Elastic Container Registry is a fully-managed Docker container registry that makes it easy for developers to store, manage, and deploy Docker container images.","skillTypesIds":["devops"],"settingsIds":["scottlogic"]},"awsECS":{"id":"awsECS","name":"AWS ECS","description":"Amazon Elastic Container Service (Amazon ECS) is a highly scalable, high-performance container orchestration service that supports Docker containers and allows you to easily run and scale containerized applications on AWS.","skillTypesIds":["devops"],"settingsIds":["scottlogic"]},"awsLambda":{"id":"awsLambda","name":"AWS Lambda","description":"AWS Lambda lets you run code without provisioning or managing servers.","skillTypesIds":["backend"],"settingsIds":["abide"]},"awsKinesis":{"id":"awsKinesis","name":"AWS Kinesis","description":"Amazon Kinesis Data Streams enables you to build custom applications that process or analyze streaming data for specialized needs.","skillTypesIds":["backend"],"settingsIds":["abide"]},"awsOpsworks":{"id":"awsOpsworks","name":"AWS Opsworks","description":"AWS OpsWorks is a configuration management service that provides managed instances of Chef and Puppet.","skillTypesIds":["devops"],"settingsIds":["abide"]},"awsRedshift":{"id":"awsRedshift","name":"AWS Redshift","description":"Amazon Redshift is a fast, fully managed data warehouse that makes it simple and cost-effective to analyze all your data using standard SQL and your existing Business Intelligence tools","skillTypesIds":["backend"],"settingsIds":["abide"]},"awsSqs":{"id":"awsSqs","name":"AWS SQS","description":"Amazon Simple Queue Service is a fully managed message queuing service that makes it easy to decouple and scale microservices, distributed systems, and serverless applications.","skillTypesIds":["backend"],"settingsIds":["abide"]},"awsS3":{"id":"awsS3","name":"AWS S3","description":"Amazon S3 is object storage built to store and retrieve any amount of data from anywhere – web sites and mobile apps, corporate applications, and data from IoT sensors or devices.","skillTypesIds":["backend"],"settingsIds":["abide"]},"bashScripting":{"id":"bashScripting","name":"bash scripting","description":"Bash is a Unix shell and command language written by Brian Fox for the GNU Project as a free software replacement for the Bourne shell","skillTypesIds":["devops"],"settingsIds":["abide","scottlogic"]},"bootstrap":{"id":"bootstrap","name":"Bootstrap","description":"Bootstrap is a free and open-source front-end library for designing websites and web applications. It contains HTML- and CSS-based design templates for typography, forms, buttons, navigation and other interface components, as well as optional JavaScript extensions.","skillTypesIds":["frontend"],"settingsIds":["abide","fundslibrary","scottlogic"]},"cake":{"id":"cake","name":"Cake","description":"Cake (C# Make) is a cross-platform build automation system with a C# DSL for tasks such as compiling code, copying files and folders, running unit tests, compressing files and building NuGet packages","skillTypesIds":["devops"],"settingsIds":["abide"]},"chef":{"id":"chef","name":"Chef","description":"Chef is a configuration management tool written in Ruby and Erlang used to streamline the task of configuring and maintaining servers.","skillTypesIds":["devops"],"settingsIds":["abide"]},"continuousIntegration":{"id":"continuousIntegration","name":"Continuous integration","description":"Continuous integration (CI) is the practice of merging all developer working copies to a shared mainline several times a day.","skillTypesIds":["devops"],"settingsIds":["abide","fundslibrary","scottlogic"]},"cordova":{"id":"cordova","name":"Apache Cordova (Phone Gap)","description":"Apache Cordova is an open-source mobile application development framework which enables software programmers to build applications for mobile devices using CSS3, HTML5, and JavaScript instead of relying on platform-specific APIs like those in Android, iOS, or Windows Phone.","skillTypesIds":["other"],"settingsIds":[]},"cPlusPlus":{"id":"cPlusPlus","name":"C++","description":"A general-purpose programming language. It has imperative, object-oriented and generic programming features, while also providing facilities for low-level memory manipulation","skillTypesIds":["backend"],"settingsIds":["toplevel"]},"cSharp":{"id":"cSharp","name":"C#","description":"C# is a multi-paradigm programming language encompassing strong typing, imperative, declarative, functional, generic, object-oriented and component-oriented programming disciplines","skillTypesIds":["backend"],"settingsIds":["toplevel","fundslibrary","abide","scottlogic"]},"css":{"id":"css","name":"CSS","description":"Cascading Style Sheets (CSS) is a style sheet language used for describing the presentation of a document written in a markup language like HTML. CSS is a cornerstone technology of the World Wide Web, alongside HTML and JavaScript","skillTypesIds":["frontend"],"settingsIds":["toplevel","fundslibrary","abide","scottlogic"]},"d3":{"id":"d3","name":"D3","description":"A JavaScript library for producing dynamic, interactive data visualizations in web browsers. It makes use of the widely implemented SVG, HTML5, and CSS standards","skillTypesIds":["frontend"],"settingsIds":[]},"docker":{"id":"docker","name":"Docker","description":"Docker is a computer program that performs operating-system-level virtualization also known as containerization.","skillTypesIds":["devops"],"settingsIds":["scottlogic"]},"dotNetCore":{"id":"dotNetCore","name":".NET Core","description":".NET Core is a free and open-source managed computer software framework for the Microsoft Windows, Apple macOS and Linux operating systems.","skillTypesIds":["backend"],"settingsIds":["scottlogic"]},"dotNetFramework":{"id":"dotNetFramework","name":".NET Framework","description":".NET Framework is a software framework developed by Microsoft that runs primarily on Microsoft Windows","skillTypesIds":["backend"],"settingsIds":["toplevel","fundslibrary","abide","scottlogic"]},"esSixPromises":{"id":"esSixPromises","name":"ES6 Promises","description":"The Promise object represents the eventual completion (or failure) of an asynchronous operation, and its resulting value.","skillTypesIds":["frontend"],"settingsIds":["fundslibrary","abide","scottlogic"]},"fSharp":{"id":"fSharp","name":"F#","description":"F# is a strongly typed, multi-paradigm programming language that encompasses functional, imperative, and object-oriented programming methods.","skillTypesIds":["backend"],"settingsIds":["abide","scottlogic"]},"gatsbyJs":{"id":"gatsbyJs","name":"GatsbyJS","description":"Blazing fast modern site generator for React. Go beyond static sites: build blogs, ecommerce sites, full-blown apps, and more with Gatsby.","skillTypesIds":["frontend"],"settingsIds":[]},"git":{"id":"git","name":"git","description":"Git is a version control system for tracking changes in computer files and coordinating work on those files among multiple people","skillTypesIds":["devops"],"settingsIds":["fundslibrary","abide","scottlogic"]},"graphQl":{"id":"graphQl","name":"GraphQL","description":"GraphQL is a query language for your API, and a server-side runtime for executing queries by using a type system you define for your data.","skillTypesIds":["frontend"],"settingsIds":[]},"grunt":{"id":"grunt","name":"grunt","description":"Grunt is a JavaScript task runner, a tool used to automatically perform frequent tasks such as minification, compilation, unit testing, and linting","skillTypesIds":["frontend"],"settingsIds":["fundslibrary"]},"html":{"id":"html","name":"HTML","description":"Hypertext Markup Language (HTML) is the standard markup language for creating web pages and web applications. With Cascading Style Sheets (CSS) and JavaScript, it forms a triad of cornerstone technologies for the World Wide Web.","skillTypesIds":["frontend"],"settingsIds":["toplevel","fundslibrary","abide","scottlogic"]},"ionicFramework":{"id":"ionicFramework","name":"Ionic framework","description":"Ionic is a powerful HTML5 SDK that helps you build native-feeling mobile apps using web technologies like HTML, CSS, and Javascript.","skillTypesIds":["other"],"settingsIds":[]},"jasmine":{"id":"jasmine","name":"jasmine","description":"Jasmine is an open source testing framework for JavaScript. It aims to run on any JavaScript-enabled platform, to not intrude on the application nor the IDE, and to have easy-to-read syntax.","skillTypesIds":["testing"],"settingsIds":["fundslibrary"]},"javascript":{"id":"javascript","name":"javascript","description":"JavaScript is a high-level, interpreted programming language. It is a language which is also characterized as dynamic, weakly typed, prototype-based and multi-paradigm","skillTypesIds":["frontend"],"settingsIds":["fundslibrary","abide","scottlogic"]},"jira":{"id":"jira","name":"JIRA","description":"Jira is a proprietary issue tracking product, developed by Atlassian. It provides bug tracking, issue tracking, and project management functions","skillTypesIds":["other"],"settingsIds":["fundslibrary","abide","scottlogic"]},"jquery":{"id":"jquery","name":"jQuery","description":"jQuery is a cross-platform JavaScript library designed to simplify the client-side scripting of HTML. It is free, open-source software using the MIT License.","skillTypesIds":["frontend"],"settingsIds":["fundslibrary"]},"karma":{"id":"karma","name":"karma","description":"Karma is a test runner for JavaScript that runs on Node.js. It is very well suited to testing AngularJS or any other JavaScript projects.","skillTypesIds":["testing"],"settingsIds":["fundslibrary"]},"knockoutJs":{"id":"knockoutJs","name":"KnockoutJs","description":"Knockout is a standalone JavaScript implementation of the Model-View-ViewModel pattern with templates.","skillTypesIds":["frontend"],"settingsIds":["fundslibrary"]},"latex":{"id":"latex","name":"LaTeX","description":"LaTeX is a document preparation system. When writing, the writer uses plain text as opposed to the formatted text found in WYSIWYG word processors like Microsoft Word.","skillTypesIds":["other"],"settingsIds":[]},"less":{"id":"less","name":"LESS","description":"Less (which stands for Leaner Style Sheets) is a backwards-compatible language extension for CSS","skillTypesIds":["frontend"],"settingsIds":["fundslibrary"]},"linq":{"id":"linq","name":"LINQ","description":"General-purpose query facilities added to the .NET Framework apply to all sources of information, not just relational or XML data.","skillTypesIds":["backend"],"settingsIds":["toplevel","fundslibrary","abide","scottlogic"]},"moq":{"id":"moq","name":"MoQ","description":"Moq is the one and only .NET mocking framework that allows specifying mock behavior via declarative specification queries.","skillTypesIds":["testing"],"settingsIds":["toplevel","abide"]},"mstest":{"id":"mstest","name":"MSTest","description":"The Visual Studio Unit Testing Framework describes Microsoft's suite of unit testing tools as integrated into some[1] versions of Visual Studio 2005 and later","skillTypesIds":["testing"],"settingsIds":["scottlogic","abide"]},"nodeJs":{"id":"nodeJs","name":"node.js","description":"","skillTypesIds":["backend"],"settingsIds":["abide","scottlogic"]},"nunit":{"id":"nunit","name":"NUnit","description":"NUnit is an open-source unit testing framework for Microsoft .NET. It serves the same purpose as JUnit does in the Java world, and is one of many programs in the xUnit family.","skillTypesIds":["testing"],"settingsIds":["toplevel","abide","scottlogic"]},"octopusDeploy":{"id":"octopusDeploy","name":"Octopus Deploy","description":"Octopus Deploy is an automated release management tool for modern developers and DevOps teams.","skillTypesIds":["devops"],"settingsIds":["abide"]},"packer":{"id":"packer","name":"Packer","description":"Packer is a free and open source tool for creating golden images for multiple platforms from a single source configuration.","skillTypesIds":["devops"],"settingsIds":["abide"]},"powershell":{"id":"powershell","name":"Powershell","description":"PowerShell is a task automation and configuration management framework from Microsoft, consisting of a command-line shell and associated scripting language.","skillTypesIds":["devops"],"settingsIds":["abide"]},"puppeteer":{"id":"puppeteer","name":"Puppeteer","description":"Puppeteer is a Node library which provides a high-level API to control Chrome or Chromium over the DevTools Protocol. Puppeteer runs headless by default, but can be configured to run full (non-headless) Chrome or Chromium","skillTypesIds":["testing"],"settingsIds":[]},"python":{"id":"python","name":"python","description":"Python is an interpreted high-level programming language for general-purpose programming. Python has a design philosophy that emphasizes code readability, notably using significant whitespace.","skillTypesIds":["backend"],"settingsIds":["abide"]},"reactJs":{"id":"reactJs","name":"react.js","description":"React is a JavaScript library for building user interfaces. It is maintained by Facebook, Instagram and a community of individual developers and corporations.","skillTypesIds":["frontend"],"settingsIds":["scottlogic"]},"resharper":{"id":"resharper","name":"Resharper","description":"ReSharper is a popular developer productivity extension for Microsoft Visual Studio. It automates most of what can be automated in your coding routines. It finds compiler errors, runtime errors, redundancies, and code smells right as you type, suggesting intelligent corrections for them.","skillTypesIds":["other"],"settingsIds":["toplevel","abide","scottlogic"]},"restfulWebservices":{"id":"restfulWebservices","name":"RESTFul webservices","description":"REpresentational State Transfer (REST) is an architectural style that defines a set of constraints and properties based on HTTP.","skillTypesIds":["other"],"settingsIds":["fundslibrary","abide","scottlogic"]},"rlanguage":{"id":"rlanguage","name":"R","description":"R is a programming language and free software environment for statistical computing and graphics that is supported by the R Foundation for Statistical Computing. The R language is widely used among statisticians and data miners for developing statistical software","skillTypesIds":["other"],"settingsIds":[]},"sourceSafe":{"id":"sourceSafe","name":"Source safe","description":"Microsoft Visual SourceSafe (VSS) is a discontinued source control program, oriented towards small software development projects.","skillTypesIds":["other"],"settingsIds":["toplevel"]},"sqlServerManagementStudio":{"id":"sqlServerManagementStudio","name":"SQL Server Management Studio","description":"SQL Server Management Studio (SSMS) is a software application first launched with Microsoft SQL Server 2005 that is used for configuring, managing, and administering all components within Microsoft SQL Server.","skillTypesIds":["other"],"settingsIds":["toplevel","fundslibrary","abide","scottlogic"]},"specflow":{"id":"specflow","name":"SpecFlow","description":"SpecFlow is an open source port of Cucumber for .Net.","skillTypesIds":["testing"],"settingsIds":["abide","scottlogic"]},"tfs":{"id":"tfs","name":"TFS","description":"Team Foundation Server (TFS) is a Microsoft product that provides source code management (either with Team Foundation Version Control or Git), reporting, requirements management, project management, automated builds, lab management, testing and release management capabilities","skillTypesIds":["other"],"settingsIds":["toplevel"]},"terraform":{"id":"terraform","name":"terraform","description":"Terraform is an infrastructure as code software by HashiCorp. It allows users to define a datacenter infrastructure in a high-level configuration language, from which it can create an execution plan to build the infrastructure.","skillTypesIds":["devops"],"settingsIds":["scottlogic"]},"teamcity":{"id":"teamcity","name":"TeamCity","description":"TeamCity is a Java-based build management and continuous integration server from JetBrains.","skillTypesIds":["devops"],"settingsIds":["abide"]},"tSql":{"id":"tSql","name":"T-SQL","description":"Transact-SQL (T-SQL) is Microsoft's and Sybase's proprietary extension to the SQL (Structured Query Language) used to interact with relational databases. T-SQL expands on the SQL standard to include procedural programming, local variables, various support functions for string processing, date processing, mathematics, etc.","skillTypesIds":["backend"],"settingsIds":["toplevel","fundslibrary","abide","scottlogic"]},"typescript":{"id":"typescript","name":"Typescript","description":"TypeScript is an open-source programming language developed and maintained by Microsoft. It is a strict syntactical superset of JavaScript, and adds optional static typing to the language.","skillTypesIds":["frontend"],"settingsIds":["fundslibrary"]},"visualStudio":{"id":"visualStudio","name":"Visual studio","description":"Microsoft Visual Studio is an integrated development environment (IDE) from Microsoft.","skillTypesIds":["other"],"settingsIds":["toplevel","fundslibrary","abide","scottlogic"]},"vstest":{"id":"vstest","name":"VSTest","description":"The Visual Studio Unit Testing Framework describes Microsoft's suite of unit testing tools as integrated into some[1] versions of Visual Studio 2005 and later","skillTypesIds":["testing"],"settingsIds":["scottlogic","abide"]},"vbDotNet":{"id":"vbDotNet","name":"VB.NET","description":"Visual Basic .NET (VB.NET) is a multi-paradigm, object-oriented programming language, implemented on the .NET Framework.","skillTypesIds":["backend"],"settingsIds":["toplevel"]},"xslt":{"id":"xslt","name":"XSLT","description":"A language to transform XML into HTML","skillTypesIds":["other"],"settingsIds":["fundslibrary"]},"xml":{"id":"xml","name":"XML","description":"A heavily used markup language","skillTypesIds":["other"],"settingsIds":["toplevel","fundslibrary","abide"]}},"skillTypes":{"backend":{"id":"backend","name":"Back End","description":"Back end Development refers to the server side of development which usually consists of three parts: a server, an application, and a database. Code written by back end developers is what communicates the database information to the browser.","level":"Advanced"},"devops":{"id":"devops","name":"Devops","description":"DevOps is a software engineering culture and practice that aims at unifying software development and software operations","level":"Advanced"},"frontend":{"id":"frontend","name":"Front End","description":"Front-end web development is the practice of converting data to graphical interface for user to view and interact with data through digital interaction using HTML, CSS and Javascript.","level":"Competent"},"other":{"id":"other","name":"Other","description":"Technologies which don't fit into the other categories.","level":"Advanced"},"testing":{"id":"testing","name":"Testing","description":"Software testing involves the execution of a software component or system component to evaluate one or more properties of interest. In general, these properties indicate the extent to which the component or system under test.","level":"Advanced"}},"settings":{"toplevel":{"id":"toplevel","name":"Toplevel Computing","description":"Digital case management solutions that help Government and Public Sector meet the Digital by Default Service Standard quickly, securely and cost effectively.","dateRange":{"startDate":"2013-03-31T23:00:00.000Z","endDate":"2014-03-31T23:00:00.000Z"}},"fundslibrary":{"id":"fundslibrary","name":"FundsLibrary","description":"FundsLibrary is one of the investments industry's leading providers of fund data, related regulatory services and software solutions.","dateRange":{"startDate":"2014-03-31T23:00:00.000Z","endDate":"2015-03-01T00:00:00.000Z"}},"abide":{"id":"abide","name":"Abide Financial","description":"Abide Financial is a leading transaction reporting provider with proven solutions across multiple regulatory regimes.","dateRange":{"startDate":"2015-03-31T23:00:00.000Z","endDate":"2017-11-01T00:00:00.000Z"}},"scottlogic":{"id":"scottlogic","name":"Scott Logic","description":"UK-based software consultancy working in a variety of different sectors including capital markets; energy trading; e-trading; financial services; health care; oil & gas and the public sector.","dateRange":{"startDate":"2017-11-01T00:00:00.000Z"}}}}
+module.exports = {"jsonResumeSkills":[{"name":"Back End","level":"Advanced","keywords":["akkaDotNet","apacheSpark","aspDotNetMvc","aspWebApi","aspDotNetCore","aspDotNetWebforms","azureDataFactory","azureSql","azureSqlDw","azureHdInsights","awsDynamoDB","awsEC2","awsLambda","awsKinesis","awsRedshift","awsSqs","awsS3","cPlusPlus","cSharp","dotNetCore","dotNetFramework","entityFramework","entityFrameworkCore","fSharp","linq","neo4j","nodeJs","python","safeStack","tSql","vbDotNet"]},{"name":"Devops","level":"Advanced","keywords":["azureContainerRegistry","azureResourceManager","awsCloudformation","awsECR","awsECS","awsOpsworks","bashScripting","cake","chef","continuousIntegration","docker","git","octopusDeploy","packer","powershell","terraform","teamcity","windowsContainers"]},{"name":"Front End","level":"Competent","keywords":["angularJs","bootstrap","css","d3","esSixPromises","elmish","fable","gatsbyJs","graphQl","grunt","html","javascript","jquery","knockoutJs","less","reactJs","safeStack","typescript"]},{"name":"Other","level":"Advanced","keywords":["azureDevops","cordova","ionicFramework","jira","latex","resharper","restfulWebservices","rlanguage","sourceSafe","sqlServerManagementStudio","tfs","visualStudio","xslt","xml"]},{"name":"Testing","level":"Advanced","keywords":["jasmine","karma","moq","mstest","nunit","puppeteer","specflow","vstest","xUnit"]}],"jsonResumeSettings":[{"company":"Toplevel Computing","keywords":["cPlusPlus","cSharp","css","dotNetFramework","html","linq","moq","nunit","resharper","sourceSafe","sqlServerManagementStudio","tfs","tSql","visualStudio","vbDotNet","xml"]},{"company":"FundsLibrary","keywords":["aspDotNetMvc","aspDotNetWebforms","bootstrap","continuousIntegration","cSharp","css","dotNetFramework","esSixPromises","git","grunt","html","jasmine","javascript","jira","jquery","karma","knockoutJs","less","linq","restfulWebservices","sqlServerManagementStudio","tSql","typescript","visualStudio","xslt","xml"]},{"company":"Abide Financial","keywords":["angularJs","akkaDotNet","aspDotNetMvc","awsCloudformation","awsDynamoDB","awsEC2","awsLambda","awsKinesis","awsOpsworks","awsRedshift","awsSqs","awsS3","bashScripting","bootstrap","cake","chef","continuousIntegration","cSharp","css","dotNetFramework","esSixPromises","fSharp","git","html","javascript","jira","linq","moq","mstest","nodeJs","nunit","octopusDeploy","packer","powershell","python","resharper","restfulWebservices","sqlServerManagementStudio","specflow","teamcity","tSql","visualStudio","vstest","xml"]},{"company":"Scott Logic","keywords":["apacheSpark","aspWebApi","azureDataFactory","azureSql","azureSqlDw","azureResourceManager","azureHdInsights","awsECR","awsECS","bashScripting","bootstrap","continuousIntegration","cSharp","css","docker","dotNetCore","dotNetFramework","esSixPromises","fSharp","git","html","javascript","jira","linq","mstest","nodeJs","nunit","reactJs","resharper","restfulWebservices","sqlServerManagementStudio","specflow","terraform","tSql","visualStudio","vstest"]},{"company":"Parmenion","keywords":["aspDotNetMvc","aspWebApi","aspDotNetCore","aspDotNetWebforms","azureContainerRegistry","azureDevops","bashScripting","cake","continuousIntegration","cSharp","css","docker","dotNetCore","dotNetFramework","esSixPromises","entityFramework","entityFrameworkCore","fSharp","gatsbyJs","git","grunt","html","javascript","knockoutJs","linq","moq","mstest","neo4j","nodeJs","nunit","powershell","puppeteer","reactJs","resharper","restfulWebservices","sqlServerManagementStudio","specflow","tSql","typescript","visualStudio","vstest","vbDotNet","windowsContainers","xml","xUnit"]},{"company":"Technical Understanding","keywords":["elmish","fable","safeStack"]}],"skills":{"angularJs":{"id":"angularJs","name":"Angular Js","description":"AngularJS is a JavaScript-based open-source front-end web application framework mainly maintained by Google.","skillTypesIds":["frontend"],"settingsIds":["abide"]},"akkaDotNet":{"id":"akkaDotNet","name":"AKKA.NET","description":".NET actor system implementation framework, port of the popular scala framework.","skillTypesIds":["backend"],"settingsIds":["abide"]},"apacheSpark":{"id":"apacheSpark","name":"Apache Spark","description":"Apache Spark is an open-source cluster-computing framework. Spark provides an interface for programming entire clusters with implicit data parallelism and fault tolerance","skillTypesIds":["backend"],"settingsIds":["scottlogic"]},"aspDotNetMvc":{"id":"aspDotNetMvc","name":"ASP.NET MVC","description":"ASP.NET MVC is a web application framework developed by Microsoft, which implements the model–view–controller (MVC) pattern.","skillTypesIds":["backend"],"settingsIds":["fundslibrary","abide","parmenion"]},"aspWebApi":{"id":"aspWebApi","name":"ASP.NET Web API","description":"ASP.NET Web API is a framework that makes it easy to build HTTP services that reach a broad range of clients, including browsers and mobile devices.","skillTypesIds":["backend"],"settingsIds":["scottlogic","parmenion"]},"aspDotNetCore":{"id":"aspDotNetCore","name":"ASP.NET Core","description":"ASP.NET Core is the open-source version of ASP.NET, that runs on Windows, Linux, macOS, and Docker.","skillTypesIds":["backend"],"settingsIds":["parmenion"]},"aspDotNetWebforms":{"id":"aspDotNetWebforms","name":"ASP.NET WebForms","description":"ASP.NET is a server-side web application framework designed for web development to produce dynamic web pages","skillTypesIds":["backend"],"settingsIds":["fundslibrary","parmenion"]},"azureContainerRegistry":{"id":"azureContainerRegistry","name":"Azure Container Registry","description":"Azure Container Registry allows you to build, store, and manage container images and artifacts in a private registry for all types of container deployments","skillTypesIds":["devops"],"settingsIds":["parmenion"]},"azureDataFactory":{"id":"azureDataFactory","name":"Azure Data Factory","description":"Azure Data Factory is a cloud-based data integration service that allows you to create data-driven workflows in the cloud for orchestrating and automating data movement and data transformation","skillTypesIds":["backend"],"settingsIds":["scottlogic"]},"azureDevops":{"id":"azureDevops","name":"Azure Devops","description":"Azure DevOps is everything you need to build your software product from beginning to end. Azure DevOps helps you plan your project with Agile tools, manages your code using Git, and deploys your code through the best CI/CD system on the planet.","skillTypesIds":["other"],"settingsIds":["parmenion"]},"azureSql":{"id":"azureSql","name":"Azure SQL","description":"Microsoft Azure SQL Database is a managed cloud database (SaaS) provided as part of Microsoft Azure","skillTypesIds":["backend"],"settingsIds":["scottlogic"]},"azureSqlDw":{"id":"azureSqlDw","name":"Azure SQL Data Warehouse","description":"SQL Data Warehouse is a cloud-based Enterprise Data Warehouse that leverages Massively Parallel Processing to quickly run complex queries across petabytes of data","skillTypesIds":["backend"],"settingsIds":["scottlogic"]},"azureResourceManager":{"id":"azureResourceManager","name":"Azure Resource Manager","description":"Azure Resource Manager is a technology used to provision resources within the Azure platform.","skillTypesIds":["devops"],"settingsIds":["scottlogic"]},"azureHdInsights":{"id":"azureHdInsights","name":"Azure HdInsights","description":"Azure HDInsight is a fully managed cloud service that makes it easy, fast and cost-effective to process massive amounts of data. Use popular open-source frameworks such as Hadoop, Spark, Hive, LLAP, Kafka, Storm, R and more.","skillTypesIds":["backend"],"settingsIds":["scottlogic"]},"awsCloudformation":{"id":"awsCloudformation","name":"AWS Cloudformation","description":"AWS CloudFormation provides a common language for you to describe and provision all the infrastructure resources in your cloud environment. CloudFormation allows you to use a simple text file to model and provision, in an automated and secure manner, all the resources needed for your applications across all regions and accounts. This file serves as the single source of truth for your cloud environment","skillTypesIds":["devops"],"settingsIds":["abide"]},"awsDynamoDB":{"id":"awsDynamoDB","name":"AWS DynamoDB","description":"Amazon DynamoDB is a fast and flexible NoSQL database service for all applications that need consistent, single-digit millisecond latency at any scale. It is a fully managed cloud database and supports both document and key-value store models","skillTypesIds":["backend"],"settingsIds":["abide"]},"awsEC2":{"id":"awsEC2","name":"AWS EC2","description":"Amazon Elastic Compute Cloud (Amazon EC2) is a web service that provides secure, resizable compute capacity in the cloud. It is designed to make web-scale cloud computing easier for developers.","skillTypesIds":["backend"],"settingsIds":["abide"]},"awsECR":{"id":"awsECR","name":"AWS ECR","description":"Amazon Elastic Container Registry is a fully-managed Docker container registry that makes it easy for developers to store, manage, and deploy Docker container images.","skillTypesIds":["devops"],"settingsIds":["scottlogic"]},"awsECS":{"id":"awsECS","name":"AWS ECS","description":"Amazon Elastic Container Service (Amazon ECS) is a highly scalable, high-performance container orchestration service that supports Docker containers and allows you to easily run and scale containerized applications on AWS.","skillTypesIds":["devops"],"settingsIds":["scottlogic"]},"awsLambda":{"id":"awsLambda","name":"AWS Lambda","description":"AWS Lambda lets you run code without provisioning or managing servers.","skillTypesIds":["backend"],"settingsIds":["abide"]},"awsKinesis":{"id":"awsKinesis","name":"AWS Kinesis","description":"Amazon Kinesis Data Streams enables you to build custom applications that process or analyze streaming data for specialized needs.","skillTypesIds":["backend"],"settingsIds":["abide"]},"awsOpsworks":{"id":"awsOpsworks","name":"AWS Opsworks","description":"AWS OpsWorks is a configuration management service that provides managed instances of Chef and Puppet.","skillTypesIds":["devops"],"settingsIds":["abide"]},"awsRedshift":{"id":"awsRedshift","name":"AWS Redshift","description":"Amazon Redshift is a fast, fully managed data warehouse that makes it simple and cost-effective to analyze all your data using standard SQL and your existing Business Intelligence tools","skillTypesIds":["backend"],"settingsIds":["abide"]},"awsSqs":{"id":"awsSqs","name":"AWS SQS","description":"Amazon Simple Queue Service is a fully managed message queuing service that makes it easy to decouple and scale microservices, distributed systems, and serverless applications.","skillTypesIds":["backend"],"settingsIds":["abide"]},"awsS3":{"id":"awsS3","name":"AWS S3","description":"Amazon S3 is object storage built to store and retrieve any amount of data from anywhere – web sites and mobile apps, corporate applications, and data from IoT sensors or devices.","skillTypesIds":["backend"],"settingsIds":["abide"]},"bashScripting":{"id":"bashScripting","name":"bash scripting","description":"Bash is a Unix shell and command language written by Brian Fox for the GNU Project as a free software replacement for the Bourne shell","skillTypesIds":["devops"],"settingsIds":["abide","scottlogic","parmenion"]},"bootstrap":{"id":"bootstrap","name":"Bootstrap","description":"Bootstrap is a free and open-source front-end library for designing websites and web applications. It contains HTML- and CSS-based design templates for typography, forms, buttons, navigation and other interface components, as well as optional JavaScript extensions.","skillTypesIds":["frontend"],"settingsIds":["abide","fundslibrary","scottlogic"]},"cake":{"id":"cake","name":"Cake","description":"Cake (C# Make) is a cross-platform build automation system with a C# DSL for tasks such as compiling code, copying files and folders, running unit tests, compressing files and building NuGet packages","skillTypesIds":["devops"],"settingsIds":["abide","parmenion"]},"chef":{"id":"chef","name":"Chef","description":"Chef is a configuration management tool written in Ruby and Erlang used to streamline the task of configuring and maintaining servers.","skillTypesIds":["devops"],"settingsIds":["abide"]},"continuousIntegration":{"id":"continuousIntegration","name":"Continuous integration","description":"Continuous integration (CI) is the practice of merging all developer working copies to a shared mainline several times a day.","skillTypesIds":["devops"],"settingsIds":["abide","fundslibrary","scottlogic","parmenion"]},"cordova":{"id":"cordova","name":"Apache Cordova (Phone Gap)","description":"Apache Cordova is an open-source mobile application development framework which enables software programmers to build applications for mobile devices using CSS3, HTML5, and JavaScript instead of relying on platform-specific APIs like those in Android, iOS, or Windows Phone.","skillTypesIds":["other"],"settingsIds":[]},"cPlusPlus":{"id":"cPlusPlus","name":"C++","description":"A general-purpose programming language. It has imperative, object-oriented and generic programming features, while also providing facilities for low-level memory manipulation","skillTypesIds":["backend"],"settingsIds":["toplevel"]},"cSharp":{"id":"cSharp","name":"C#","description":"C# is a multi-paradigm programming language encompassing strong typing, imperative, declarative, functional, generic, object-oriented and component-oriented programming disciplines","skillTypesIds":["backend"],"settingsIds":["toplevel","fundslibrary","abide","scottlogic","parmenion"]},"css":{"id":"css","name":"CSS","description":"Cascading Style Sheets (CSS) is a style sheet language used for describing the presentation of a document written in a markup language like HTML. CSS is a cornerstone technology of the World Wide Web, alongside HTML and JavaScript","skillTypesIds":["frontend"],"settingsIds":["toplevel","fundslibrary","abide","scottlogic","parmenion"]},"d3":{"id":"d3","name":"D3","description":"A JavaScript library for producing dynamic, interactive data visualizations in web browsers. It makes use of the widely implemented SVG, HTML5, and CSS standards","skillTypesIds":["frontend"],"settingsIds":[]},"docker":{"id":"docker","name":"Docker","description":"Docker is a computer program that performs operating-system-level virtualization also known as containerization.","skillTypesIds":["devops"],"settingsIds":["scottlogic","parmenion"]},"dotNetCore":{"id":"dotNetCore","name":".NET Core","description":".NET Core is a free and open-source managed computer software framework for the Microsoft Windows, Apple macOS and Linux operating systems.","skillTypesIds":["backend"],"settingsIds":["scottlogic","parmenion"]},"dotNetFramework":{"id":"dotNetFramework","name":".NET Framework","description":".NET Framework is a software framework developed by Microsoft that runs primarily on Microsoft Windows","skillTypesIds":["backend"],"settingsIds":["toplevel","fundslibrary","abide","scottlogic","parmenion"]},"esSixPromises":{"id":"esSixPromises","name":"ES6 Promises","description":"The Promise object represents the eventual completion (or failure) of an asynchronous operation, and its resulting value.","skillTypesIds":["frontend"],"settingsIds":["fundslibrary","abide","scottlogic","parmenion"]},"entityFramework":{"id":"entityFramework","name":"Entity Framework","description":"Entity Framework is an object-relational mapper (O/RM) that enables .NET developers to work with a database using .NET objects.","skillTypesIds":["backend"],"settingsIds":["parmenion"]},"entityFrameworkCore":{"id":"entityFrameworkCore","name":"EF Core","description":"Entity Framework Core is an object-relational mapper (O/RM) that enables .NET developers to work with a database using .NET objects.","skillTypesIds":["backend"],"settingsIds":["parmenion"]},"elmish":{"id":"elmish","name":"Elmish","description":"Elmish is a set of simple abstractions for writing user interfaces in F# applications in a functional style following the model-view-update architecture made famous by Elm.","skillTypesIds":["frontend"],"settingsIds":["technicalunderstanding"]},"fable":{"id":"fable","name":"Fable","description":"Fable is a compiler powered by Babel designed to make F# a first-class citizen of the JavaScript ecosystem.","skillTypesIds":["frontend"],"settingsIds":["technicalunderstanding"]},"fSharp":{"id":"fSharp","name":"F#","description":"F# is a strongly typed, multi-paradigm programming language that encompasses functional, imperative, and object-oriented programming methods.","skillTypesIds":["backend"],"settingsIds":["abide","scottlogic","parmenion"]},"gatsbyJs":{"id":"gatsbyJs","name":"GatsbyJS","description":"Blazing fast modern site generator for React. Go beyond static sites: build blogs, ecommerce sites, full-blown apps, and more with Gatsby.","skillTypesIds":["frontend"],"settingsIds":["parmenion"]},"git":{"id":"git","name":"git","description":"Git is a version control system for tracking changes in computer files and coordinating work on those files among multiple people","skillTypesIds":["devops"],"settingsIds":["fundslibrary","abide","scottlogic","parmenion"]},"graphQl":{"id":"graphQl","name":"GraphQL","description":"GraphQL is a query language for your API, and a server-side runtime for executing queries by using a type system you define for your data.","skillTypesIds":["frontend"],"settingsIds":[]},"grunt":{"id":"grunt","name":"grunt","description":"Grunt is a JavaScript task runner, a tool used to automatically perform frequent tasks such as minification, compilation, unit testing, and linting","skillTypesIds":["frontend"],"settingsIds":["fundslibrary","parmenion"]},"html":{"id":"html","name":"HTML","description":"Hypertext Markup Language (HTML) is the standard markup language for creating web pages and web applications. With Cascading Style Sheets (CSS) and JavaScript, it forms a triad of cornerstone technologies for the World Wide Web.","skillTypesIds":["frontend"],"settingsIds":["toplevel","fundslibrary","abide","scottlogic","parmenion"]},"ionicFramework":{"id":"ionicFramework","name":"Ionic framework","description":"Ionic is a powerful HTML5 SDK that helps you build native-feeling mobile apps using web technologies like HTML, CSS, and Javascript.","skillTypesIds":["other"],"settingsIds":[]},"jasmine":{"id":"jasmine","name":"jasmine","description":"Jasmine is an open source testing framework for JavaScript. It aims to run on any JavaScript-enabled platform, to not intrude on the application nor the IDE, and to have easy-to-read syntax.","skillTypesIds":["testing"],"settingsIds":["fundslibrary"]},"javascript":{"id":"javascript","name":"javascript","description":"JavaScript is a high-level, interpreted programming language. It is a language which is also characterized as dynamic, weakly typed, prototype-based and multi-paradigm","skillTypesIds":["frontend"],"settingsIds":["fundslibrary","abide","scottlogic","parmenion"]},"jira":{"id":"jira","name":"JIRA","description":"Jira is a proprietary issue tracking product, developed by Atlassian. It provides bug tracking, issue tracking, and project management functions","skillTypesIds":["other"],"settingsIds":["fundslibrary","abide","scottlogic"]},"jquery":{"id":"jquery","name":"jQuery","description":"jQuery is a cross-platform JavaScript library designed to simplify the client-side scripting of HTML. It is free, open-source software using the MIT License.","skillTypesIds":["frontend"],"settingsIds":["fundslibrary"]},"karma":{"id":"karma","name":"karma","description":"Karma is a test runner for JavaScript that runs on Node.js. It is very well suited to testing AngularJS or any other JavaScript projects.","skillTypesIds":["testing"],"settingsIds":["fundslibrary"]},"knockoutJs":{"id":"knockoutJs","name":"KnockoutJs","description":"Knockout is a standalone JavaScript implementation of the Model-View-ViewModel pattern with templates.","skillTypesIds":["frontend"],"settingsIds":["fundslibrary","parmenion"]},"latex":{"id":"latex","name":"LaTeX","description":"LaTeX is a document preparation system. When writing, the writer uses plain text as opposed to the formatted text found in WYSIWYG word processors like Microsoft Word.","skillTypesIds":["other"],"settingsIds":[]},"less":{"id":"less","name":"LESS","description":"Less (which stands for Leaner Style Sheets) is a backwards-compatible language extension for CSS","skillTypesIds":["frontend"],"settingsIds":["fundslibrary"]},"linq":{"id":"linq","name":"LINQ","description":"General-purpose query facilities added to the .NET Framework apply to all sources of information, not just relational or XML data.","skillTypesIds":["backend"],"settingsIds":["toplevel","fundslibrary","abide","scottlogic","parmenion"]},"moq":{"id":"moq","name":"MoQ","description":"Moq is the one and only .NET mocking framework that allows specifying mock behavior via declarative specification queries.","skillTypesIds":["testing"],"settingsIds":["toplevel","abide","parmenion"]},"mstest":{"id":"mstest","name":"MSTest","description":"The Visual Studio Unit Testing Framework describes Microsoft's suite of unit testing tools as integrated into some[1] versions of Visual Studio 2005 and later","skillTypesIds":["testing"],"settingsIds":["scottlogic","abide","parmenion"]},"neo4j":{"id":"neo4j","name":"neo4j","description":"Neo4j is a graph database management system, described by its developers as an ACID-compliant transactional database with native graph storage and processing","skillTypesIds":["backend"],"settingsIds":["parmenion"]},"nodeJs":{"id":"nodeJs","name":"node.js","description":"Node.js is an open-source, cross-platform, JavaScript runtime environment that executes JavaScript code outside of a web browser","skillTypesIds":["backend"],"settingsIds":["abide","scottlogic","parmenion"]},"nunit":{"id":"nunit","name":"NUnit","description":"NUnit is an open-source unit testing framework for Microsoft .NET. It serves the same purpose as JUnit does in the Java world, and is one of many programs in the xUnit family.","skillTypesIds":["testing"],"settingsIds":["toplevel","abide","scottlogic","parmenion"]},"octopusDeploy":{"id":"octopusDeploy","name":"Octopus Deploy","description":"Octopus Deploy is an automated release management tool for modern developers and DevOps teams.","skillTypesIds":["devops"],"settingsIds":["abide"]},"packer":{"id":"packer","name":"Packer","description":"Packer is a free and open source tool for creating golden images for multiple platforms from a single source configuration.","skillTypesIds":["devops"],"settingsIds":["abide"]},"powershell":{"id":"powershell","name":"Powershell","description":"PowerShell is a task automation and configuration management framework from Microsoft, consisting of a command-line shell and associated scripting language.","skillTypesIds":["devops"],"settingsIds":["abide","parmenion"]},"puppeteer":{"id":"puppeteer","name":"Puppeteer","description":"Puppeteer is a Node library which provides a high-level API to control Chrome or Chromium over the DevTools Protocol. Puppeteer runs headless by default, but can be configured to run full (non-headless) Chrome or Chromium","skillTypesIds":["testing"],"settingsIds":["parmenion"]},"python":{"id":"python","name":"python","description":"Python is an interpreted high-level programming language for general-purpose programming. Python has a design philosophy that emphasizes code readability, notably using significant whitespace.","skillTypesIds":["backend"],"settingsIds":["abide"]},"reactJs":{"id":"reactJs","name":"react.js","description":"React is a JavaScript library for building user interfaces. It is maintained by Facebook, Instagram and a community of individual developers and corporations.","skillTypesIds":["frontend"],"settingsIds":["scottlogic","parmenion"]},"resharper":{"id":"resharper","name":"Resharper","description":"ReSharper is a popular developer productivity extension for Microsoft Visual Studio. It automates most of what can be automated in your coding routines. It finds compiler errors, runtime errors, redundancies, and code smells right as you type, suggesting intelligent corrections for them.","skillTypesIds":["other"],"settingsIds":["toplevel","abide","scottlogic","parmenion"]},"restfulWebservices":{"id":"restfulWebservices","name":"RESTFul webservices","description":"REpresentational State Transfer (REST) is an architectural style that defines a set of constraints and properties based on HTTP.","skillTypesIds":["other"],"settingsIds":["fundslibrary","abide","scottlogic","parmenion"]},"rlanguage":{"id":"rlanguage","name":"R","description":"R is a programming language and free software environment for statistical computing and graphics that is supported by the R Foundation for Statistical Computing. The R language is widely used among statisticians and data miners for developing statistical software","skillTypesIds":["other"],"settingsIds":[]},"safeStack":{"id":"safeStack","name":"SAFE Stack","description":"An end-to-end, functional-first stack for cloud-ready web development that emphasizes type-safe programming","skillTypesIds":["backend","frontend"],"settingsIds":["technicalunderstanding"]},"sourceSafe":{"id":"sourceSafe","name":"Source safe","description":"Microsoft Visual SourceSafe (VSS) is a discontinued source control program, oriented towards small software development projects.","skillTypesIds":["other"],"settingsIds":["toplevel"]},"sqlServerManagementStudio":{"id":"sqlServerManagementStudio","name":"SQL Server Management Studio","description":"SQL Server Management Studio (SSMS) is a software application first launched with Microsoft SQL Server 2005 that is used for configuring, managing, and administering all components within Microsoft SQL Server.","skillTypesIds":["other"],"settingsIds":["toplevel","fundslibrary","abide","scottlogic","parmenion"]},"specflow":{"id":"specflow","name":"SpecFlow","description":"SpecFlow is an open source port of Cucumber for .Net.","skillTypesIds":["testing"],"settingsIds":["abide","scottlogic","parmenion"]},"tfs":{"id":"tfs","name":"TFS","description":"Team Foundation Server (TFS) is a Microsoft product that provides source code management (either with Team Foundation Version Control or Git), reporting, requirements management, project management, automated builds, lab management, testing and release management capabilities","skillTypesIds":["other"],"settingsIds":["toplevel"]},"terraform":{"id":"terraform","name":"terraform","description":"Terraform is an infrastructure as code software by HashiCorp. It allows users to define a datacenter infrastructure in a high-level configuration language, from which it can create an execution plan to build the infrastructure.","skillTypesIds":["devops"],"settingsIds":["scottlogic"]},"teamcity":{"id":"teamcity","name":"TeamCity","description":"TeamCity is a Java-based build management and continuous integration server from JetBrains.","skillTypesIds":["devops"],"settingsIds":["abide"]},"tSql":{"id":"tSql","name":"T-SQL","description":"Transact-SQL (T-SQL) is Microsoft's and Sybase's proprietary extension to the SQL (Structured Query Language) used to interact with relational databases. T-SQL expands on the SQL standard to include procedural programming, local variables, various support functions for string processing, date processing, mathematics, etc.","skillTypesIds":["backend"],"settingsIds":["toplevel","fundslibrary","abide","scottlogic","parmenion"]},"typescript":{"id":"typescript","name":"Typescript","description":"TypeScript is an open-source programming language developed and maintained by Microsoft. It is a strict syntactical superset of JavaScript, and adds optional static typing to the language.","skillTypesIds":["frontend"],"settingsIds":["fundslibrary","parmenion"]},"visualStudio":{"id":"visualStudio","name":"Visual studio","description":"Microsoft Visual Studio is an integrated development environment (IDE) from Microsoft.","skillTypesIds":["other"],"settingsIds":["toplevel","fundslibrary","abide","scottlogic","parmenion"]},"vstest":{"id":"vstest","name":"VSTest","description":"The Visual Studio Unit Testing Framework describes Microsoft's suite of unit testing tools as integrated into some[1] versions of Visual Studio 2005 and later","skillTypesIds":["testing"],"settingsIds":["scottlogic","abide","parmenion"]},"vbDotNet":{"id":"vbDotNet","name":"VB.NET","description":"Visual Basic .NET (VB.NET) is a multi-paradigm, object-oriented programming language, implemented on the .NET Framework.","skillTypesIds":["backend"],"settingsIds":["toplevel","parmenion"]},"windowsContainers":{"id":"windowsContainers","name":"Windows Containers","description":"Windows containers allow users to package applications with their dependencies and leverage operating system-level virtualization to provide fast, fully isolated environments on a single system.","skillTypesIds":["devops"],"settingsIds":["parmenion"]},"xslt":{"id":"xslt","name":"XSLT","description":"A language to transform XML into HTML","skillTypesIds":["other"],"settingsIds":["fundslibrary"]},"xml":{"id":"xml","name":"XML","description":"A heavily used markup language","skillTypesIds":["other"],"settingsIds":["toplevel","fundslibrary","abide","parmenion"]},"xUnit":{"id":"xUnit","name":"xUnit","description":"Unit testing framework.","skillTypesIds":["testing"],"settingsIds":["parmenion"]}},"skillTypes":{"backend":{"id":"backend","name":"Back End","description":"Back end Development refers to the server side of development which usually consists of three parts: a server, an application, and a database. Code written by back end developers is what communicates the database information to the browser.","level":"Advanced"},"devops":{"id":"devops","name":"Devops","description":"DevOps is a software engineering culture and practice that aims at unifying software development and software operations","level":"Advanced"},"frontend":{"id":"frontend","name":"Front End","description":"Front-end web development is the practice of converting data to graphical interface for user to view and interact with data through digital interaction using HTML, CSS and Javascript.","level":"Competent"},"other":{"id":"other","name":"Other","description":"Technologies which don't fit into the other categories.","level":"Advanced"},"testing":{"id":"testing","name":"Testing","description":"Software testing involves the execution of a software component or system component to evaluate one or more properties of interest. In general, these properties indicate the extent to which the component or system under test.","level":"Advanced"}},"settings":{"toplevel":{"id":"toplevel","name":"Toplevel Computing","description":"Digital case management solutions that help Government and Public Sector meet the Digital by Default Service Standard quickly, securely and cost effectively.","dateRange":{"startDate":"2013-03-31T23:00:00.000Z","endDate":"2014-03-31T23:00:00.000Z"}},"fundslibrary":{"id":"fundslibrary","name":"FundsLibrary","description":"FundsLibrary is one of the investments industry's leading providers of fund data, related regulatory services and software solutions.","dateRange":{"startDate":"2014-03-31T23:00:00.000Z","endDate":"2015-03-01T00:00:00.000Z"}},"abide":{"id":"abide","name":"Abide Financial","description":"Abide Financial is a leading transaction reporting provider with proven solutions across multiple regulatory regimes.","dateRange":{"startDate":"2015-03-31T23:00:00.000Z","endDate":"2017-11-01T00:00:00.000Z"}},"scottlogic":{"id":"scottlogic","name":"Scott Logic","description":"UK-based software consultancy working in a variety of different sectors including capital markets; energy trading; e-trading; financial services; health care; oil & gas and the public sector.","dateRange":{"startDate":"2017-11-01T00:00:00.000Z","endDate":"2018-09-30T23:00:00.000Z"}},"parmenion":{"id":"parmenion","name":"Parmenion","description":"(contract, 3 extensions) Parmenion is a rapidly growing, award winning technology and investment solutions business.","dateRange":{"startDate":"2018-11-01T00:00:00.000Z","endDate":"2020-05-31T23:00:00.000Z"}},"technicalunderstanding":{"id":"technicalunderstanding","name":"Technical Understanding","description":"","dateRange":{"startDate":"2018-11-01T00:00:00.000Z"}}}}
 
 /***/ })
 /******/ ])["default"];
