@@ -14,8 +14,6 @@ date: "2020/07/01"
 category: Tech
 ---
 
-> This post is a write up of the implementation of gamesroom.xyz. It includes an intro to some of the tech involved, some of the problems overcome and general notes.
-
 I've wanted to make an application using the SAFE stack for a while and with our new indoor life it seems a good time to make a multiplayer games room.
 
 This also presented a chance to try out using F# with SignalR for client-server communication and Akka.Net for a stateful game server.
@@ -52,6 +50,8 @@ let createPrinterActorProps = props(fun (mailbox: Actor<Msg>) ->
     )
 ```
 
+The actor above receives a message that wraps either an `int` or a `string` and prints the value to the console.
+
 The actor can be created by passing in a name to the `spawn` method along with the props and an `ActorSystem` to run in. `spawn` returns an `IActorRef<Msg>` that can be told a `Msg` with the custom operator `<!` that calls the actor's `Tell` method.
 
 ``` fsharp 
@@ -86,7 +86,7 @@ SignalR is a solution for painless client-server communication over websockets. 
 
 This is the first time i've used the library, the setup on the server-side is the same as C# and is well documented.
 
-SignalR works well with F# objects as long as camelCase is used for property names and the DTOs are simple records that use the `CLIMutable` attribute (on the server-side).
+SignalR works well with F# objects as long as camelCase is used for property names and the DTOs are simple records that use the `CLIMutable` attribute on the server-side.
 I chose to use the non-native-F# version of types where possible (`array` over `list` being an example) and didn't try to use any discriminated unions.
 Sending a `int array` from the client required serialising it to a string, as the fable representation of the array was a simple object, rather than a javascript array.
 
@@ -105,7 +105,9 @@ Overall I'm a `paket` convert, although it took me a bit longer to figure out ho
 
 ### Conclusion
 
-Overall the experience was a very pleasant one. The functional style of writing app state is a great way to express the intent and limit the possible app states with the compiler. Being able to use the same language in the client and server code is very cool.
+Overall the experience was a very pleasant one. The functional style of writing app state is a great way to express the intent and limit the possible app states with the compiler. 
+
+Being able to use the same language in the client and server code is very cool. I only experienced one null-based error in the front end code, which is a very different to most of my javascript experience.
 
 As other people have suggested, the code took a bit longer to write than I would expect a similar app to be written in C#/javascript, but this was partly due to figuring out some of the quirks of using the technology together.
 
