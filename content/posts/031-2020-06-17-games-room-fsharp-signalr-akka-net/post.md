@@ -107,7 +107,7 @@ Overall I'm a `paket` convert, although it took me a bit longer to figure out ho
 
 Overall the experience was a very pleasant one. The functional style of writing app state is a great way to express the intent and limit the possible app states with the compiler. 
 
-Being able to use the same language in the client and server code is very cool. I only experienced one null-based error in the front end code, which is a very different to most of my javascript experience.
+Being able to use the same language in the client and server code is very cool. I only encountered one null-based error in the front end code, which is counter to most of my javascript programming experience. Being able to use `match` expressions on the client side code really does seem like a "game changer".
 
 As other people have suggested, the code took a bit longer to write than I would expect a similar app to be written in C#/javascript, but this was partly due to figuring out some of the quirks of using the technology together.
 
