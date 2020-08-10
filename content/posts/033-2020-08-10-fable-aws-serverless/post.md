@@ -22,7 +22,7 @@ I want to use fable to create AWS Lambdas that run the node.js runtime (rather t
 
 ## Err... what?
 
-**AWS Lambda** [is a "functions as a service" technology](https://aws.amazon.com/lambda/) that enables building "serverless" applications. "serverless" applications have a lot of the deployment and running considerations abstracted away. They are useful for apps that need to scale on demand and that may not be used often. 
+**AWS Lambda** [is a "functions as a service" technology](https://aws.amazon.com/lambda/) that makes it easy to build "serverless" applications. "serverless" applications have a lot of the deployment and running considerations abstracted away and are useful for apps that need to scale on demand and that may not be used often. 
 
 AWS Lambda functions can be written in a variety of languages/runtimes including Java, Node.js, .Net Core and Python.
 
@@ -41,22 +41,22 @@ fable works at the language level and passes the F# abstract syntax tree to the 
 
 There are a few advantages of trying this approach:
 
-**cost** - serverless applications don't have some of the same up front costs as other methods of deploying apps using a "best-practice" approach. A zero-to-low traffic severless app will likely fall into the free-tier for most cloud provider services.
+**cost** - serverless applications don't have some of the same up front costs as other methods of deploying apps using a "best-practice" approach. A zero-to-low traffic serverless app will likely fall into the free-tier for most cloud provider services.
 
 
-**client-server code sharing** - fable allows the same strongly-typed code to be run on the back-end and front-end. This is currently possible with typescript, but i'm a bigger fan of the F# type-system. 
+**client-server code sharing** - fable allows the same strongly typed code to be run on the back-end and front-end. This is currently possible with typescript, but i'm a bigger fan of the F# type-system. 
 
-This means that dtos, validation logic and domain types can be shared which potentially removes some kinds of bugs and speeds up development time. 
+This means that dtos, validation logic and domain types can be shared, this potentially removes some kinds of bugs and can help speed up development time. 
 
-**Runtime** - Targeting the node.js runtime allows access to a formidable amount of third-party libraries on the `npm` repository. This is especially useful for AWS libraries where the .Net client libraries can lag behind the node.js version.
+**Runtime** - Targeting the node.js runtime allows access to a formidable amount of third-party libraries on the `npm` repository. This is especially useful for AWS libraries where the .Net client libraries can lag behind the node.js version in terms of maturity.
 
-Another big advantage is that [the "cold start" time for node.js is lower](https://mikhail.io/serverless/coldstarts/aws/) than for `dotnet`. It's not a huge difference, but these start times can compound if there is a change of lambda calls.
+Another big advantage is that [the "cold start" time for node.js is lower](https://mikhail.io/serverless/coldstarts/aws/) than for `dotnet`. It's not a huge difference, but these start times can compound if there is a chain of lambda calls.
 
 ---
 
 ## Architecture
 
-The app consists of a static SPA site, stored on AWS S3, that is hosted with the AWS Cloudfront CDN. 
+The app consists of a static SPA site stored on AWS S3, that is hosted with the AWS Cloudfront CDN. 
 
 The back-end consists of a collection of AWS Lambda functions that form a REST API with the addition of an AWS API Gateway. 
 The application sends requests to the gateway by customising the CDN's behaviour to direct calls to the `<CDNBase>/api/<path>` to the gateway.
@@ -69,7 +69,7 @@ The application sends requests to the gateway by customising the CDN's behaviour
 
 ### Shared code
 
-A big advantage as described above is the possibility to share code across the front and backend code bases. In this case a file called `Shared.fs` is used in both and it contains a couple of simple DTOs to create and receive a customer:
+A big advantage as described above is the possibility to share code across the front and backend code bases. In this case a file called `Shared.fs` is used in both and it contains a couple of DTOs to create and receive a customer:
 
 ``` fsharp
 module Shared
@@ -87,7 +87,7 @@ Functions invoked by AWS Lambda need to have two arguments, these are often call
 
 `event` - contains information about the trigger of the function, in this case data relating to the API Gateway and REST call details. 
 
-`context` - contains information on the context of the call, which includes AWS specific information like resource and user identifiers. Context also provides the methods required to respond to the request call. API Gateway expects an object to be passed to the `context.succeed` method that contains information on the response `statusCode`, `headers` and `body`.
+`context` - contains information on the context of the call, which includes AWS specific information like resource and user identifiers. Context also provides the methods required to respond to the request call. API Gateway expects an object that contains information on the response `statusCode`, `headers` and `body` to be passed to the `context.succeed` method.
 
 The `event` and `context` objects need type definitions to be used with fable. These can be derived by deploying empty functions and using `console.log` to work out the property names and types. In the solution these types form an `AwsTypes` module.
 
