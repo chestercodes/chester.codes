@@ -2,7 +2,7 @@
 layout: post
 title: Serverless apps on AWS using F# and fable
 excerpt: Serverless apps on AWS using F# and fable
-issue: 32
+issue: 33
 tags: 
 - dotnet
 - fsharp
