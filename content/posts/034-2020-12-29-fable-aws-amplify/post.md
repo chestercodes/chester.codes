@@ -220,7 +220,7 @@ export const listTodoLists = /* GraphQL */ `
 
 ---
 
-### Using js code in fable
+## Using javascript code in fable
 
 Consuming javascript from fable involves describing the type shape and location of the code. To use the generated `listTodoLists` query string that is exported from the `graphql/queries.js` file:
 
@@ -313,7 +313,7 @@ type ModelTodoListFilterInput =
       not: Option<ModelTodoListFilterInput> }
 ```
 
-## AppSync client
+## AWS AppSync client
 
 The [AWS AppSync javascript client](https://github.com/awslabs/aws-mobile-appsync-sdk-js) is the easiest way to consume the API from the app.
 Using the client from fable involves importing the `aws-appsync` package from npm and creating types for the initialisation. The client creation types are a bit too involved for this post, but can be [seen in the project repo](https://github.com/chestercodes/fable-aws-amplify/blob/main/src/types/AwsAppsync.fs).
@@ -382,8 +382,8 @@ I've uploaded the [application code to github for those interested](https://gith
 AWS Amplify is an ambitious attempt to speed up app development by providing abstractions over common AWS service setups. Overall I think it is a useful tool that strikes a good balance between ease and control.
 I'm not sure how the experience will scale to more than one developer or whether the tool is the best choice for a long lasting project. My description of the amplify cli feature set is far from complete and those interested should [consult the docs](https://aws.amazon.com/amplify/).
 
-The choice of language for a new project is always hard, especially [between F# and typescript](https://thomasbandt.com/type-safe-spa-fable-fsharp-vs-typescript) which has a huge user base and is enough type safety for most.
-The main advantage of using F# for front-end development is client-server code sharing, which isn't applicable here, but I think that the language constructs, type-system and refactoring experience (incredible) make it a killer choice for this and other projects. 
+The choice of language for a new project is always hard, especially [between F# and typescript](https://thomasbandt.com/type-safe-spa-fable-fsharp-vs-typescript) which has a huge user base and provides enough type safety for most.
+The main advantage of using F# for front-end development is client-server code sharing, which isn't applicable here, but I think that the language features, type-system and refactoring experience make it a great choice. 
 
-
-During writing this blog post I realised that the amplify cli could be used to generate [typescript that interacts with the API](https://medium.com/@dantasfiles/using-typescript-with-aws-amplify-api-3788d722869), then convert this to F# with the `ts2fable` tool. This would have involved adding a typescript build step, but have the advantage of eliminating most of the work defining data types and potentially removing a source of bugs.
+After finishing the code for this post I realised that when the amplify cli is used to generate typescript it generates code for the [API interaction.](https://medium.com/@dantasfiles/using-typescript-with-aws-amplify-api-3788d722869)
+The generated `API.ts` file contains the query types created by snowflaqe and the data types returned by the API resolvers. Converting this  typescript file to F# with the `ts2fable` tool removes the need for most of the manual type definitions and can potentially remove a source of bugs.
