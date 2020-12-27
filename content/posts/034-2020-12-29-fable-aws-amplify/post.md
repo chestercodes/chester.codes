@@ -382,8 +382,8 @@ I've uploaded the [application code to github for those interested](https://gith
 AWS Amplify is an ambitious attempt to speed up app development by providing abstractions over common AWS service setups. Overall I think it is a useful tool that strikes a good balance between ease and control.
 I'm not sure how the experience will scale to more than one developer or whether the tool is the best choice for a long lasting project. My description of the amplify cli feature set is far from complete and those interested should [consult the docs](https://aws.amazon.com/amplify/).
 
-The choice of language for a new project is always hard, especially [between F# and typescript](https://thomasbandt.com/type-safe-spa-fable-fsharp-vs-typescript) which has a huge user base and provides enough type safety for most.
+The choice of language for a new project is always hard, especially [between F# and typescript](https://thomasbandt.com/type-safe-spa-fable-fsharp-vs-typescript) which benefits from a huge user base and provides enough type safety for most.
 The main advantage of using F# for front-end development is client-server code sharing, which isn't applicable here, but I think that the language features, type-system and refactoring experience make it a great choice. 
 
 After finishing the code for this post I realised that when the amplify cli is used to generate typescript it generates code for the [API interaction.](https://medium.com/@dantasfiles/using-typescript-with-aws-amplify-api-3788d722869)
-The generated `API.ts` file contains the query types created by snowflaqe and the data types returned by the API resolvers. Converting this  typescript file to F# with the `ts2fable` tool removes the need for most of the manual type definitions and can potentially remove a source of bugs.
+The generated `API.ts` file contains types for the query objects and the data returned by the API resolvers. Converting this typescript file to F# with the `ts2fable` tool removes the need for the snowflaqe generation step and most of the manual type definitions.
