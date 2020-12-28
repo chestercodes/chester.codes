@@ -29,7 +29,7 @@ The plugins include ([but are not limited to](https://docs.amplify.aws/cli/plugi
  Category | Purpose
  ---      | ---
  auth     | Adds user authentication to an application using AWS Cognito
- api      | Uses a GraphQL schema to create an AWS AppSync API backed by AWS DynamoDB
+ api      | Adds a scalable GraphQL backend API using AWS AppSync and DynamoDB
  storage  | Adds file and app data storage with AWS S3 and DynamoDB
  function | Add custom functionality using AWS Lambda
 
@@ -77,17 +77,14 @@ amplify stores state about the services that a project uses alongside the code i
 ## auth
 
 AWS cognito is a service that provides user authentication and access control. Cognito makes it easy to implement user sign-up, password reset with a customisable hosted UI.
-
-amplify has an `auth` plugin that when added to the project will create a hosted UI with AWS cognito. The auth plugin is added with the command:
+amplify has an `auth` plugin that will create a hosted UI with AWS cognito when added to the project:
 
 ``` bash
 # format is amplify add <plugin>
 amplify add auth
 ```
 
-`amplify` will then ask questions to get the desired configuration of AWS Cognito. There are a lot of options presented and the amplify-cli changes fairly regularly, so they may not be the same as seen here. 
-
-The important choices that we want to make are:
+`amplify` will then ask questions to get the desired configuration of AWS Cognito. There are a lot of options presented and the cli changes fairly regularly, so they may not be the same as seen here. The important choices to make are:
 
 - Choose manual configuration
 - No unauthenticated logins
@@ -103,7 +100,7 @@ These and the other current choices can be seen below:
 
 ![amplify add auth](amplify-add-auth.jpg)
 
-When the add command has finished the project enters a new unpublished state. The changes required to create all of the `auth` resources are present in the `amplify` directory but no change has taken place in AWS. The changes can then be inspected locally, and if necessary removed, without potentially breaking anything external of the repository. If the changes are satisfactory then the resources can be created with:
+When the add command has finished, the project enters a new unpublished state. The changes required to create all of the `auth` resources are present in the `amplify` directory but no change has taken place in AWS. The changes can then be inspected locally, and if necessary removed, without potentially breaking anything external of the repository. If the changes are satisfactory then the resources can be created with:
 
 ```
 amplify push
@@ -125,7 +122,7 @@ Navigating to this link shows the AWS Incognito hosted portal, allowing user sig
 
 ![incognito portal](auth-portal.jpg)
 
-Creating and signing in to an account redirects the browser to the url that can be parsed for the OAuth tokens.
+A user signing in to an account redirects the browser to a url that can be parsed for the OAuth tokens.
 
 ```
 <signInRedirectUrl>/#id_token=XXX&access_token=XXX&expires_in=3600&token_type=Bearer
@@ -188,7 +185,7 @@ With the schema defined upfront the amplify cli can be used to create the `api` 
 
 After the call to `amplify push` the cli will ask a few more questions relating to code generation. The cli offers to create the Create/Update/Delete queries, mutations and subscriptions for the @model types, in either `javascript` or `typescript`. This feature saves some key-strokes and can also be used multiple times as the schema evolves as it saves the settings in a `.graphqlconfig.yml` in the repository.
 
-`javascript` code generation is useful for the purposes of the app, the generated files (`queries.js`, `mutations.js` and `subscriptions.js`) can be imported and used from F# code with fable. Part of the cli generated `queries.js`:
+`javascript` code generation is useful for the purposes of the app, the generated files (`queries.js`, `mutations.js` and `subscriptions.js`) can be imported and used from F# code with fable. Part of the cli generated `queries.js` is shown:
 
 ``` js
 /* eslint-disable */
@@ -257,7 +254,7 @@ The F# types can also be generated using the [ts2fable](https://github.com/fable
 
 With the AppSync API created, the amplify cli also generates a `schema.json` file that describes the API schema. This file contains type information on the shape of the queries that the API expects, which can be used for query validation. 
 
-The generated client queries don't include one that retrieves both the user's lists and tasks. The initial data loading can be done with a query saved to `gql/InitLists.gql`.
+The generated client queries don't include one that retrieves both the user's lists and tasks. The initial data loading for the app can be done with a query saved to `gql/InitLists.gql`.
 
 ``` graphql
 query InitLists {
@@ -320,7 +317,7 @@ Using the client from fable involves importing the `aws-appsync` package from np
 
 The client can be used in a similar way to a REST API, with the data being returned from the `query` and `mutate` methods. The data structures for input and filtering are generated by snowflaqe, but the types for the data returned for each resolver need to defined.
 
-It's also possible to use the client with GraphQL subscriptions. This requires making the same `query` and `mutate` client calls but waiting for subscriptions to feedback the data changes to the app `update` loop. 
+It's also possible to use the client with GraphQL subscriptions. This requires making the same `query` and `mutate` client calls but waiting for subscriptions to feedback the persisted data changes to the app. 
 
 There are advantages to both methods but I chose to use the subscription method of feeding back the data as the `Elmish` app framework has a useful way to setup subscriptions. A simplified version of setting up the `onCreateTodoList` subscription using the client is shown below:
 
@@ -340,12 +337,12 @@ type DataResponse<'T> =
 type SubscriptionQuery = { query: GraphQLTag; variables: Object option }
 let onCreateTodoListQueryInput = Some (createObj [ "owner" ==> username ])
 
+// create query from amplify generated code
+let onCreateTodoListQuery = gql subscriptions.onCreateTodoList
+
 // define function to be invoked when subscription triggered
 let onCreateTodoListNext = fun (x: DataResponse<OnCreateTodoList>) -> 
   console.log("List created named " + x.data.onCreateTodoList.name)
-
-// create query from amplify generated code
-let onCreateTodoListQuery = gql subscriptions.onCreateTodoList
 
 // create subscription using appsync client
 let onCreateTodoList = client.subscribe ({
