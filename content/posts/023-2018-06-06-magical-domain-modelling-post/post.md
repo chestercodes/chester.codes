@@ -6,7 +6,7 @@ issue: 23
 tags: 
 - fsharp
 slug: "magical-domain-modelling-with-fsharp-post"
-date: "2018/06/06"
+date: "2018-06-06"
 category: Tech
 ---
 

@@ -8,7 +8,7 @@ tags:
 - devops
 - powershell
 slug: "log-file-convention"
-date: "2017/01/04"
+date: "2017-01-04"
 category: Tech
 ---
 

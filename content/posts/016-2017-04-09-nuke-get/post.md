@@ -8,7 +8,7 @@ tags:
 - powershell
 - nuget
 slug: "nuke-get"
-date: "2017/04/09"
+date: "2017-04-09"
 category: Tech
 ---
 

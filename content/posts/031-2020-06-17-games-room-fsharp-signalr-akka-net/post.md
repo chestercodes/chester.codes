@@ -10,7 +10,7 @@ tags:
 - akka-net
 - safe-stack
 slug: "games-room-fsharp-signalr-akka-net"
-date: "2020/06/17"
+date: "2020-06-17"
 category: Tech
 ---
 

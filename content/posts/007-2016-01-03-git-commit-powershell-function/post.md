@@ -8,7 +8,7 @@ tags:
 - git
 - powershell
 slug: "git-commit-powershell-function"
-date: "2016/01/03"
+date: "2016-01-03"
 category: Tech
 ---
 

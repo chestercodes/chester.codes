@@ -8,7 +8,7 @@ tags:
 - npm
 - talk
 slug: "fsharp-bristol-talk"
-date: "2018/03/14"
+date: "2018-03-14"
 category: Tech
 ---
 

@@ -10,7 +10,7 @@ tags:
 - fable
 - lambda
 slug: "serverless-apps-aws-fsharp-fable"
-date: "2020/08/10"
+date: "2020-08-10"
 category: Tech
 ---
 

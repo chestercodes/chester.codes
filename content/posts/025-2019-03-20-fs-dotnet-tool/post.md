@@ -8,7 +8,7 @@ tags:
 - dotnet
 - argu
 slug: "easy-clis-with-fsharp-and-dotnet-tools"
-date: "2019/03/20"
+date: "2019-03-20"
 category: Tech
 ---
 

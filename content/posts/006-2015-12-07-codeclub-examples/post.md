@@ -10,7 +10,7 @@ tags:
 - scratch
 - python
 slug: "codeclub-examples"
-date: "2015/12/07"
+date: "2015-12-07"
 category: Tech
 ---
 

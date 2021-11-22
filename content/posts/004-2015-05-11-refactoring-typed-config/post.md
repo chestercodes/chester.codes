@@ -7,7 +7,7 @@ tags:
 - c-sharp
 - refactoring
 slug: "refactoring-typed-config"
-date: "2015/05/11"
+date: "2015-05-11"
 category: Tech
 ---
 

@@ -7,7 +7,7 @@ tags:
 - versioning
 - syntactic-versioning
 slug: "automating-dotnet-library-versioning-synver"
-date: "2019/12/25"
+date: "2019-12-25"
 category: Tech
 ---
 

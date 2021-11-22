@@ -10,7 +10,7 @@ tags:
 - fable
 - snowflaqe
 slug: "aws-amplify-fsharp-fable"
-date: "2020/12/29"
+date: "2020-12-29"
 category: Tech
 ---
 
@@ -36,6 +36,7 @@ The plugins include ([but are not limited to](https://docs.amplify.aws/cli/plugi
 
 Amplify supports Javascript and Typescript as languages, but can be used with any technology that can be transformed into Javascript. 
 This blog post details how to create a simple todo list app with user authentication, authorisation and data persistence. 
+
 ---
 
 ## F# and fable

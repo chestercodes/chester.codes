@@ -8,7 +8,7 @@ tags:
 - jekyll
 - jekyll-now
 slug: "setting-up-blog"
-date: "2015/04/04"
+date: "2015-04-04"
 category: Tech
 ---
 

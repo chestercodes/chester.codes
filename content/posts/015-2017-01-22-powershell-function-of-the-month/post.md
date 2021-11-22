@@ -7,7 +7,7 @@ tags:
 - powershell
 - psfom
 slug: "powershell-function-of-the-month"
-date: "2017/01/22"
+date: "2017-01-22"
 category: Tech
 ---
 

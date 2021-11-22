@@ -8,7 +8,7 @@ tags:
 - error-handling
 - patterns
 slug: "powershell-error-handling"
-date: "2016/12/22"
+date: "2016-12-22"
 category: Tech
 ---
 

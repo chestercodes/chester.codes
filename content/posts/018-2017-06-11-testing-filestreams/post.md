@@ -9,7 +9,7 @@ tags:
 - file-system
 - streams
 slug: "testing-filestreams"
-date: "2017/06/11"
+date: "2017-06-11"
 category: Tech
 ---
 

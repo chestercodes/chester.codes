@@ -8,7 +8,7 @@ tags:
 - neo4j
 - fsharp
 slug: "software-platform-dependency-analysis-with-fsharp-and-neofourj"
-date: "2020/02/11"
+date: "2020-02-11"
 category: Tech
 ---
 

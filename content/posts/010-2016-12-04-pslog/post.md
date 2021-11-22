@@ -9,7 +9,7 @@ tags:
 - structured-logging
 - logging
 slug: "pslog"
-date: "2016/12/04"
+date: "2016-12-04"
 category: Tech
 ---
 

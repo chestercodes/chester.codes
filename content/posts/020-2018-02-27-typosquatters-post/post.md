@@ -8,7 +8,7 @@ tags:
 - javascript
 - package
 slug: "typosquatters-post"
-date: "2018/02/27"
+date: "2018-02-27"
 category: Tech
 ---
 

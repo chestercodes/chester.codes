@@ -12,7 +12,7 @@ tags:
 - build
 - teamcity
 slug: "let-them-use-cake"
-date: "2017/01/05"
+date: "2017-01-05"
 category: Tech
 ---
 

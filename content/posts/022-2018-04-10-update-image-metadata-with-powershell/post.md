@@ -9,7 +9,7 @@ tags:
 - exif
 - scripting
 slug: "update-image-metadata-with-powershell"
-date: "2018/04/10"
+date: "2018-04-10"
 category: Tech
 ---
 

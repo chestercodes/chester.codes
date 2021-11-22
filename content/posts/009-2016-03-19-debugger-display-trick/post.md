@@ -8,7 +8,7 @@ tags:
 - testing
 - code-generation
 slug: "debugger-display-trick"
-date: "2016/03/19"
+date: "2016-03-19"
 category: Tech
 ---
 

@@ -9,7 +9,7 @@ tags:
 - c-sharp
 - sass
 slug: "c-sharp-highlighting"
-date: "2015/05/08"
+date: "2015-05-08"
 category: Tech
 ---
 

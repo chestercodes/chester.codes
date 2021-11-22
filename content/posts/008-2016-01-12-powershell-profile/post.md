@@ -7,7 +7,7 @@ tags:
 - powershell
 - profile
 slug: "powershell-profile"
-date: "2016/01/12"
+date: "2016-01-12"
 category: Tech
 ---
 

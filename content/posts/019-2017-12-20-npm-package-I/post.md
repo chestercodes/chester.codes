@@ -8,7 +8,7 @@ tags:
 - javascript
 - package
 slug: "npm-package-I"
-date: "2017/12/20"
+date: "2017-12-20"
 category: Tech
 ---
 

@@ -9,7 +9,7 @@ tags:
 - build-automation
 - testing
 slug: "running-vstest-with-cake"
-date: "2018/08/19"
+date: "2018-08-19"
 category: Tech
 ---
 

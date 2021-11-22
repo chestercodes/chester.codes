@@ -8,7 +8,7 @@ tags:
 - jekyll
 - jekyll-now
 slug: "First-post"
-date: "2015/04/03"
+date: "2015-04-03"
 category: Tech
 ---
 

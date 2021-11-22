@@ -7,7 +7,7 @@ tags:
 - dotnet
 - versioning
 slug: "automating-dotnet-library-versioning-github"
-date: "2019/12/27"
+date: "2019-12-27"
 category: Tech
 ---
 

@@ -7,7 +7,7 @@ tags:
 - aws-lambda
 - python
 slug: "python-lambda-structure"
-date: "2017/04/17"
+date: "2017-04-17"
 category: Tech
 ---
 
