@@ -57,7 +57,7 @@ const Layout = ({ location, title, children }) => {
             //width: '40%',
             padding: '1vw'
           }}>
-            <Bio />
+            {Bio(false)}
           </div>
 
           <div style={{

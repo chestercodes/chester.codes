@@ -2,7 +2,7 @@ import * as React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import { StaticImage } from "gatsby-plugin-image"
 
-const Bio = () => {
+const Bio = (fullVersion) => {
   const data = useStaticQuery(graphql`
     query BioQuery {
       site {
@@ -22,7 +22,8 @@ const Bio = () => {
   // Set these values by editing "siteMetadata" in gatsby-config.js
   const author = data.site.siteMetadata?.author
   //const social = data.site.siteMetadata?.social
-
+  const textWidth = fullVersion ? "inherit" : 160
+  
   return (
     <div className="bio" style={{
       margin: 0
@@ -39,7 +40,7 @@ const Bio = () => {
       />
       {author?.name && (
         <p style={{
-          width: 160
+          width: textWidth
         }}>
           Website and blog of <strong>{author.name}</strong>
         </p>

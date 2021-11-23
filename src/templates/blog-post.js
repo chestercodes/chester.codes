@@ -9,7 +9,7 @@ const BlogPostTemplate = ({ data, location }) => {
   const post = data.markdownRemark
   const siteTitle = data.site.siteMetadata?.title || `Title`
   const { previous, next } = data
-
+  var issuesUrl = "https://github.com/chestercodes/chester.codes/issues/" + post.frontmatter.issue;
   return (
     <Layout location={location} title={siteTitle}>
       <Seo
@@ -30,10 +30,14 @@ const BlogPostTemplate = ({ data, location }) => {
           itemProp="articleBody"
         />
         <hr />
+        <div className="post-meta">
+          <p>Thanks for reading! Any comments/questions/suggestions? <a href={issuesUrl}>I'd love to hear them!</a></p>
+        </div>
         <footer>
-          <Bio />
+          {Bio(true)}
         </footer>
       </article>
+
       <nav className="blog-post-nav">
         <ul
           style={{
@@ -85,6 +89,7 @@ export const pageQuery = graphql`
         title
         date(formatString: "MMMM DD, YYYY")
         description
+        issue
       }
     }
     previous: markdownRemark(id: { eq: $previousPostId }) {
