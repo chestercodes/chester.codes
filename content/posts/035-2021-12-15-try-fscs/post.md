@@ -58,7 +58,7 @@ type FsiExpressionEvaluator() =
     ...
 ```
 
-Can then create an `fsi` session with `FsiEvaluationSession.Create()`, the streams, default configuration and `fsi` `--noninteractive` arguments:
+Still within the type, can create an `fsi` session with `FsiEvaluationSession.Create()`, the streams, default configuration and other arguments (`fsi`, `--noninteractive`):
 
 ``` fsharp
     // differs across platforms
@@ -76,7 +76,6 @@ Can then create an `fsi` session with `FsiEvaluationSession.Create()`, the strea
 With the session initialised, add an `Execute` method that takes a `string` expression and returns a `Result<string, string>` of either the compilation error or value.
 
 ``` fsharp
-    // Evaluate expression & return the result
     member this.Evaluate(expression: string) =
         let result, warnings = fsiSession.EvalExpressionNonThrowing(expression)
         match result with
@@ -100,14 +99,13 @@ With the session initialised, add an `Execute` method that takes a `string` expr
             sprintf "Failed: %s" messages |> Error
 ```
 
-
-
+The `FsiExpressionEvaluator` type allows the execution of F# code dynamically via an `fsi` session. The code runner app will evaluate user generated expressions and display the output or compiler errors.
 
 ---
 
 ## Web app
 
-Creating the application involves installing the SAFE stack [project template and creating a new project](https://safe-stack.github.io/docs/quickstart/). This creates the files needed to build the Client and Server components with the application code files stored in the `src` directory.
+Creating the web application involves installing the SAFE stack [project template and creating a new project](https://safe-stack.github.io/docs/quickstart/). This creates the files needed to build the Client and Server components with the application code files stored in the `src` directory.
 
 ![FableTree](FableTree.png)
 
