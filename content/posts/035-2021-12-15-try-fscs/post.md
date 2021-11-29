@@ -290,6 +290,15 @@ let app =
 run app
 ```
 
+With the server setup it's possible to see Fable.Remoting in action and the request and response if the expression `1 + 1` is evaluated:
+
+![ApiOk](ApiOk.png)
+
+And a compiler error if the expression `1 + "1"` is sent:
+
+![ApiError](ApiError.png)
+
+
 
 ## Conclusion
 
