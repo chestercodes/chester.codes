@@ -3,7 +3,9 @@ import * as React from "react"
 const DatedComponent = ({ comparisonDate, showWarning, children }) => {
   let prodHostName = "chester.codes"
   //prodHostName = "localhost"
-  const isDev = window && (window.location.hostname !== prodHostName)
+  
+  const isNotSsr = (typeof window !== 'undefined')
+  const isDev = isNotSsr && (window.location.hostname !== prodHostName)
   
   const postDate = Date.parse(comparisonDate)
   const now = Date.now()
