@@ -332,3 +332,9 @@ a:focus {
     list-style-position: inside;
   }
 }
+
+/* Not sure why this is needed... */
+span.token.operator {
+  /* background-color: rgb(245, 242, 240); */
+  background-color: inherit;
+}
