@@ -14,7 +14,7 @@ date: "2021-12-15"
 category: Tech
 ---
 
-> This is an entry for the [F# Advent Calendar 2021](https://sergeytihon.com/tag/fsadvent), please consider checking out some of the other awesome blog posts.
+> This is an entry for the [F# Advent Calendar 2021](https://sergeytihon.com/2021/10/18/f-advent-calendar-2021/), please consider checking out some of the other awesome blog posts.
 
 
 `FSharp.Compiler.Services` is a nuget package that contains tools for implementing F# language bindings. It is mostly used for developer tools but also contains APIs for dynamic execution of F# code. 
@@ -22,7 +22,7 @@ category: Tech
 [SAFE Stack](https://safe-stack.github.io/) is a `dotnet new` template that allows web applications to be written in F# and run on the server and browser. Server side code runs with the dotnet runtime and client side code is [transpiled into Javascript with fable](https://fable.io/).
 
 Interactive code runners like [try.dot.net](https://try.dot.net/) are an easy way to start learning a programming language. They speed up the process by executing code in a web browser, removing the need to install any software onto your computer.
-Combining FSCS and the SAFE stack we can easily create a code runner to execute F# code in a browser.
+Combining FSCS and the SAFE stack we can easily create an F# interactive code running web application.
 
 ---
 
