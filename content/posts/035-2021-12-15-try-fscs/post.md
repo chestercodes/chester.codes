@@ -22,14 +22,14 @@ category: Tech
 [SAFE Stack](https://safe-stack.github.io/) is a `dotnet new` template that allows web applications to be written in F# and run on the server and browser. Server side code runs with the dotnet runtime and client side code is [transpiled into Javascript with fable](https://fable.io/).
 
 Interactive code runners like [try.dot.net](https://try.dot.net/) are an easy way to start learning a programming language. They speed up the process by executing code in a web browser, removing the need to install any software onto your computer.
-Combining FSCS and the SAFE stack we can easily create an F# interactive code running web application.
+Combining FSCS and the SAFE stack we can easily create a web application to interactively run F# code.
 
 ---
 
 ## FSharp.Compiler.Services
 
 
-There are two main ways to run dynamic F# code with the package, either using the `fsc` executable to compile the code and import the created `.dll` file or creating a F# interactive session with the `fsi` executable and passing it commands to evaluate.
+There are two main ways to run dynamic F# code with the package, either using the `fsc` executable to compile the code and import the created `.dll` file, or creating an F# interactive session with the `fsi` executable and passing it commands to evaluate.
 
 The code runner app is going to use the `fsi` executable on the server and pass results back to the browser. The [documentation](https://fsharp.github.io/fsharp-compiler-docs/fcs/interactive.html#Interactive-Service-Embedding-F-Interactive) describes how to create an interactive session with FSCS and the `dotnet` executable can be used instead by prefixing the initial arguments with `fsi`.
 
@@ -57,7 +57,7 @@ type FsiExpressionEvaluator() =
     ...
 ```
 
-Still within the type, can create an `fsi` session with `FsiEvaluationSession.Create()`, the streams, default configuration and other arguments (`fsi`, `--noninteractive`):
+Still within the type, create an `fsi` session with `FsiEvaluationSession.Create()`, the streams, default configuration and other arguments (`fsi`, `--noninteractive`):
 
 ``` fsharp
     // differs across platforms
@@ -72,7 +72,7 @@ Still within the type, can create an `fsi` session with `FsiEvaluationSession.Cr
     ...
 ```
 
-With the session initialised, add an `Evaluate` method that takes a `string` expression and returns a `Result<string, string>` of either the compilation error or value.
+With the session initialised, add an `Evaluate` method that takes a `string` expression and returns a `Result<string, string>` of either the compilation error(s) or evaluation result.
 
 ``` fsharp
     member this.Evaluate(expression: string) =
@@ -84,7 +84,7 @@ With the session initialised, add an `Evaluate` method that takes a `string` exp
                 match valueOrUnit with
                 // return value as string
                 | Some fsharpValue -> sprintf "%A" fsharpValue.ReflectionValue
-                // unit value, return blank string
+                // unit, return blank string
                 | None -> ""
             Ok expressionValue
         // execution failed
@@ -115,10 +115,10 @@ The template creates three F# projects for the Shared, Server and Client code wi
 
 ### Shared code
 
-The shared code project is a dependency of both the client and server projects and can be used for data transfer objects and validation code.
-Client-Server communication is achieved with the `Fable.Remoting` [RPC library](https://zaid-ajaj.github.io/Fable.Remoting/) with the route and contract defined in the shared code.
+The shared code project is a dependency of both the client and server projects and can be used for shared types and validation code.
+Client-Server communication is achieved with the `Fable.Remoting` [RPC library](https://zaid-ajaj.github.io/Fable.Remoting/) with the route and contract defined in the shared project and the library providing helper functions to implement the client and server setup.
 
-The client sends an expression in the form of a string and the server either returns the result of the expression if the code is ok, or returns the compiler errors if the code does not compile. The `Shared.fs` file shows the required code to achieve this in an `eval` procedure:
+The client sends an expression in the form of a `string` and the server either returns the result of the expression if the code evaluates, or returns the compiler errors if the code does not compile. The `Shared.fs` file shows the required code to achieve this in an `eval` procedure:
 
 ``` fsharp
 namespace Shared
@@ -141,14 +141,14 @@ type IRunnerApi =
 
 ### Client
 
-The browser app is written in F# that is transpiled into Javascript.
-The SAFE stack template implements a simple application written in the MVU architectural pattern using the [Elmish library](https://elmish.github.io/elmish/) which can be tweaked to make the code runner.
+The client side browser application is written in F#. The code is transpiled into Javascript as part of the build process using Fable.
+The SAFE stack template includes a simple application written in the MVU architectural pattern using the [Elmish library](https://elmish.github.io/elmish/) which can be tweaked to make the code runner.
 
-MVU stands for Model View Update, the model contains all of the possible states of the application as a data structure. The view is a function that takes the model as an argument and returns the UI to be rendered to the user who can then perform actions that dispatch messages. Update is a function that takes messages from the UI and returns an updated model to be rendered.
+MVU stands for Model View Update, the model contains all of the possible states of the application as a data structure. The `view` is a function that takes the model as an argument and returns the UI to be rendered to the user who can then perform actions that dispatch messages. `update` is a function that takes messages from the UI and returns an updated model to be rendered.
 
 ![mvu pattern](mvu.png)
 
-The app needs to store the expression to be evaluated and the response from the api. It responds to three different events: changing the expression text, run the expression and update the model from the response of the api. These can be codified with:
+The app needs to store the expression to be evaluated and the response from the api and will encounter three different events: changing the expression text, run the expression and update the model from the response of the api. These can be codified with:
 
 
 ``` fsharp
@@ -182,9 +182,12 @@ let runnerApi =
 let update (msg: Msg) (model: Model) : Model * Cmd<Msg> =
     match msg with
     | EvaluateExpression ->
-        // create command that sends expression to api and calls back to GotResponse
+        // create command to run after update function executed
         let evaluateExpressionOnServer =
-            Cmd.OfAsync.perform runnerApi.eval model.Expression GotResponse
+            Cmd.OfAsync.perform  // create command to perform:
+                runnerApi.eval   //   call runner api eval function
+                model.Expression //   with currently editing Expression from model
+                GotResponse      //   create GotResponse message from eval return  
         model, evaluateExpressionOnServer
     | GotResponse res ->
         // update the model with api response
@@ -241,7 +244,7 @@ let runButton =
     ]
 ```
 
-The values `resultBox`, `expressionTextArea` and `runButton` are F# values with type `ReactElement` and can be inserted within other layout:
+The values `resultBox`, `expressionTextArea` and `runButton` are F# values of type `ReactElement` and can be put within other layout components:
 
 ![View](View.png)
 
@@ -249,7 +252,7 @@ The values `resultBox`, `expressionTextArea` and `runButton` are F# values with 
 
 The SAFE template uses the [Saturn framework](https://saturnframework.org/) to create the API. Saturn is built on top of ASP.NET Core and provides useful abstractions and utilities for creating modern web APIs. 
 
-The server side code needs to implement the `IRunbookApi` contract and then Fable.Remoting can implement an app for Saturn to run.
+The server side code needs to create a record of type `IRunbookApi` and then Fable.Remoting can generate an app for Saturn to run.
 
 ``` fsharp
 let evaluator = FsiExpressionEvaluator()
