@@ -2,7 +2,7 @@
 layout: post
 title: Interactive code runner with FSCS and SAFE stack
 exc_erpt: Interactive code runner with FSCS and SAFE stack
-issue: 35
+issue: 36
 tags:
 - dotnet
 - fsharp
