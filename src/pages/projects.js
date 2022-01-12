@@ -1,6 +1,7 @@
 import * as React from "react"
 import { graphql } from "gatsby"
 
+import ProjectsComponent from "../components/projects"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 
@@ -11,12 +12,7 @@ const Projects = ({ data, location }) => {
   return (
     <Layout location={location} title={siteTitle}>
       <Seo title="Projects" />
-      
-      <div>
-        <p>
-          Projects page is coming soon...
-        </p>
-      </div>
+      <ProjectsComponent />
     </Layout>
   )
 }

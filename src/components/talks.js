@@ -1,4 +1,6 @@
-[
+import * as React from "react"
+
+const talks = [
   {
     "cover": "/talks/full_stack_development.png",
     "coverPosition":"",
@@ -50,20 +52,52 @@
       }
     ]
   },
-  {
-    "cover": "/talks/ddd_southwest_devops.jpg",
-    "coverPosition": "",
-    "title": "Seperation of concerns in Devops",
-    "code": "https://github.com/chestercodes/SeparationOfConcernsInDevOpsTalk",
-    "slides": "https://github.com/chestercodes/SeparationOfConcernsInDevOpsTalk/blob/master/SeperationOfConcernsInDevops.pdf",
-    "abstract": "Seperation of concerns is a practice we all apply to our code, but can get lost when we implement our devops processes. This session describes some of these concerns, how they can get mixed up and some technologies to help prise them apart.",
-    "description": "There are a few products to help easily implement continuous integration and automated deployment in the .NET space. \nThese products make things as simple as possible, but often lead developers down compromising paths due to their design (and business model). \nAll is not lost though! This session will describe and demonstrate technologies and patterns to help developers practice devops with pride. \nThis session stems from my experience mis-using Teamcity and Octopus Deploy and talks about the importance of seperating the concerns of orchestration and action in relation to building and deploying software.",
-    "sessions": [
-      {
-        "location": "DDD Southwest 7",
-        "date": "2017/05/06",
-        "url": "https://dddsouthwest.com/"
-      }
-    ]
-  }
+  // {
+  //   "cover": "/talks/ddd_southwest_devops.jpg",
+  //   "coverPosition": "",
+  //   "title": "Seperation of concerns in Devops",
+  //   "code": "https://github.com/chestercodes/SeparationOfConcernsInDevOpsTalk",
+  //   "slides": "https://github.com/chestercodes/SeparationOfConcernsInDevOpsTalk/blob/master/SeperationOfConcernsInDevops.pdf",
+  //   "abstract": "Seperation of concerns is a practice we all apply to our code, but can get lost when we implement our devops processes. This session describes some of these concerns, how they can get mixed up and some technologies to help prise them apart.",
+  //   "description": "There are a few products to help easily implement continuous integration and automated deployment in the .NET space. \nThese products make things as simple as possible, but often lead developers down compromising paths due to their design (and business model). \nAll is not lost though! This session will describe and demonstrate technologies and patterns to help developers practice devops with pride. \nThis session stems from my experience mis-using Teamcity and Octopus Deploy and talks about the importance of seperating the concerns of orchestration and action in relation to building and deploying software.",
+  //   "sessions": [
+  //     {
+  //       "location": "DDD Southwest 7",
+  //       "date": "2017/05/06",
+  //       "url": "https://dddsouthwest.com/"
+  //     }
+  //   ]
+  // }
 ]
+
+const Talks = () => {
+
+  const toTalk = talk => (
+    <div style={{
+      padding: 10
+    }}>
+      <h4 style={{
+        marginTop: 10,
+        marginBottom: 10,
+        //padding: 10
+      }} >{talk.title}</h4>
+      <p>
+        <a href={talk.slides} >{talk.slides}</a> - {talk.abstract}
+      </p>
+    </div>
+  )
+
+  return (
+    <div style={{
+      margin: 20,
+    }}>
+      <h2 style={{
+        padding: 10
+      }} >Talks</h2>
+
+      {talks.map(toTalk)}
+    </div>
+  )
+}
+
+export default Talks
