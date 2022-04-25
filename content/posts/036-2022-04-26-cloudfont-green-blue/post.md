@@ -1,16 +1,16 @@
 ---
 layout: post
-title: Blue/Green deployments with AWS Cloudfront
+title: Green/Blue deployments with AWS Cloudfront
 issue: 37
 tags:
 - aws
 - cloudfront
-- blue-green
+- green-blue
 - typescript
 - cdk
 - devops
-slug: "cloudfront-blue-green"
-date: "2022-06-01"
+slug: "cloudfront-green-blue"
+date: "2022-04-26"
 category: Tech
 ---
 
@@ -19,7 +19,7 @@ Amazon CloudFront is a global content delivery network (CDN) service built for h
 I recently finished a static site project ([that you should check out](https://life-cal.com)), hosted by AWS Cloudfront.
 I choose a simple implementation, but was interested to see how hard it would be to implement more advanced patterns. This post describes a couple of options on how to implement green/blue deployments with AWS Cloudfront.
 
-The [Green/Blue deployment pattern](https://martinfowler.com/bliki/BlueGreenDeployment.html) consists of two identical production environments (named green and blue), with a router distributing web traffic between the two.
+The [Green/Blue deployment pattern](https://martinfowler.com/bliki/BlueGreenDeployment.html) consists of two identical production environments, named green and blue, with a router distributing web traffic between the two.
 The aim of the pattern is to enable high-availability application changes, new versions can be deployed with an easy way to rollback. This pattern also enables incremental deployments by gradually increasing the traffic from the old colour to the new.
 
 For a static site, a common pattern is for Cloudfront to cache files that are hosted by S3. Green/Blue deployments involve routing traffic between the green and blue source buckets.
@@ -79,4 +79,7 @@ Code for this example can be found on github in the [repo associated with this p
 
 ## Conclusion
 
-This post has shown a couple of ways that Cloudfront can be used to implement Green/Blue deployments. The Lambda@Edge functionality is very useful for adding a layer of programmability to the cache.
+This post has shown a couple of ways that Cloudfront can be used to implement Green/Blue deployments.
+The Lambda@Edge functionality is very useful for adding a layer of programmability to Cloudfront which can have a wide range of use cases.
+
+Example code for this post can be found on [my Github](https://github.com/chestercodes/cdk-cloudfront-blue-green) for those interested.
