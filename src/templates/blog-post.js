@@ -17,6 +17,7 @@ const BlogPostTemplate = ({ data, location }) => {
       <Seo
         title={post.frontmatter.title}
         description={post.frontmatter.description || post.excerpt}
+        bigLogo={true}
       />
       <DatedComponent comparisonDate={post.frontmatter.date} showWarning={true}>
         <article

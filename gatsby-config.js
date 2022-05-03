@@ -5,25 +5,11 @@ module.exports = {
       name: `Chester Burbidge`,
       summary: `who likes cool tech.`,
     },
-    description: `Website and blog of Chester Burbidge`,
+    description: `Website and blog of Chester Burbidge, a software developer based in Bristol. Site contains posts about various topics including F#, AWS, devops. Also contains links to social media, interactive CV and information about other projects.`,
     siteUrl: `https://chester.codes/`,
     social: {
       twitter: `chestercodes`,
     },
-    menuLinks: [
-      {
-        name: 'home',
-        link: '/'
-      },
-      {
-        name: 'cv',
-        link: '/cv'
-      },
-      {
-        name: 'etc',
-        link: '/etc'
-      }
-    ]
   },
   plugins: [
     `gatsby-plugin-image`,
@@ -120,5 +106,6 @@ module.exports = {
       },
     },
     `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-sitemap`,
   ],
 }
