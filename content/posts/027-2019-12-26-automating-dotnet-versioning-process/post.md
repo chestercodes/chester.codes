@@ -8,6 +8,7 @@ tags:
 - versioning
 slug: "automating-dotnet-library-versioning-the-process"
 date: "2019-12-26"
+description: Series of posts detailing a method of automate nuget package versioning and publication using github actions.
 category: Tech
 ---
 

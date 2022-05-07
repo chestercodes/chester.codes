@@ -11,6 +11,7 @@ tags:
 - lambda
 slug: "serverless-apps-aws-fsharp-fable"
 date: "2020-08-10"
+description: This post details implementing a serverless app using F#, Fable, Feliz, serverless, AWS Lambda, API Gateway.
 category: Tech
 ---
 

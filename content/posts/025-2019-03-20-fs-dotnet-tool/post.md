@@ -9,6 +9,7 @@ tags:
 - argu
 slug: "easy-clis-with-fsharp-and-dotnet-tools"
 date: "2019-03-20"
+description: A post that details a method of creating a cli with a dotnet global tool, F# and Argu
 category: Tech
 ---
 

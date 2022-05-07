@@ -11,6 +11,7 @@ tags:
 - devops
 slug: "running-dotnet-test-in-docker"
 date: "2020-04-05"
+description: This post details a problem solved when running dotnet test in docker. Namely the problem of retrieving files from the docker image when a non zero exit code occurs from the dotnet test command.
 category: Tech
 ---
 

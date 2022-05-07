@@ -9,6 +9,7 @@ tags:
 - package
 slug: "npm-package-I"
 date: "2017-12-20"
+description: npm typosquatting results found an interesting javascript package I
 category: Tech
 ---
 

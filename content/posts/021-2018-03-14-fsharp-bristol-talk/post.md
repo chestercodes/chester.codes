@@ -9,6 +9,7 @@ tags:
 - talk
 slug: "fsharp-bristol-talk"
 date: "2018-03-14"
+description: Talk 'Hunting typosquatters with F#' at F# Bristol
 category: Tech
 ---
 

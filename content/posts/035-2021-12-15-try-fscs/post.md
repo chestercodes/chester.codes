@@ -11,6 +11,7 @@ tags:
 - fscs
 slug: "try-fscs"
 date: "2021-12-15"
+description: This post details how to make an interactive code runner with F# Fable using the SAFE stack and Fsharp compiler services FSCS
 category: Tech
 ---
 

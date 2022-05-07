@@ -11,6 +11,7 @@ tags:
 - snowflaqe
 slug: "aws-amplify-fsharp-fable"
 date: "2020-12-29"
+description: This post details how to make a todo list application using the AWS Amplify toolset. Tech involves F#, Fable, AWS Cognito, graphql, API Gateway and AWS Lambda.
 category: Tech
 ---
 

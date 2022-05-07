@@ -10,6 +10,7 @@ tags:
 - scripting
 slug: "update-image-metadata-with-powershell"
 date: "2018-04-10"
+description: Using powershell to update the 'Date taken' property of images
 category: Tech
 ---
 

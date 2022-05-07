@@ -11,6 +11,7 @@ tags:
 - safe-stack
 slug: "games-room-fsharp-signalr-akka-net"
 date: "2020-06-17"
+description: This post details how to make a multiplayer games room with F# Akka.Net, SAFE Stack, SignalR and some techniques and problems solved.
 category: Tech
 ---
 

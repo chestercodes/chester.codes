@@ -9,6 +9,7 @@ tags:
 - package
 slug: "typosquatters-post"
 date: "2018-02-27"
+description: Hunting typosquatters on npm blog post published on Scott Logic blog
 category: Tech
 ---
 

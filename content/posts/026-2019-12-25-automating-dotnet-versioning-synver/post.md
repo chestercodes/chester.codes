@@ -8,6 +8,7 @@ tags:
 - syntactic-versioning
 slug: "automating-dotnet-library-versioning-synver"
 date: "2019-12-25"
+description: Series of posts detailing a method of automate nuget package versioning and publication using github actions.
 category: Tech
 ---
 

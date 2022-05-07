@@ -10,6 +10,7 @@ tags:
 - testing
 slug: "running-vstest-with-cake"
 date: "2018-08-19"
+description: Running VsTest with Cake blog post published on Scott Logic blog
 category: Tech
 ---
 

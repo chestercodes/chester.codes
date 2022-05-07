@@ -7,6 +7,7 @@ tags:
 - fsharp
 slug: "magical-domain-modelling-with-fsharp-post"
 date: "2018-06-06"
+description: Magical domain modelling with F# blog post published on Scott Logic blog
 category: Tech
 ---
 

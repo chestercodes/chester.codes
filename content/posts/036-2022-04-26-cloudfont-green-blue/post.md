@@ -11,6 +11,7 @@ tags:
 - devops
 slug: "cloudfront-green-blue"
 date: "2022-04-26"
+description: This post details a couple of methods of implementing Green Blue deployments on AWS Cloudfront. Links to examples in typescript and AWS CDK are listed.
 category: Tech
 ---
 

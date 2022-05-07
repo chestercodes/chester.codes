@@ -9,6 +9,7 @@ tags:
 - fsharp
 slug: "software-platform-dependency-analysis-with-fsharp-and-neofourj"
 date: "2020-02-11"
+description: This post details a project to analyse project dependencies with F# and display and analyse them with neo4j .
 category: Tech
 ---
 
