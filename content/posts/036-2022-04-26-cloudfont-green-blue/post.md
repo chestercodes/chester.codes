@@ -21,7 +21,7 @@ I recently finished a static site project ([that you should check out](https://l
 I choose a simple implementation, but was interested to see how hard it would be to implement more advanced patterns. This post describes a couple of options on how to implement green/blue deployments with AWS Cloudfront.
 
 The [Green/Blue deployment pattern](https://martinfowler.com/bliki/BlueGreenDeployment.html) consists of two identical production environments, named green and blue, with a router distributing web traffic between the two.
-The aim of the pattern is to enable high-availability application changes, new versions can be deployed with an easy way to rollback. This pattern also enables incremental deployments by gradually increasing the traffic from the old colour to the new.
+One of the advantages of this pattern, is that it allows applications to be deployed with minimal-to-no down time enabling high-availability application changes. This pattern also enables incremental deployments by gradually increasing the traffic from the old colour to the new.
 
 For a static site, a common pattern is for Cloudfront to cache files that are hosted by S3. Green/Blue deployments involve routing traffic between the green and blue source buckets.
 There are a few ways of achieving this, I explored the following:
