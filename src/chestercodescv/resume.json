@@ -35,14 +35,18 @@
   },
   "work": [
     {
-      "company": "Current",
+      "company": "Just Eat",
       "position": "Software Developer",
-      "website": "https://todo.co.uk/",
+      "website": "https://just-eat.co.uk/",
       "startDate": "2020-09-01",
-      "endDate": "",
+      "endDate": "2022-06-17",
       "summary": "",
       "highlights": [
-        ""
+        "Used AWS Lambda and other services to upload images and other content to Cloudinary.",
+        "Participated in migration of .Net framework app to dotnet 5 and Vue.js app hosted on EKS.",
+        "Championed new CI/CD technologies, moving away from TeamCity to Zuul CI with ansible and heavy use of docker.",
+        "As a new starter, automated new starter setup process with powershell script.",
+        "During a hackathon, created backstage plugin to improve monitoring and observability experience."
       ],
       "skills": [
         "ansible",
@@ -103,7 +107,7 @@
       "endDate": "2020-05-29",
       "summary": "",
       "highlights": [
-        "Extension of D2C services of investment platform and maintenence of existing legacy systems, including most Microsoft technologies of the last 10 years.",
+        "Extension of D2C services of investment platform and maintenance of existing legacy systems, including most Microsoft technologies of the last 10 years.",
         "Part of small group that led the migration of ~70 .Net framework and core services to windows containers.  ",
         "Developed internal tools, mostly in own time, for speeding up local development processes and project dependency analysis. "
       ],
@@ -276,7 +280,7 @@
       "website": "https://www.fundslibrary.co.uk",
       "startDate": "2014-03-01",
       "endDate": "2015-03-01",
-      "summary": "Maintained the Fundslibrary website in an agile environment.\nPracticed modern software development practices including TDD, CI and SOLID practices.\nBackend developement involved C#, ASP.NET MVC and SQL Server to create web services and sites.\nClient side development used typescript, LESS and libraries such as KnockoutJs and jQuery.",
+      "summary": "Maintained the Fundslibrary website in an agile environment.\nPracticed modern software development practices including TDD, CI and SOLID practices.\nBackend development involved C#, ASP.NET MVC and SQL Server to create web services and sites.\nClient side development used typescript, LESS and libraries such as KnockoutJs and jQuery.",
       "skills": [
         "aspDotNetMvc",
         "aspDotNetWebforms",
@@ -312,7 +316,7 @@
       "website": "https://www.toplev.com/",
       "startDate": "2013-03-01",
       "endDate": "2014-03-01",
-      "summary": "Maintained proprietary web development product and extended behaviour to customer specifications. Role involved writing specications, designs and performing the implementation of code changes.",
+      "summary": "Maintained proprietary web development product and extended behaviour to customer specifications. Role involved writing specifications, designs and performing the implementation of code changes.",
       "skills": [
         "cPlusPlus",
         "cSharp",
